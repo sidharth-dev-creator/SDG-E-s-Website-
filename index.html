@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SDG-E</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- THEME SWITCH -->
+
+    <div class="theme-switch">
+
+        <span>☀</span>
+
+        <label class="switch">
+
+            <input type="checkbox" id="themeToggle">
+
+            <span class="slider"></span>
+
+        </label>
+
+        <span>☾</span>
+
+    </div>
+
+<!-- FULL SCREEN BUTTON -->
+
+<button id="fullscreenButton" class="fullscreen-button">
+    ⛶ Full Screen
+</button>
+
+    <!-- ================================
+         PAGE 1
+    ================================= -->
+
+    <section id="pageOne" class="page active">
+
+       <div class="welcome">
+
+    <h1>
+        Welcome to The SDG-E page
+    </h1>
+
+    <button id="continueButton">
+        Continue
+    </button>
+
+    <p class="creator-credit">
+        Creator · Sidharth Sukumar · Eshaan Kannan
+    </p>
+
+</div>
+
+</section>
+
+
+<!-- ================================
+     PAGE 2
+================================= -->
+
+<section id="pageTwo" class="page">
+
+        <button id="backButton" class="back-button">
+            ← Back
+        </button>
+
+
+        <div class="page-heading">
+
+            <h1>SDG-E</h1>
+
+            <p>
+                Explore the different sections
+            </p>
+
+        </div>
+
+
+        <div class="boxes">
+
+
+            <!-- BOX 1 -->
+
+            <div class="info-box clickable-box" id="partsBox">
+
+                <span class="box-number">
+                    01
+                </span>
+
+                <h2>
+                    Parts
+                </h2>
+
+                <p>
+                    Click to see all the parts used
+                    in the SDG-E project.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+
+            <!-- BOX 2 -->
+
+            <div class="info-box clickable-box" id="areaInfoBox">
+
+                <span class="box-number">
+                    02
+                </span>
+
+                <h2>
+                    Area Info
+                </h2>
+
+                <p>
+                    Information about the area and environment related to the project.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+
+            <!-- BOX 3 -->
+
+            <div class="info-box clickable-box" id="partnershipBox">
+
+                <span class="box-number">
+                    03
+                </span>
+
+                <h2>
+                    Partnership and Duties
+                </h2>
+
+                <p>
+                    Meet the partners and learn about their roles in the SDG-E project.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+
+            <!-- BOX 4 -->
+
+            <div class="info-box clickable-box" id="silMentorBox">
+
+                <span class="box-number">
+                    04
+                </span>
+
+                <h2>
+                    SIL Unique ID and Mentor
+                </h2>
+
+                <p>
+                    Our SIL Unique ID and the mentor guiding our project.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+
+            <!-- BOX 5 -->
+
+            <div class="info-box clickable-box" id="codingBox">
+
+                <span class="box-number">
+                    05
+                </span>
+
+                <h2>
+                    Robots Coding
+                </h2>
+
+                <p>
+                    Explore the coding used for our Micro:bits and Avishkaar robot.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+
+            <!-- BOX 6 -->
+
+            <div class="info-box clickable-box" id="resultsBox">
+
+                <span class="box-number">
+                    06
+                </span>
+
+                <h2>
+                    Results After Test
+                </h2>
+
+                <p>
+                    Results and observations from our final testing.
+                </p>
+
+                <span class="click-hint">
+                    Click to explore →
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================================
+         PAGE 3 - PARTS
+    ================================= -->
+
+    <section id="partsPage" class="page parts-page">
+
+        <button id="partsBackButton" class="back-button">
+            ← Back
+        </button>
+
+
+        <div class="parts-header">
+
+            <span class="section-label">
+                SDG-E • COMPONENTS
+            </span>
+
+            <h1>
+                Parts Used
+            </h1>
+
+            <p>
+                The components and hardware used
+                to build our SDG-E robot.
+            </p>
+
+        </div>
+
+
+        <div class="parts-container">
+
+
+            <!-- PART 1 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    01
+                </span>
+
+                <div>
+
+                    <h2>
+                        Three Micro:bits
+                    </h2>
+
+                    <p>
+                        We used three Micro:bits, with each
+                        one having a different role in the
+                        robot's system.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 2 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    02
+                </span>
+
+                <div>
+
+                    <h2>
+                        Micro:bit — Soil Moisture Sensor
+                    </h2>
+
+                    <p>
+                        The first Micro:bit is connected to
+                        the soil moisture sensor (SMS).
+                        It is responsible for reading the
+                        moisture level of the soil.
+                    </p>
+
+                    <p>
+                        When the soil is detected as
+                        <strong>WET</strong>, the reading
+                        can be sent to the rest of the
+                        system.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 3 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    03
+                </span>
+
+                <div>
+
+                    <h2>
+                        Micro:bit — Extra Functions
+                    </h2>
+
+                    <p>
+                        The second Micro:bit handles
+                        additional functions of the robot.
+                    </p>
+
+                    <ul>
+
+                        <li>
+                            Battery system
+                        </li>
+
+                        <li>
+                            Cool animations
+                        </li>
+
+                        <li>
+                            Speaker
+                        </li>
+
+                        <li>
+                            Radio broadcasting
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 4 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    04
+                </span>
+
+                <div>
+
+                    <h2>
+                        Micro:bit — WET Indicator
+                    </h2>
+
+                    <p>
+                        The third Micro:bit receives the
+                        <strong>WET</strong> reading from
+                        the first Micro:bit.
+                    </p>
+
+                    <p>
+                        When the soil is well moisturized,
+                        this Micro:bit lights up its own
+                        LED to indicate that the soil has
+                        sufficient moisture.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 5 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    05
+                </span>
+
+                <div>
+
+                    <h2>
+                        Avishkaar Microcontroller
+                    </h2>
+
+                    <p>
+                        We used an Avishkaar
+                        microcontroller for one of the
+                        robot's main mechanical functions:
+                        controlling the hatch.
+                    </p>
+
+                    <p>
+                        Its main purpose is to operate
+                        the mechanism that opens the
+                        hatch.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 6 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    06
+                </span>
+
+                <div>
+
+                    <h2>
+                        Avishkaar Metal Parts
+                    </h2>
+
+                    <p>
+                        We used metal construction parts
+                        from Avishkaar to build the
+                        structure of the robot.
+                    </p>
+
+                    <p>
+                        The metal parts were later given
+                        a paint job to match the appearance
+                        and design of our robot.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 7 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    07
+                </span>
+
+                <div>
+
+                    <h2>
+                        Avishkaar Ultrasonic Sensor
+                    </h2>
+
+                    <p>
+                        An Avishkaar ultrasonic sensor is
+                        positioned as the head of the
+                        robot.
+                    </p>
+
+                    <p>
+                        We chose this placement because
+                        its appearance resembles the head
+                        of <strong>WALL-E</strong>, which
+                        fits the design we had previously
+                        planned for the robot.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 8 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    08
+                </span>
+
+                <div>
+
+                    <h2>
+                        Strong DC Motors
+                    </h2>
+
+                    <p>
+                        We used strong DC motors to power
+                        the two tires underneath the robot.
+                    </p>
+
+                    <p>
+                        One motor powers one side of the
+                        robot, while another motor powers
+                        the other side, allowing the robot
+                        to move using its two driven wheels.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PART 9 -->
+
+            <article class="part-card">
+
+                <span class="part-number">
+                    09
+                </span>
+
+                <div>
+
+                    <h2>
+                        Power Switches
+                    </h2>
+
+                    <p>
+                        Switches were placed at the back
+                        of the robot to control power to
+                        the two strong DC motors.
+                    </p>
+
+                    <p>
+                        This gives us a convenient way to
+                        control the motor system from the
+                        rear of the robot.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+        <button id="partsBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <!-- ================================
+         PAGE 4 - AREA INFO
+    ================================= -->
+
+    <section id="areaInfoPage" class="page area-info-page">
+
+        <button id="areaInfoBackButton" class="back-button">
+            ← Back
+        </button>
+
+        <div class="area-info-header">
+
+            <span class="section-label">
+                SDG-E • AREA INFO
+            </span>
+
+            <h1>
+                Area Information
+            </h1>
+
+            <p>
+                Location and school information
+                related to our SDG-E project.
+            </p>
+
+        </div>
+
+
+        <div class="area-info-container">
+
+            <div class="area-info-card">
+                <span>01</span>
+                <h2>Country</h2>
+                <p>India</p>
+            </div>
+
+            <div class="area-info-card">
+                <span>02</span>
+                <h2>State</h2>
+                <p>Kerala</p>
+            </div>
+
+            <div class="area-info-card">
+                <span>03</span>
+                <h2>City</h2>
+                <p>Kasaragod</p>
+            </div>
+
+            <div class="area-info-card">
+                <span>04</span>
+                <h2>School</h2>
+                <p>TGES — The Guardian English School</p>
+            </div>
+
+        </div>
+
+
+        <button id="areaInfoBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <!-- =================================
+         PAGE 5 - PARTNERSHIP AND DUTIES
+    ================================= -->
+
+    <section id="partnershipPage" class="page partnership-page">
+
+        <button id="partnershipBackButton" class="back-button">
+            ← Back
+        </button>
+
+        <div class="partnership-header">
+
+            <span class="section-label">
+                SDG-E • PARTNERSHIP
+            </span>
+
+            <h1>
+                Partnership and Duties
+            </h1>
+
+            <p>
+                The people behind the ideas, mechanics, coding and technical work.
+            </p>
+
+        </div>
+
+
+        <div class="partnership-container">
+
+
+            <div class="partner-card">
+
+                <span>01</span>
+
+                <h2>
+                    Eshaan Kannan
+                </h2>
+
+                <h3>
+                    Mechanic & Technical Support
+                </h3>
+
+                <p>
+                    Eshaan is responsible for mechanical work and helps fix
+                    technical and wiring issues.
+                </p>
+
+                <p>
+                    He also contributed many ideas to the project.
+                </p>
+
+            </div>
+
+
+            <div class="partner-card">
+
+                <span>02</span>
+
+                <h2>
+                    Sidharth Sukumar
+                </h2>
+
+                <h3>
+                    Mechanic, Coder & Part Leader
+                </h3>
+
+                <p>
+                    Sidharth works on mechanics, coding and creating ideas
+                    for the project.
+                </p>
+
+                <p>
+                    He also works on the model and mechanical creations
+                    and helps lead the parts and project work.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button id="partnershipBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <!-- =================================
+         PAGE 6 - SIL UNIQUE ID AND MENTOR
+    ================================= -->
+
+    <section id="silMentorPage" class="page sil-mentor-page">
+
+        <button id="silMentorBackButton" class="back-button">
+            ← Back
+        </button>
+
+        <div class="sil-mentor-header">
+
+            <span class="section-label">
+                SDG-E • SIL INFORMATION
+            </span>
+
+            <h1>
+                SIL Unique ID and Mentor
+            </h1>
+
+            <p>
+                The official identification of our project and the mentor guiding us.
+            </p>
+
+        </div>
+
+
+        <div class="sil-mentor-container">
+
+
+            <div class="sil-info-card">
+
+                <span>01</span>
+
+                <h2>
+                    SIL Unique ID
+                </h2>
+
+                <p class="sil-id">
+                    SIL2265157
+                </p>
+
+            </div>
+
+
+            <div class="sil-info-card">
+
+                <span>02</span>
+
+                <h2>
+                    Mentor
+                </h2>
+
+                <p class="mentor-name">
+                    Ms. Seema
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <button id="silMentorBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <!-- =================================
+         PAGE 7 - ROBOTS CODING
+    ================================= -->
+
+    <section id="codingPage" class="page coding-page">
+
+        <button id="codingBackButton" class="back-button">
+            ← Back
+        </button>
+
+        <div class="coding-header">
+
+            <span class="section-label">
+                SDG-E • ROBOTS CODING
+            </span>
+
+            <h1>
+                Robots Coding
+            </h1>
+
+            <p>
+                The coding used to control our robots and microcontrollers.
+            </p>
+
+        </div>
+
+
+        <div class="coding-container">
+
+
+            <div class="coding-card">
+
+                <span class="coding-number">
+                    01
+                </span>
+
+                <h2>
+                    MakeCode — Micro:bit 1
+                </h2>
+
+                <p>
+                    Coding for the first Micro:bit and its robot functions.
+                </p>
+
+                <div class="coding-placeholder">
+
+                    <strong>
+                        Coming Soon
+                    </strong>
+
+                    <span>
+                        Micro:bit 1 coding picture will be added here.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="coding-card">
+
+                <span class="coding-number">
+                    02
+                </span>
+
+                <h2>
+                    MakeCode — Micro:bit 2
+                </h2>
+
+                <p>
+                    Coding for the second Micro:bit and its robot functions.
+                </p>
+
+                <div class="coding-placeholder">
+
+                    <strong>
+                        Coming Soon
+                    </strong>
+
+                    <span>
+                        Micro:bit 2 coding picture will be added here.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="coding-card">
+
+                <span class="coding-number">
+                    03
+                </span>
+
+                <h2>
+                    MakeCode — Micro:bit 3
+                </h2>
+
+                <p>
+                    Coding for the third Micro:bit and its robot functions.
+                </p>
+
+                <div class="coding-placeholder">
+
+                    <strong>
+                        Coming Soon
+                    </strong>
+
+                    <span>
+                        Micro:bit 3 coding picture will be added here.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="coding-card">
+
+                <span class="coding-number">
+                    04
+                </span>
+
+                <h2>
+                    Avishkaar Micro Controller
+                </h2>
+
+                <p>
+                    Coding for the Avishkaar Micro Controller used in our robot.
+                </p>
+
+                <div class="coding-placeholder">
+
+                    <strong>
+                        Coming Soon
+                    </strong>
+
+                    <span>
+                        Avishkaar coding picture will be added here.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button id="codingBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <!-- =================================
+         PAGE 8 - RESULTS AFTER TEST
+    ================================= -->
+
+    <section id="resultsPage" class="page results-page">
+
+        <button id="resultsBackButton" class="back-button">
+            ← Back
+        </button>
+
+        <div class="results-header">
+
+            <span class="section-label">
+                SDG-E • RESULTS
+            </span>
+
+            <h1>
+                Results After Test
+            </h1>
+
+            <p>
+                The final results will be added after testing.
+            </p>
+
+        </div>
+
+
+        <div class="results-coming-soon">
+
+            <span class="results-number">
+                01
+            </span>
+
+            <h2>
+                Coming Soon...
+            </h2>
+
+            <p>
+                Results will be added after testing!
+            </p>
+
+        </div>
+
+
+        <button id="resultsBottomBack" class="bottom-back">
+            ← Return to SDG-E
+        </button>
+
+    </section>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

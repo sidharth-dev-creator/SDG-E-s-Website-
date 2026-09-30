@@ -1,0 +1,2056 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+
+    min-height: 100vh;
+
+    background: #000;
+
+    color: #fff;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    overflow-x: hidden;
+
+    transition:
+        background 0.6s ease,
+        color 0.6s ease;
+
+}
+
+
+/* =========================================
+   PAGE SYSTEM
+========================================= */
+
+.page {
+
+    min-height: 100vh;
+
+    display: none;
+
+}
+
+
+.page.active {
+
+    display: flex;
+
+}
+
+
+/* =========================================
+   THEME SWITCH
+========================================= */
+
+.theme-switch {
+
+    position: fixed;
+
+    top: 25px;
+    right: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    z-index: 9999;
+
+    font-size: 18px;
+
+}
+
+
+.switch {
+
+    position: relative;
+
+    width: 52px;
+    height: 28px;
+
+    display: inline-block;
+
+}
+
+
+.switch input {
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+
+}
+
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #333;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    transition: 0.4s;
+
+}
+
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 22px;
+    height: 22px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #fff;
+
+    border-radius: 50%;
+
+    transition: 0.4s;
+
+}
+
+
+input:checked + .slider {
+
+    background: #ddd;
+
+}
+
+
+input:checked + .slider::before {
+
+    transform: translateX(24px);
+
+    background: #000;
+
+}
+
+
+/* =========================================
+   PAGE 1
+========================================= */
+
+#pageOne {
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.welcome {
+
+    text-align: center;
+
+    padding: 30px;
+
+}
+
+
+.welcome h1 {
+
+    font-size:
+        clamp(2.2rem, 6vw, 5rem);
+
+    letter-spacing: -2px;
+
+    margin-bottom: 40px;
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+}
+
+
+@keyframes floating {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   CONTINUE BUTTON
+========================================= */
+
+#continueButton {
+
+    padding: 14px 35px;
+
+    border: 1px solid
+        rgba(255,255,255,0.4);
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    animation:
+        buttonFloat 3s ease-in-out infinite;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+#continueButton:hover {
+
+    background: #fff;
+
+    color: #000;
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(255,255,255,0.2);
+
+}
+
+
+@keyframes buttonFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   BACK BUTTON
+========================================= */
+
+.back-button {
+
+    position: fixed;
+
+    top: 25px;
+    left: 25px;
+
+    padding: 10px 18px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.4);
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    z-index: 9999;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.back-button:hover {
+
+    background: #fff;
+
+    color: #000;
+
+    transform: translateX(-4px);
+
+}
+
+
+/* =========================================
+   PAGE 2
+========================================= */
+
+#pageTwo {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-bottom: 70px;
+
+}
+
+
+.page-heading {
+
+    text-align: center;
+
+    padding-top: 110px;
+
+    padding-bottom: 45px;
+
+}
+
+
+.page-heading h1 {
+
+    font-size:
+        clamp(2.5rem, 5vw, 4rem);
+
+    margin-bottom: 10px;
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+}
+
+
+.page-heading p {
+
+    opacity: 0.6;
+
+    font-size: 17px;
+
+}
+
+
+/* =========================================
+   BOX GRID
+========================================= */
+
+.boxes {
+
+    width: min(1100px, 90%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 25px;
+
+}
+
+
+/* =========================================
+   INFORMATION BOX
+========================================= */
+
+.info-box {
+
+    position: relative;
+
+    min-height: 230px;
+
+    padding: 35px;
+
+    background: #111;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    animation:
+        boxFloat 5s ease-in-out infinite;
+
+    transition:
+        background 0.5s ease,
+        border 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.info-box:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.info-box:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.info-box:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.info-box:nth-child(4) {
+    animation-delay: 1.2s;
+}
+
+.info-box:nth-child(5) {
+    animation-delay: 1.6s;
+}
+
+.info-box:nth-child(6) {
+    animation-delay: 2s;
+}
+
+
+@keyframes boxFloat {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   CLICKABLE PARTS BOX
+========================================= */
+
+.clickable-box {
+
+    cursor: pointer;
+
+}
+
+
+.clickable-box:hover {
+
+    transform:
+        translateY(-9px)
+        scale(1.02);
+
+    border-color:
+        rgba(255,255,255,0.5);
+
+    box-shadow:
+        0 15px 45px
+        rgba(255,255,255,0.1);
+
+}
+
+
+.info-box:hover {
+
+    border-color:
+        rgba(255,255,255,0.4);
+
+}
+
+
+.box-number {
+
+    position: absolute;
+
+    top: 20px;
+    right: 25px;
+
+    font-size: 13px;
+
+    opacity: 0.3;
+
+}
+
+
+.info-box h2 {
+
+    font-size: 25px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.info-box p {
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    opacity: 0.65;
+
+}
+
+
+.click-hint {
+
+    margin-top: 20px;
+
+    font-size: 13px;
+
+    opacity: 0.45;
+
+}
+
+
+/* =========================================
+   PARTS PAGE
+========================================= */
+
+.parts-page {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-bottom: 80px;
+
+}
+
+
+.parts-header {
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    padding-top: 110px;
+
+    padding-bottom: 50px;
+
+}
+
+
+.section-label {
+
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    opacity: 0.45;
+
+}
+
+
+.parts-header h1 {
+
+    font-size:
+        clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+}
+
+
+.parts-header p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+}
+
+
+/* =========================================
+   PARTS CONTAINER
+========================================= */
+
+.parts-container {
+
+    width: min(950px, 90%);
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+
+}
+
+
+/* =========================================
+   PART CARD
+========================================= */
+
+.part-card {
+
+    position: relative;
+
+    padding: 35px 40px 35px 85px;
+
+    background: #111;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    animation:
+        partAppear 0.7s ease both;
+
+    transition:
+        transform 0.3s ease,
+        background 0.5s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+/* Staggered entrance */
+
+.part-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.part-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.part-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.part-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.part-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.part-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.part-card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.part-card:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+.part-card:nth-child(9) {
+    animation-delay: 0.45s;
+}
+
+
+@keyframes partAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* Hover */
+
+.part-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 12px 35px
+        rgba(255,255,255,0.07);
+
+}
+
+
+/* =========================================
+   PART NUMBER
+========================================= */
+
+.part-number {
+
+    position: absolute;
+
+    left: 30px;
+
+    top: 35px;
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+}
+
+
+/* =========================================
+   PART TITLE
+========================================= */
+
+.part-card h2 {
+
+    font-size: 24px;
+
+    margin-bottom: 14px;
+
+}
+
+
+/* =========================================
+   PART TEXT
+========================================= */
+
+.part-card p {
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    opacity: 0.65;
+
+    margin-bottom: 12px;
+
+}
+
+
+.part-card strong {
+
+    color: inherit;
+
+    opacity: 1;
+
+}
+
+
+/* =========================================
+   PART LIST
+========================================= */
+
+.part-card ul {
+
+    margin-top: 10px;
+
+    padding-left: 20px;
+
+}
+
+
+.part-card li {
+
+    margin-bottom: 8px;
+
+    opacity: 0.65;
+
+}
+
+
+/* =========================================
+   BOTTOM BACK BUTTON
+========================================= */
+
+.bottom-back {
+
+    margin-top: 40px;
+
+    padding: 13px 25px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.3);
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.bottom-back:hover {
+
+    background: #fff;
+
+    color: #000;
+
+    transform: translateY(-3px);
+
+}
+
+
+/* =========================================
+   LIGHT MODE
+========================================= */
+
+body.light {
+
+    background: #fff;
+
+    color: #000;
+
+}
+
+
+/* Buttons */
+
+body.light #continueButton,
+body.light .back-button,
+body.light .bottom-back {
+
+    color: #000;
+
+    border-color:
+        rgba(0,0,0,0.3);
+
+}
+
+
+body.light #continueButton:hover,
+body.light .back-button:hover,
+body.light .bottom-back:hover {
+
+    background: #000;
+
+    color: #fff;
+
+}
+
+
+/* Main boxes */
+
+body.light .info-box,
+body.light .part-card {
+
+    background: #f5f5f5;
+
+    border-color:
+        rgba(0,0,0,0.12);
+
+}
+
+
+body.light .info-box:hover,
+body.light .part-card:hover {
+
+    border-color:
+        rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.08);
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+
+    .theme-switch {
+
+        top: 18px;
+
+        right: 18px;
+
+    }
+
+
+    .back-button {
+
+        top: 18px;
+
+        left: 18px;
+
+        padding: 8px 14px;
+
+    }
+
+
+    .page-heading {
+
+        padding-top: 100px;
+
+    }
+
+
+    .boxes {
+
+        grid-template-columns: 1fr;
+
+        width: 90%;
+
+        gap: 18px;
+
+    }
+
+
+    .info-box {
+
+        min-height: 210px;
+
+        padding: 28px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .info-box h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .parts-header {
+
+        padding-top: 100px;
+
+    }
+
+
+    .part-card {
+
+        padding:
+            30px
+            25px
+            30px
+            65px;
+
+        border-radius: 22px;
+
+    }
+
+
+    .part-card h2 {
+
+        font-size: 21px;
+
+    }
+
+
+    .part-card p {
+
+        font-size: 15px;
+
+    }
+
+
+    .part-number {
+
+        left: 22px;
+
+        top: 30px;
+
+    }
+
+}
+
+
+/* =========================================
+   AREA INFO PAGE
+========================================= */
+
+.area-info-page {
+
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+
+}
+
+
+.area-info-header {
+
+    width: min(900px, 90%);
+    text-align: center;
+
+    padding-top: 110px;
+    padding-bottom: 50px;
+
+}
+
+
+.area-info-header h1 {
+
+    font-size:
+        clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+}
+
+
+.area-info-header p {
+
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: 0.6;
+
+}
+
+
+.area-info-container {
+
+    width: min(950px, 90%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.area-info-card {
+
+    position: relative;
+
+    padding: 35px;
+
+    background: #111;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.5s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.area-info-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 12px 35px
+        rgba(255,255,255,0.07);
+
+}
+
+
+.area-info-card span {
+
+    display: block;
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+    margin-bottom: 15px;
+
+}
+
+
+.area-info-card h2 {
+
+    font-size: 24px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.area-info-card p {
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    opacity: 0.65;
+
+}
+
+
+/* LIGHT MODE */
+
+body.light .area-info-card {
+
+    background: #f5f5f5;
+
+    border-color:
+        rgba(0,0,0,0.12);
+
+}
+
+
+body.light .area-info-card:hover {
+
+    border-color:
+        rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.08);
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .area-info-container {
+
+        grid-template-columns: 1fr;
+
+        width: 90%;
+
+    }
+
+    .area-info-card {
+
+        padding: 28px;
+
+        border-radius: 22px;
+
+    }
+
+}
+
+
+/* =========================================
+   PARTNERSHIP PAGE
+========================================= */
+
+.partnership-page {
+
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+
+}
+
+
+.partnership-header {
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    padding-top: 110px;
+    padding-bottom: 50px;
+
+}
+
+
+.partnership-header h1 {
+
+    font-size:
+        clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation:
+        floating 4s ease-in-out infinite;
+
+}
+
+
+.partnership-header p {
+
+    font-size: 17px;
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+}
+
+
+.partnership-container {
+
+    width: min(950px, 90%);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.partner-card {
+
+    position: relative;
+
+    padding: 35px;
+
+    background: #111;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.5s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.partner-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color:
+        rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 12px 35px
+        rgba(255,255,255,0.07);
+
+}
+
+
+.partner-card > span {
+
+    display: block;
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+    margin-bottom: 15px;
+
+}
+
+
+.partner-card h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.partner-card h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 20px;
+
+    opacity: 0.55;
+
+}
+
+
+.partner-card p {
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    opacity: 0.65;
+
+    margin-bottom: 12px;
+
+}
+
+
+/* LIGHT MODE */
+
+body.light .partner-card {
+
+    background: #f5f5f5;
+
+    border-color:
+        rgba(0,0,0,0.12);
+
+}
+
+
+body.light .partner-card:hover {
+
+    border-color:
+        rgba(0,0,0,0.3);
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.08);
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .partnership-container {
+
+        grid-template-columns: 1fr;
+
+        width: 90%;
+
+    }
+
+    .partner-card {
+
+        padding: 28px;
+
+        border-radius: 22px;
+
+    }
+
+}
+
+
+/* =========================================
+   SIL UNIQUE ID & MENTOR PAGE
+========================================= */
+
+.sil-mentor-page {
+
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+
+}
+
+
+.sil-mentor-header {
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    padding-top: 110px;
+
+    padding-bottom: 50px;
+
+}
+
+
+.sil-mentor-header h1 {
+
+    font-size: clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation: floating 4s ease-in-out infinite;
+
+}
+
+
+.sil-mentor-header p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+}
+
+
+.sil-mentor-container {
+
+    width: min(950px, 90%);
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.sil-info-card {
+
+    position: relative;
+
+    padding: 40px;
+
+    background: #111;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    transition:
+        transform 0.3s ease,
+        background 0.5s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.sil-info-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: rgba(255,255,255,0.35);
+
+    box-shadow: 0 12px 35px rgba(255,255,255,0.07);
+
+}
+
+
+.sil-info-card > span {
+
+    display: block;
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+    margin-bottom: 15px;
+
+}
+
+
+.sil-info-card h2 {
+
+    font-size: 28px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.sil-id,
+.mentor-name {
+
+    font-size: 22px;
+
+    font-weight: 500;
+
+    letter-spacing: 1px;
+
+    opacity: 0.75;
+
+}
+
+
+body.light .sil-info-card {
+
+    background: #f5f5f5;
+
+    border-color: rgba(0,0,0,0.12);
+
+}
+
+
+body.light .sil-info-card:hover {
+
+    border-color: rgba(0,0,0,0.3);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sil-mentor-container {
+
+        grid-template-columns: 1fr;
+
+        width: 90%;
+
+    }
+
+    .sil-info-card {
+
+        padding: 28px;
+
+        border-radius: 22px;
+
+    }
+
+}
+
+
+/* =========================================
+   ROBOTS CODING PAGE
+========================================= */
+
+.coding-page {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-bottom: 80px;
+
+}
+
+
+.coding-header {
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    padding-top: 110px;
+
+    padding-bottom: 50px;
+
+}
+
+
+.coding-header h1 {
+
+    font-size: clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation: floating 4s ease-in-out infinite;
+
+}
+
+
+.coding-header p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+}
+
+
+.coding-container {
+
+    width: min(1000px, 90%);
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 22px;
+
+}
+
+
+.coding-card {
+
+    padding: 35px;
+
+    background: #111;
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 25px;
+
+    transition:
+        transform 0.3s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+.coding-card:hover {
+
+    transform: translateY(-5px);
+
+    border-color: rgba(255,255,255,0.35);
+
+    box-shadow: 0 12px 35px rgba(255,255,255,0.07);
+
+}
+
+
+.coding-number {
+
+    display: block;
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+    margin-bottom: 15px;
+
+}
+
+
+.coding-card h2 {
+
+    font-size: 25px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.coding-card > p {
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+    margin-bottom: 25px;
+
+}
+
+
+.coding-placeholder {
+
+    min-height: 220px;
+
+    border: 1px dashed rgba(255,255,255,0.25);
+
+    border-radius: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    gap: 10px;
+
+    opacity: 0.7;
+
+}
+
+
+.coding-placeholder strong {
+
+    font-size: 20px;
+
+}
+
+
+.coding-placeholder span {
+
+    font-size: 13px;
+
+    opacity: 0.6;
+
+}
+
+
+body.light .coding-card {
+
+    background: #f5f5f5;
+
+    border-color: rgba(0,0,0,0.12);
+
+}
+
+
+body.light .coding-card:hover {
+
+    border-color: rgba(0,0,0,0.3);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+}
+
+
+body.light .coding-placeholder {
+
+    border-color: rgba(0,0,0,0.25);
+
+}
+
+
+@media (max-width: 700px) {
+
+    .coding-container {
+
+        grid-template-columns: 1fr;
+
+        width: 90%;
+
+    }
+
+    .coding-card {
+
+        padding: 28px;
+
+        border-radius: 22px;
+
+    }
+
+}
+
+
+/* =========================================
+   RESULTS AFTER TEST PAGE
+========================================= */
+
+.results-page {
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-bottom: 80px;
+
+}
+
+
+.results-header {
+
+    width: min(900px, 90%);
+
+    text-align: center;
+
+    padding-top: 110px;
+
+    padding-bottom: 50px;
+
+}
+
+
+.results-header h1 {
+
+    font-size: clamp(2.8rem, 6vw, 5rem);
+
+    margin-bottom: 15px;
+
+    animation: floating 4s ease-in-out infinite;
+
+}
+
+
+.results-header p {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    opacity: 0.6;
+
+}
+
+
+.results-coming-soon {
+
+    width: min(700px, 90%);
+
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    background: #111;
+
+    border: 1px dashed rgba(255,255,255,0.25);
+
+    border-radius: 25px;
+
+}
+
+
+.results-number {
+
+    font-size: 13px;
+
+    opacity: 0.35;
+
+    margin-bottom: 20px;
+
+}
+
+
+.results-coming-soon h2 {
+
+    font-size: 36px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.results-coming-soon p {
+
+    font-size: 16px;
+
+    opacity: 0.6;
+
+}
+
+
+body.light .results-coming-soon {
+
+    background: #f5f5f5;
+
+    border-color: rgba(0,0,0,0.25);
+
+}
+
+/* =========================================
+   FULL SCREEN BUTTON
+========================================= */
+
+.fullscreen-button {
+
+    position: fixed;
+
+    bottom: 25px;
+    right: 25px;
+
+    padding: 10px 18px;
+
+    border: 1px solid rgba(255,255,255,0.4);
+
+    border-radius: 50px;
+
+    background: transparent;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    z-index: 9999;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+
+}
+
+
+.fullscreen-button:hover {
+
+    background: #fff;
+
+    color: #000;
+
+    transform: translateY(-3px);
+
+}
+
+
+/* LIGHT MODE */
+
+body.light .fullscreen-button {
+
+    color: #000;
+
+    border-color: rgba(0,0,0,0.3);
+
+}
+
+
+body.light .fullscreen-button:hover {
+
+    background: #000;
+
+    color: #fff;
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .fullscreen-button {
+
+        bottom: 18px;
+        right: 18px;
+
+        padding: 8px 12px;
+
+        font-size: 13px;
+
+    }
+
+}
+
+/* =========================================
+   CREATOR CREDIT
+========================================= */
+
+.creator-credit {
+
+    margin-top: 28px;
+
+    font-size: 14px;
+
+    letter-spacing: 0.8px;
+
+    text-align: center;
+
+    opacity: 0.28;
+
+    cursor: default;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease,
+        text-shadow 0.4s ease;
+
+    animation: creatorFloat 4s ease-in-out infinite;
+
+}
+
+
+/* FLOATING MOTION */
+
+@keyframes creatorFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+
+}
+
+
+/* HOVER / TOUCH */
+
+.creator-credit:hover {
+
+    opacity: 0.85;
+
+    transform: translateY(-3px) scale(1.03);
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.5),
+        0 0 18px rgba(255,255,255,0.25);
+
+}
+
+
+/* LIGHT MODE */
+
+body.light .creator-credit:hover {
+
+    text-shadow:
+        0 0 8px rgba(0,0,0,0.25),
+        0 0 18px rgba(0,0,0,0.12);
+
+}

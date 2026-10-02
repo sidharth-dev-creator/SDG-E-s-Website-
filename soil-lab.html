@@ -1,0 +1,3332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SDG-E • Soil Sensor Lab</title>
+
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 50% -20%,
+                    #1b2d3d 0%,
+                    #0d151d 31%,
+                    #070b10 62%,
+                    #030507 100%
+                );
+        }
+
+
+        button {
+            font: inherit;
+        }
+
+
+        /* =========================================================
+           LAB ROOT
+        ========================================================= */
+
+        .lab-app {
+
+            width: 100vw;
+            height: 100vh;
+
+            min-height: 650px;
+
+            padding:
+                18px 22px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================= */
+
+        .lab-topbar {
+
+            flex:
+                0 0 auto;
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 16px;
+
+            margin-bottom: 14px;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            min-height: 44px;
+
+            padding:
+                0 16px 0 9px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            color:
+                rgba(255,255,255,.9);
+
+            cursor: pointer;
+
+            box-shadow:
+                inset 0 1px 0
+                rgba(255,255,255,.035),
+
+                0 10px 25px
+                rgba(0,0,0,.18);
+
+            transition:
+                transform .22s ease,
+                background .22s ease,
+                border-color .22s ease;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateX(-3px);
+
+            background:
+                rgba(255,255,255,.075);
+
+            border-color:
+                rgba(255,255,255,.28);
+        }
+
+
+        .back-arrow {
+
+            width: 28px;
+            height: 28px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            color:
+                #ffffff;
+
+            font-size: 15px;
+
+            line-height: 1;
+        }
+
+
+        .back-text {
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: .4px;
+        }
+
+
+        /* RIGHT SIDE */
+
+        .top-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
+
+
+        .online-pill {
+
+            min-height: 40px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                0 13px;
+
+            border:
+                1px solid
+                rgba(45,243,154,.18);
+
+            border-radius: 12px;
+
+            background:
+                rgba(45,243,154,.035);
+
+            color:
+                rgba(255,255,255,.62);
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        .online-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background:
+                #2df39a;
+
+            box-shadow:
+                0 0 10px
+                rgba(45,243,154,.7);
+        }
+
+
+        .fullscreen-button {
+
+            min-height: 40px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                0 13px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,.045);
+
+            color:
+                rgba(255,255,255,.82);
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: .5px;
+
+            transition:
+                background .22s ease,
+                border-color .22s ease,
+                transform .22s ease;
+        }
+
+
+        .fullscreen-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(255,255,255,.075);
+
+            border-color:
+                rgba(255,255,255,.27);
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        .lab-header {
+
+            flex:
+                0 0 auto;
+
+            text-align: center;
+
+            margin-bottom: 16px;
+        }
+
+
+        .lab-kicker {
+
+            display: inline-block;
+
+            margin-bottom: 7px;
+
+            color:
+                rgba(255,255,255,.38);
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            letter-spacing: 3px;
+        }
+
+
+        .lab-header h1 {
+
+            font-size:
+                clamp(
+                    34px,
+                    4.1vw,
+                    56px
+                );
+
+            line-height:
+                .95;
+
+            letter-spacing:
+                -2.6px;
+        }
+
+
+        .lab-header h1 span {
+
+            color:
+                #31b8ff;
+
+            text-shadow:
+                0 0 25px
+                rgba(49,184,255,.14);
+        }
+
+
+        .lab-header p {
+
+            max-width: 690px;
+
+            margin:
+                9px auto 0;
+
+            color:
+                rgba(255,255,255,.44);
+
+            font-size:
+                11px;
+
+            line-height:
+                1.5;
+        }
+
+
+        /* =========================================================
+           MAIN DASHBOARD
+        ========================================================= */
+
+        .lab-dashboard {
+
+            flex:
+                1 1 auto;
+
+            min-height: 0;
+
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(220px, .7fr)
+                minmax(430px, 1.45fr)
+                minmax(235px, .75fr);
+
+            grid-template-rows:
+                minmax(0, 1fr)
+                minmax(0, 1fr);
+
+            gap: 14px;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================= */
+
+        .card {
+
+            position: relative;
+
+            min-width: 0;
+            min-height: 0;
+
+            padding: 19px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.09);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.035),
+                    rgba(255,255,255,.012)
+                );
+
+            box-shadow:
+                0 18px 45px
+                rgba(0,0,0,.2),
+
+                inset 0 1px 0
+                rgba(255,255,255,.025);
+
+            overflow: hidden;
+        }
+
+
+        .card::before {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle at 0% 0%,
+                    rgba(255,255,255,.035),
+                    transparent 33%
+                );
+        }
+
+
+        /* SOIL */
+
+        .soil-card {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+
+        /* HARDWARE */
+
+        .hardware-card {
+            grid-column: 2 / 4;
+            grid-row: 1;
+        }
+
+
+        /* MONITOR */
+
+        .monitor-card {
+            grid-column: 1 / 3;
+            grid-row: 2;
+        }
+
+
+        /* GUIDE */
+
+        .guide-card {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+
+        /* =========================================================
+           CARD HEADER
+        ========================================================= */
+
+        .card-head {
+
+            position: relative;
+
+            z-index: 5;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 13px;
+        }
+
+
+        .card-title-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .card-number {
+
+            width: 25px;
+            height: 25px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 8px;
+
+            color:
+                rgba(255,255,255,.65);
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        .card-label {
+
+            color:
+                rgba(255,255,255,.38);
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.7px;
+        }
+
+
+        .card-tag {
+
+            padding:
+                5px
+                8px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius: 999px;
+
+            color:
+                rgba(255,255,255,.38);
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: .9px;
+        }
+
+
+        .card-tag.green {
+
+            color:
+                #2df39a;
+
+            border-color:
+                rgba(45,243,154,.2);
+
+            background:
+                rgba(45,243,154,.025);
+        }
+
+
+        .card h2 {
+
+            position: relative;
+
+            z-index: 5;
+
+            font-size: 19px;
+
+            letter-spacing: -.4px;
+        }
+
+
+        .card-description {
+
+            position: relative;
+
+            z-index: 5;
+
+            margin-top: 5px;
+
+            color:
+                rgba(255,255,255,.41);
+
+            font-size: 10px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =========================================================
+           SOIL OPTIONS
+        ========================================================= */
+
+        .soil-options {
+
+            position: relative;
+
+            z-index: 5;
+
+            display: grid;
+
+            gap: 9px;
+
+            margin-top: 15px;
+        }
+
+
+        .soil-option {
+
+            display: grid;
+
+            grid-template-columns:
+                42px
+                minmax(0, 1fr)
+                auto;
+
+            align-items: center;
+
+            gap: 9px;
+
+            min-height: 58px;
+
+            padding: 7px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.08);
+
+            border-radius: 14px;
+
+            background:
+                rgba(0,0,0,.17);
+
+            cursor: grab;
+
+            user-select: none;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                background .2s ease;
+        }
+
+
+        .soil-option:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(255,255,255,.25);
+
+            background:
+                rgba(255,255,255,.025);
+        }
+
+
+        .soil-option:active {
+
+            cursor: grabbing;
+
+            transform:
+                scale(.985);
+        }
+
+
+        .soil-visual {
+
+            width: 42px;
+            height: 42px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 11px;
+        }
+
+
+        .soil-visual::before {
+
+            content: "";
+
+            width: 19px;
+            height: 12px;
+
+            border-radius:
+                55%
+                45%
+                45%
+                55%;
+
+            transform:
+                rotate(-10deg);
+        }
+
+
+        .dry-visual {
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #c5824b,
+                    #73401f 63%,
+                    #31190e
+                );
+        }
+
+
+        .dry-visual::before {
+
+            background:
+                #8e4e29;
+        }
+
+
+        .wet-visual {
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #624a41,
+                    #291c17 63%,
+                    #0e0a08
+                );
+        }
+
+
+        .wet-visual::before {
+
+            background:
+                #3d2b25;
+        }
+
+
+        .soil-name strong {
+
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .soil-name small {
+
+            display: block;
+
+            margin-top: 2px;
+
+            color:
+                rgba(255,255,255,.38);
+
+            font-size: 8px;
+        }
+
+
+        .soil-arrow {
+
+            padding-right: 4px;
+
+            color:
+                rgba(255,255,255,.3);
+
+            font-size: 14px;
+        }
+
+
+        .soil-tip {
+
+            position: relative;
+
+            z-index: 5;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 10px;
+
+            padding:
+                8px
+                9px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 11px;
+
+            color:
+                rgba(255,255,255,.36);
+
+            font-size: 8px;
+
+            line-height: 1.35;
+        }
+
+
+        .soil-tip span {
+
+            width: 15px;
+            height: 15px;
+
+            display: grid;
+
+            place-items: center;
+
+            flex:
+                0 0 auto;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 50%;
+
+            font-size: 8px;
+        }
+
+
+        /* =========================================================
+           HARDWARE STAGE
+        ========================================================= */
+
+        .hardware-stage {
+
+            position: relative;
+
+            z-index: 5;
+
+            height:
+                calc(100% - 67px);
+
+            min-height:
+                250px;
+
+            margin-top: 11px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.065);
+
+            border-radius: 16px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(49,184,255,.06),
+                    transparent 52%
+                ),
+
+                #05090d;
+
+            overflow: hidden;
+        }
+
+
+        .hardware-stage::after {
+
+            content:
+                "MICRO:BIT V2  •  SENSOR";
+
+            position: absolute;
+
+            top: 9px;
+            right: 10px;
+
+            z-index: 10;
+
+            color:
+                rgba(255,255,255,.18);
+
+            font-size: 6px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+        }
+
+
+        /* WIRES */
+
+        .wire-layer {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            z-index: 1;
+
+            pointer-events: none;
+        }
+
+
+        .wire {
+
+            fill: none;
+
+            stroke-width: 4;
+
+            stroke-linecap: round;
+        }
+
+
+        .wire.red {
+            stroke: #ff4b4b;
+        }
+
+
+        .wire.black {
+            stroke: #171c21;
+        }
+
+
+        .wire.yellow {
+            stroke: #efc43b;
+        }
+
+
+        /* =========================================================
+           MICROBIT
+        ========================================================= */
+
+        .microbit {
+
+            position: absolute;
+
+            left: 7%;
+
+            top: 50%;
+
+            width: 230px;
+            height: 174px;
+
+            z-index: 4;
+
+            transform:
+                translateY(-50%);
+
+            border:
+                2px solid
+                rgba(255,255,255,.13);
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1a2631,
+                    #080c10
+                );
+
+            box-shadow:
+                0 20px 40px
+                rgba(0,0,0,.46),
+
+                inset 0 0 30px
+                rgba(255,255,255,.025);
+        }
+
+
+        .microbit-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                9px
+                13px
+                4px;
+
+            color:
+                rgba(255,255,255,.54);
+
+            font-size: 8px;
+
+            letter-spacing: .8px;
+        }
+
+
+        .microbit-main {
+
+            position: relative;
+
+            height: 122px;
+        }
+
+
+        .microbit-button {
+
+            position: absolute;
+
+            top: 35px;
+
+            width: 32px;
+            height: 32px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                2px solid
+                rgba(255,255,255,.18);
+
+            border-radius: 50%;
+
+            background:
+                #101820;
+
+            color: white;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+        }
+
+
+        .microbit-button.a {
+            left: 13px;
+        }
+
+
+        .microbit-button.b {
+            right: 13px;
+        }
+
+
+        .led-grid {
+
+            position: absolute;
+
+            top: 10px;
+
+            left: 50%;
+
+            width: 70px;
+            height: 70px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 4px;
+
+            transform:
+                translateX(-50%);
+        }
+
+
+        .led {
+
+            width: 8px;
+            height: 8px;
+
+            border-radius: 2px;
+
+            background:
+                rgba(49,184,255,.12);
+        }
+
+
+        .led.on {
+
+            background:
+                #31b8ff;
+
+            box-shadow:
+                0 0 7px
+                #31b8ff;
+        }
+
+
+        .microbit-pins {
+
+            position: absolute;
+
+            left: 12px;
+            right: 12px;
+
+            bottom: 7px;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,.3);
+
+            font-size: 6px;
+        }
+
+
+        /* =========================================================
+           SENSOR
+        ========================================================= */
+
+        .sensor-drop-zone {
+
+            position: absolute;
+
+            right: 7%;
+
+            top: 50%;
+
+            width: 180px;
+            height: 200px;
+
+            z-index: 4;
+
+            transform:
+                translateY(-50%);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            padding:
+                10px;
+
+            border:
+                1px dashed
+                rgba(49,184,255,.28);
+
+            border-radius: 17px;
+
+            background:
+                rgba(49,184,255,.018);
+
+            transition:
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .sensor-drop-zone.drag-over {
+
+            border-color:
+                #31b8ff;
+
+            background:
+                rgba(49,184,255,.065);
+
+            box-shadow:
+                0 0 25px
+                rgba(49,184,255,.12);
+        }
+
+
+        .sensor-title {
+
+            color:
+                rgba(255,255,255,.35);
+
+            font-size: 6px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        .sensor-board {
+
+            position: relative;
+
+            width: 82px;
+            height: 106px;
+
+            margin-top: 10px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.14);
+
+            border-radius:
+                11px
+                11px
+                14px
+                14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #3a4b58,
+                    #11181e
+                );
+
+            box-shadow:
+                0 13px 25px
+                rgba(0,0,0,.4);
+        }
+
+
+        .sensor-top-line {
+
+            position: absolute;
+
+            top: 7px;
+
+            left: 50%;
+
+            width: 36px;
+            height: 4px;
+
+            transform:
+                translateX(-50%);
+
+            border-radius: 999px;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+
+        .sensor-connector {
+
+            position: absolute;
+
+            top: -8px;
+
+            left: 28px;
+
+            width: 26px;
+            height: 11px;
+
+            border:
+                1px solid
+                #4c565f;
+
+            border-radius: 3px;
+
+            background:
+                #0d1012;
+        }
+
+
+        .sensor-prongs {
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: -46px;
+
+            display: flex;
+
+            gap: 17px;
+
+            transform:
+                translateX(-50%);
+        }
+
+
+        .sensor-prong {
+
+            width: 13px;
+
+            height: 70px;
+
+            border-radius:
+                3px
+                3px
+                10px
+                10px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #687680,
+                    #dfe5e8,
+                    #65747d
+                );
+        }
+
+
+        .soil-on-sensor {
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 9px;
+
+            width: 116px;
+
+            min-height: 26px;
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 4px;
+
+            transform:
+                translateX(-50%);
+
+            pointer-events: none;
+        }
+
+
+        .placed-soil {
+
+            width: 48px;
+            height: 26px;
+
+            border-radius:
+                60%
+                45%
+                50%
+                55%;
+        }
+
+
+        .placed-dry {
+
+            background:
+                radial-gradient(
+                    circle at 35% 35%,
+                    #b8753f,
+                    #71401f 60%,
+                    #362014
+                );
+        }
+
+
+        .placed-wet {
+
+            background:
+                radial-gradient(
+                    circle at 35% 35%,
+                    #5d4035,
+                    #291d18 60%,
+                    #100c0a
+                );
+        }
+
+
+        .drop-message {
+
+            position: absolute;
+
+            bottom: 9px;
+
+            color:
+                rgba(255,255,255,.2);
+
+            font-size: 6px;
+
+            font-weight: 900;
+
+            letter-spacing: 1px;
+        }
+
+
+        /* =========================================================
+           MONITOR
+        ========================================================= */
+
+        .monitor-layout {
+
+            position: relative;
+
+            z-index: 5;
+
+            height:
+                calc(100% - 68px);
+
+            margin-top: 10px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(170px, .9fr)
+                minmax(160px, 1fr)
+                minmax(150px, .85fr);
+
+            gap: 12px;
+        }
+
+
+        .reading-box {
+
+            padding: 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 14px;
+
+            background:
+                rgba(0,0,0,.15);
+        }
+
+
+        .reading-label {
+
+            color:
+                rgba(255,255,255,.3);
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.2px;
+        }
+
+
+        .reading {
+
+            min-height: 76px;
+
+            margin-top: 7px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(49,184,255,.2);
+
+            border-radius: 12px;
+
+            background:
+                #02070b;
+
+            color:
+                #31b8ff;
+
+            font-family: monospace;
+
+            font-size: 23px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 12px
+                rgba(49,184,255,.75);
+        }
+
+
+        .reading.error {
+
+            color:
+                #ff5c5c;
+
+            border-color:
+                rgba(255,92,92,.34);
+
+            text-shadow:
+                0 0 12px
+                rgba(255,92,92,.75);
+        }
+
+
+        .status-box {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 14px;
+
+            background:
+                rgba(0,0,0,.12);
+        }
+
+
+        .status-box-label {
+
+            color:
+                rgba(255,255,255,.28);
+
+            font-size: 7px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.1px;
+        }
+
+
+        .status-box p {
+
+            margin-top: 8px;
+
+            color:
+                rgba(255,255,255,.5);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+
+        .controls-box {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .read-button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            border:
+                1px solid
+                rgba(49,184,255,.28);
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(49,184,255,.13),
+                    rgba(49,184,255,.025)
+                );
+
+            color: white;
+
+            cursor: pointer;
+
+            transition:
+                transform .2s ease,
+                border-color .2s ease;
+        }
+
+
+        .read-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                #31b8ff;
+        }
+
+
+        .read-button strong {
+
+            width: 32px;
+            height: 32px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 50%;
+
+            background:
+                #1597ff;
+
+            font-size: 13px;
+
+            box-shadow:
+                0 0 16px
+                rgba(21,151,255,.35);
+        }
+
+
+        .read-button span {
+
+            font-size: 8px;
+
+            font-weight: 900;
+
+            letter-spacing: .9px;
+        }
+
+
+        .reset-button {
+
+            width: 100%;
+
+            min-height: 36px;
+
+            margin-top: 7px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius: 11px;
+
+            background:
+                transparent;
+
+            color:
+                rgba(255,255,255,.57);
+
+            cursor: pointer;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            letter-spacing: .8px;
+        }
+
+
+        .reset-button:hover {
+
+            border-color:
+                rgba(255,255,255,.3);
+
+            color:
+                #ffffff;
+        }
+
+
+        /* =========================================================
+           GUIDE
+        ========================================================= */
+
+        .guide-items {
+
+            position: relative;
+
+            z-index: 5;
+
+            display: grid;
+
+            gap: 8px;
+
+            margin-top: 13px;
+        }
+
+
+        .guide-item {
+
+            display: grid;
+
+            grid-template-columns:
+                25px
+                minmax(0, 1fr);
+
+            gap: 8px;
+
+            align-items: center;
+
+            padding: 9px;
+
+            border:
+                1px solid
+                rgba(255,255,255,.07);
+
+            border-radius: 11px;
+
+            background:
+                rgba(0,0,0,.12);
+        }
+
+
+        .guide-number {
+
+            width: 25px;
+            height: 25px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.1);
+
+            border-radius: 7px;
+
+            color:
+                rgba(255,255,255,.48);
+
+            font-size: 7px;
+
+            font-weight: 900;
+        }
+
+
+        .guide-item strong {
+
+            font-size: 9px;
+        }
+
+
+        .guide-item p {
+
+            margin-top: 2px;
+
+            color:
+                rgba(255,255,255,.36);
+
+            font-size: 7px;
+
+            line-height: 1.35;
+        }
+
+
+        .keyboard-tip {
+
+            position: relative;
+
+            z-index: 5;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-top: 8px;
+
+            color:
+                rgba(255,255,255,.35);
+
+            font-size: 7px;
+        }
+
+
+        .keyboard-key {
+
+            width: 22px;
+            height: 22px;
+
+            display: grid;
+
+            place-items: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.12);
+
+            border-radius: 6px;
+
+            font-family: monospace;
+
+            font-size: 8px;
+
+            font-weight: 900;
+        }
+
+
+        /* =========================================================
+           BROWSER FULLSCREEN MODE
+        ========================================================= */
+
+        body.real-fullscreen .lab-app {
+
+            padding:
+                14px 18px;
+        }
+
+
+        body.real-fullscreen .lab-topbar {
+
+            margin-bottom:
+                10px;
+        }
+
+
+        body.real-fullscreen .lab-header {
+
+            margin-bottom:
+                10px;
+        }
+
+
+        body.real-fullscreen .lab-header p {
+
+            display: none;
+        }
+
+
+        body.real-fullscreen .card {
+
+            padding:
+                16px;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1050px) {
+
+            body {
+                overflow: auto;
+            }
+
+
+            .lab-app {
+
+                min-height: 100vh;
+
+                height: auto;
+
+                overflow: visible;
+            }
+
+
+            .lab-dashboard {
+
+                grid-template-columns:
+                    1fr;
+
+                grid-template-rows:
+                    auto;
+
+                overflow: visible;
+            }
+
+
+            .soil-card,
+            .hardware-card,
+            .monitor-card,
+            .guide-card {
+
+                grid-column:
+                    auto;
+
+                grid-row:
+                    auto;
+            }
+
+
+            .hardware-stage {
+
+                height: 390px;
+            }
+
+
+            .monitor-layout {
+
+                height: auto;
+
+                grid-template-columns:
+                    1fr;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .lab-app {
+
+                padding:
+                    14px;
+            }
+
+
+            .top-right {
+
+                gap: 6px;
+            }
+
+
+            .online-pill {
+
+                display: none;
+            }
+
+
+            .back-text {
+
+                display: none;
+            }
+
+
+            .back-button {
+
+                padding:
+                    0 9px;
+            }
+
+
+            .lab-header h1 {
+
+                font-size:
+                    43px;
+            }
+
+
+            .hardware-stage {
+
+                height:
+                    550px;
+            }
+
+
+            .microbit {
+
+                left:
+                    50%;
+
+                top:
+                    105px;
+
+                transform:
+                    translateX(-50%);
+            }
+
+
+            .sensor-drop-zone {
+
+                right:
+                    50%;
+
+                top:
+                    370px;
+
+                transform:
+                    translateX(50%);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="lab-app">
+
+
+        <!-- =====================================================
+             TOP BAR
+        ===================================================== -->
+
+        <header class="lab-topbar">
+
+
+            <button
+                class="back-button"
+                id="backButton"
+                type="button"
+            >
+
+                <span class="back-arrow">
+                    ←
+                </span>
+
+                <span class="back-text">
+                    Back to SDG-E
+                </span>
+
+            </button>
+
+
+            <div class="top-right">
+
+
+                <div class="online-pill">
+
+                    <span class="online-dot"></span>
+
+                    SENSOR LAB ONLINE
+
+                </div>
+
+
+                <button
+                    class="fullscreen-button"
+                    id="fullscreenButton"
+                    type="button"
+                >
+                    ⛶ Full Screen
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             HEADER
+        ===================================================== -->
+
+        <section class="lab-header">
+
+            <span class="lab-kicker">
+                SDG-E • SOIL MOISTURE SYSTEM
+            </span>
+
+
+            <h1>
+                🌱 Soil
+                <span>Sensor Lab</span>
+            </h1>
+
+
+            <p>
+                Test the soil moisture sensor using dry soil,
+                wet soil, and the micro:bit control system.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ===================================================== -->
+
+        <main class="lab-dashboard">
+
+
+            <!-- =================================================
+                 SOIL CARD
+            ================================================= -->
+
+            <section class="card soil-card">
+
+                <div class="card-head">
+
+                    <div class="card-title-row">
+
+                        <span class="card-number">
+                            01
+                        </span>
+
+                        <span class="card-label">
+                            SOIL BENCH
+                        </span>
+
+                    </div>
+
+
+                    <span class="card-tag">
+                        INPUT
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    Choose the soil
+                </h2>
+
+
+                <p class="card-description">
+                    Drag a sample onto the sensor,
+                    or click one to place it.
+                </p>
+
+
+                <div class="soil-options">
+
+
+                    <div
+                        id="drySoil"
+                        class="soil-option"
+                        draggable="true"
+                    >
+
+                        <div
+                            class="soil-visual dry-visual"
+                        ></div>
+
+
+                        <div class="soil-name">
+
+                            <strong>
+                                Dry Soil
+                            </strong>
+
+                            <small>
+                                Low moisture
+                            </small>
+
+                        </div>
+
+
+                        <span class="soil-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="wetSoil"
+                        class="soil-option"
+                        draggable="true"
+                    >
+
+                        <div
+                            class="soil-visual wet-visual"
+                        ></div>
+
+
+                        <div class="soil-name">
+
+                            <strong>
+                                Wet Soil
+                            </strong>
+
+                            <small>
+                                High moisture
+                            </small>
+
+                        </div>
+
+
+                        <span class="soil-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="soil-tip">
+
+                    <span>
+                        i
+                    </span>
+
+                    Dry + wet together
+                    produces ERROR.
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 HARDWARE CARD
+            ================================================= -->
+
+            <section class="card hardware-card">
+
+                <div class="card-head">
+
+                    <div class="card-title-row">
+
+                        <span class="card-number">
+                            02
+                        </span>
+
+                        <span class="card-label">
+                            HARDWARE BENCH
+                        </span>
+
+                    </div>
+
+
+                    <span class="card-tag green">
+                        CONNECTED
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    Micro:bit + Soil Sensor
+                </h2>
+
+
+                <p class="card-description">
+                    The sensor is connected to the micro:bit.
+                    Press A to read the soil state.
+                </p>
+
+
+                <div
+                    class="hardware-stage"
+                    id="sensorDropZone"
+                >
+
+
+                    <svg
+                        class="wire-layer"
+                        viewBox="0 0 900 400"
+                        preserveAspectRatio="none"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            class="wire red"
+                            d="M270 165 C380 130 480 135 620 165"
+                        />
+
+                        <path
+                            class="wire black"
+                            d="M270 184 C390 174 490 174 620 184"
+                        />
+
+                        <path
+                            class="wire yellow"
+                            d="M270 203 C390 225 490 215 620 201"
+                        />
+
+                    </svg>
+
+
+                    <!-- MICROBIT -->
+
+                    <div class="microbit">
+
+                        <div class="microbit-top">
+
+                            <span>
+                                micro:bit
+                            </span>
+
+                            <strong>
+                                V2
+                            </strong>
+
+                        </div>
+
+
+                        <div class="microbit-main">
+
+                            <button
+                                id="virtualButtonA"
+                                class="microbit-button a"
+                                type="button"
+                            >
+                                A
+                            </button>
+
+
+                            <div
+                                id="microbitLedGrid"
+                                class="led-grid"
+                            ></div>
+
+
+                            <button
+                                class="microbit-button b"
+                                type="button"
+                            >
+                                B
+                            </button>
+
+                        </div>
+
+
+                        <div class="microbit-pins">
+
+                            <span>0</span>
+                            <span>1</span>
+                            <span>2</span>
+                            <span>3V</span>
+                            <span>GND</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SENSOR -->
+
+                    <div
+                        id="sensorDevice"
+                        class="sensor-drop-zone"
+                    >
+
+                        <span class="sensor-title">
+                            2-PIN SOIL MOISTURE SENSOR
+                        </span>
+
+
+                        <div class="sensor-board">
+
+                            <div class="sensor-top-line"></div>
+
+                            <div class="sensor-connector"></div>
+
+
+                            <div class="sensor-prongs">
+
+                                <span
+                                    class="sensor-prong"
+                                ></span>
+
+                                <span
+                                    class="sensor-prong"
+                                ></span>
+
+                            </div>
+
+
+                            <div
+                                id="soilOnSensor"
+                                class="soil-on-sensor"
+                            ></div>
+
+                        </div>
+
+
+                        <span class="drop-message">
+                            DROP SOIL HERE
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 MONITOR CARD
+            ================================================= -->
+
+            <section class="card monitor-card">
+
+                <div class="card-head">
+
+                    <div class="card-title-row">
+
+                        <span class="card-number">
+                            03
+                        </span>
+
+                        <span class="card-label">
+                            LIVE MONITOR
+                        </span>
+
+                    </div>
+
+
+                    <span class="card-tag">
+                        READOUT
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    Sensor reading
+                </h2>
+
+
+                <p class="card-description">
+                    Place soil on the sensor and press A.
+                </p>
+
+
+                <div class="monitor-layout">
+
+
+                    <div class="reading-box">
+
+                        <span class="reading-label">
+                            CURRENT STATE
+                        </span>
+
+
+                        <div
+                            id="sensorReading"
+                            class="reading"
+                        >
+                            READY
+                        </div>
+
+                    </div>
+
+
+                    <div class="status-box">
+
+                        <span class="status-box-label">
+                            SENSOR STATUS
+                        </span>
+
+
+                        <p id="sensorStatus">
+                            Waiting for soil...
+                        </p>
+
+                    </div>
+
+
+                    <div class="controls-box">
+
+                        <button
+                            id="sensorButtonA"
+                            class="read-button"
+                            type="button"
+                        >
+
+                            <strong>
+                                A
+                            </strong>
+
+                            <span>
+                                READ SENSOR
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            id="sensorResetButton"
+                            class="reset-button"
+                            type="button"
+                        >
+                            RESET LAB
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 GUIDE CARD
+            ================================================= -->
+
+            <section class="card guide-card">
+
+                <div class="card-head">
+
+                    <div class="card-title-row">
+
+                        <span class="card-number">
+                            04
+                        </span>
+
+                        <span class="card-label">
+                            HOW IT WORKS
+                        </span>
+
+                    </div>
+
+
+                    <span class="card-tag">
+                        GUIDE
+                    </span>
+
+                </div>
+
+
+                <h2>
+                    Test states
+                </h2>
+
+
+                <div class="guide-items">
+
+
+                    <div class="guide-item">
+
+                        <span class="guide-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Dry → DRY
+                            </strong>
+
+                            <p>
+                                Low moisture detected.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="guide-item">
+
+                        <span class="guide-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Wet → WET
+                            </strong>
+
+                            <p>
+                                High moisture detected.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="guide-item">
+
+                        <span class="guide-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Both → ERROR
+                            </strong>
+
+                            <p>
+                                Multiple soils detected.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="keyboard-tip">
+
+                    <span class="keyboard-key">
+                        A
+                    </span>
+
+                    Press A on your keyboard too.
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <script>
+
+        /* =========================================================
+           ELEMENTS
+        ========================================================= */
+
+        const drySoil =
+            document.getElementById(
+                "drySoil"
+            );
+
+        const wetSoil =
+            document.getElementById(
+                "wetSoil"
+            );
+
+        const sensorDropZone =
+            document.getElementById(
+                "sensorDropZone"
+            );
+
+        const sensorDevice =
+            document.getElementById(
+                "sensorDevice"
+            );
+
+        const soilOnSensor =
+            document.getElementById(
+                "soilOnSensor"
+            );
+
+        const sensorReading =
+            document.getElementById(
+                "sensorReading"
+            );
+
+        const sensorStatus =
+            document.getElementById(
+                "sensorStatus"
+            );
+
+        const sensorButtonA =
+            document.getElementById(
+                "sensorButtonA"
+            );
+
+        const virtualButtonA =
+            document.getElementById(
+                "virtualButtonA"
+            );
+
+        const sensorResetButton =
+            document.getElementById(
+                "sensorResetButton"
+            );
+
+        const microbitLedGrid =
+            document.getElementById(
+                "microbitLedGrid"
+            );
+
+        const backButton =
+            document.getElementById(
+                "backButton"
+            );
+
+        const fullscreenButton =
+            document.getElementById(
+                "fullscreenButton"
+            );
+
+
+        /* =========================================================
+           STATE
+        ========================================================= */
+
+        const soilState = {
+
+            dry: false,
+
+            wet: false
+
+        };
+
+
+        /* =========================================================
+           LED MATRIX
+        ========================================================= */
+
+        for (
+            let i = 0;
+            i < 25;
+            i++
+        ) {
+
+            const led =
+                document.createElement(
+                    "div"
+                );
+
+            led.className =
+                "led";
+
+            microbitLedGrid.appendChild(
+                led
+            );
+
+        }
+
+
+        const patterns = {
+
+            ready: [
+                0, 4,
+                6, 8,
+                12,
+                16, 18,
+                20, 24
+            ],
+
+            dry: [
+                0,1,2,3,4,
+                6,8,
+                10,12,14,
+                16,
+                18,
+                20,21,22,23,24
+            ],
+
+            wet: [
+                0,4,
+                5,9,
+                10,14,
+                15,19,
+                20,24
+            ],
+
+            error: [
+                0,2,4,
+                6,8,
+                10,11,12,13,14,
+                16,18,
+                20,22,24
+            ]
+
+        };
+
+
+        function showPattern(
+            pattern
+        ) {
+
+            [
+                ...microbitLedGrid.children
+            ].forEach(
+                (
+                    led,
+                    index
+                ) => {
+
+                    led.classList.toggle(
+                        "on",
+                        pattern.includes(
+                            index
+                        )
+                    );
+
+                }
+            );
+        }
+
+
+        /* =========================================================
+           RENDER SOIL
+        ========================================================= */
+
+        function renderSoil() {
+
+            soilOnSensor.innerHTML =
+                "";
+
+
+            if (
+                soilState.dry
+            ) {
+
+                const dry =
+                    document.createElement(
+                        "div"
+                    );
+
+                dry.className =
+                    "placed-soil placed-dry";
+
+                soilOnSensor.appendChild(
+                    dry
+                );
+            }
+
+
+            if (
+                soilState.wet
+            ) {
+
+                const wet =
+                    document.createElement(
+                        "div"
+                    );
+
+                wet.className =
+                    "placed-soil placed-wet";
+
+                soilOnSensor.appendChild(
+                    wet
+                );
+            }
+
+
+            if (
+                !soilState.dry &&
+                !soilState.wet
+            ) {
+
+                const msg =
+                    document.createElement(
+                        "div"
+                    );
+
+                msg.className =
+                    "drop-message";
+
+                msg.textContent =
+                    "DROP SOIL HERE";
+
+                soilOnSensor.appendChild(
+                    msg
+                );
+            }
+
+        }
+
+
+        /* =========================================================
+           PLACE SOIL
+        ========================================================= */
+
+        function placeSoil(
+            type
+        ) {
+
+            if (
+                type !== "dry" &&
+                type !== "wet"
+            ) {
+                return;
+            }
+
+
+            soilState[type] =
+                true;
+
+
+            renderSoil();
+
+
+            sensorReading.textContent =
+                "READY";
+
+            sensorReading.classList.remove(
+                "error"
+            );
+
+
+            sensorStatus.textContent =
+                "Soil placed. Press A.";
+
+
+            showPattern(
+                patterns.ready
+            );
+
+        }
+
+
+        /* =========================================================
+           DRAG
+        ========================================================= */
+
+        function setupSoil(
+            element,
+            type
+        ) {
+
+            element.addEventListener(
+                "dragstart",
+                event => {
+
+                    event.dataTransfer.setData(
+                        "text/plain",
+                        type
+                    );
+
+                    element.style.opacity =
+                        ".6";
+                }
+            );
+
+
+            element.addEventListener(
+                "dragend",
+                () => {
+
+                    element.style.opacity =
+                        "1";
+                }
+            );
+
+
+            element.addEventListener(
+                "click",
+                () => {
+
+                    placeSoil(
+                        type
+                    );
+
+                }
+            );
+
+        }
+
+
+        setupSoil(
+            drySoil,
+            "dry"
+        );
+
+
+        setupSoil(
+            wetSoil,
+            "wet"
+        );
+
+
+        /* =========================================================
+           DROP ZONE
+        ========================================================= */
+
+        sensorDropZone.addEventListener(
+            "dragover",
+            event => {
+
+                event.preventDefault();
+
+                sensorDropZone.classList.add(
+                    "drag-over"
+                );
+
+            }
+        );
+
+
+        sensorDropZone.addEventListener(
+            "dragleave",
+            event => {
+
+                if (
+                    event.target ===
+                    sensorDropZone
+                ) {
+
+                    sensorDropZone.classList.remove(
+                        "drag-over"
+                    );
+                }
+
+            }
+        );
+
+
+        sensorDropZone.addEventListener(
+            "drop",
+            event => {
+
+                event.preventDefault();
+
+
+                sensorDropZone.classList.remove(
+                    "drag-over"
+                );
+
+
+                const type =
+                    event.dataTransfer.getData(
+                        "text/plain"
+                    );
+
+
+                placeSoil(
+                    type
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           READ SENSOR
+        ========================================================= */
+
+        function readSensor() {
+
+            const dry =
+                soilState.dry;
+
+            const wet =
+                soilState.wet;
+
+
+            sensorReading.classList.remove(
+                "error"
+            );
+
+
+            if (
+                dry &&
+                wet
+            ) {
+
+                sensorReading.textContent =
+                    "ERROR";
+
+                sensorReading.classList.add(
+                    "error"
+                );
+
+                sensorStatus.textContent =
+                    "Multiple soil types detected.";
+
+                showPattern(
+                    patterns.error
+                );
+
+                return;
+            }
+
+
+            if (
+                wet
+            ) {
+
+                sensorReading.textContent =
+                    "WET";
+
+                sensorStatus.textContent =
+                    "High moisture detected.";
+
+                showPattern(
+                    patterns.wet
+                );
+
+                return;
+            }
+
+
+            if (
+                dry
+            ) {
+
+                sensorReading.textContent =
+                    "DRY";
+
+                sensorStatus.textContent =
+                    "Low moisture detected.";
+
+                showPattern(
+                    patterns.dry
+                );
+
+                return;
+            }
+
+
+            sensorReading.textContent =
+                "ERROR";
+
+            sensorReading.classList.add(
+                "error"
+            );
+
+            sensorStatus.textContent =
+                "No soil detected.";
+
+            showPattern(
+                patterns.error
+            );
+
+        }
+
+
+        /* =========================================================
+           A BUTTON
+        ========================================================= */
+
+        function pressA() {
+
+            sensorReading.animate(
+                [
+                    {
+                        transform: "scale(1)"
+                    },
+
+                    {
+                        transform: "scale(1.06)"
+                    },
+
+                    {
+                        transform: "scale(1)"
+                    }
+                ],
+                {
+                    duration: 220
+                }
+            );
+
+
+            readSensor();
+
+        }
+
+
+        sensorButtonA.addEventListener(
+            "click",
+            pressA
+        );
+
+
+        virtualButtonA.addEventListener(
+            "click",
+            pressA
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key.toLowerCase() === "a"
+                ) {
+
+                    pressA();
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        sensorResetButton.addEventListener(
+            "click",
+            () => {
+
+                soilState.dry =
+                    false;
+
+                soilState.wet =
+                    false;
+
+
+                renderSoil();
+
+
+                sensorReading.textContent =
+                    "READY";
+
+                sensorReading.classList.remove(
+                    "error"
+                );
+
+
+                sensorStatus.textContent =
+                    "Waiting for soil...";
+
+
+                showPattern(
+                    patterns.ready
+                );
+
+            }
+        );
+
+
+        /* =========================================================
+           BACK
+        ========================================================= */
+
+        backButton.addEventListener(
+            "click",
+            () => {
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+
+        /* =========================================================
+           FULLSCREEN
+        ========================================================= */
+
+        fullscreenButton.addEventListener(
+            "click",
+            async () => {
+
+                try {
+
+                    if (
+                        !document.fullscreenElement
+                    ) {
+
+                        await document
+                            .documentElement
+                            .requestFullscreen();
+
+                    }
+
+                    else {
+
+                        await document
+                            .exitFullscreen();
+
+                    }
+
+                }
+
+                catch (
+                    error
+                ) {
+
+                    console.error(
+                        "Fullscreen error:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "fullscreenchange",
+            () => {
+
+                if (
+                    document.fullscreenElement
+                ) {
+
+                    document.body.classList.add(
+                        "real-fullscreen"
+                    );
+
+                    fullscreenButton.textContent =
+                        "✕ Exit Full Screen";
+
+                }
+
+                else {
+
+                    document.body.classList.remove(
+                        "real-fullscreen"
+                    );
+
+                    fullscreenButton.textContent =
+                        "⛶ Full Screen";
+
+                }
+
+            }
+        );
+
+
+        /* =========================================================
+           INITIAL STATE
+        ========================================================= */
+
+        renderSoil();
+
+        showPattern(
+            patterns.ready
+        );
+
+    </script>
+
+</body>
+
+</html>

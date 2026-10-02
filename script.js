@@ -1,509 +1,3781 @@
 /* =========================================
-   GET PAGES
+   SDG-E WEBSITE — FINAL SCRIPT
 ========================================= */
 
-const pageOne =
-    document.getElementById("pageOne");
+const $ = (id) => document.getElementById(id);
+const qs = (sel, root = document) => root.querySelector(sel);
+const qsa = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-const pageTwo =
-    document.getElementById("pageTwo");
+const pageOne = $("pageOne");
+const pageTwo = $("pageTwo");
 
-const partsPage =
-    document.getElementById("partsPage");
+function showPage(page) {
+    qsa(".page").forEach(p => p.classList.remove("active"));
+    if (page) page.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
+function bindNav(buttonId, targetId) {
+    const button = $(buttonId);
+    const target = $(targetId);
+    if (!button || !target) return;
+    button.addEventListener("click", () => showPage(target));
+}
+
+function bindBack(buttonId, targetId) {
+    const button = $(buttonId);
+    const target = $(targetId);
+    if (!button || !target) return;
+    button.addEventListener("click", () => showPage(target));
+}
 
 /* =========================================
-   GET BUTTONS
+   PAGE NAVIGATION
 ========================================= */
 
-const continueButton =
-    document.getElementById("continueButton");
+bindNav("continueButton", "pageTwo");
+bindBack("backButton", "pageOne");
 
-const backButton =
-    document.getElementById("backButton");
+bindNav("partsBox", "partsPage");
+bindBack("partsBackButton", "pageTwo");
+bindBack("partsBottomBack", "pageTwo");
 
-const partsBox =
-    document.getElementById("partsBox");
+bindNav("areaInfoBox", "areaInfoPage");
+bindBack("areaInfoBackButton", "pageTwo");
+bindBack("areaInfoBottomBack", "pageTwo");
 
-const partsBackButton =
-    document.getElementById("partsBackButton");
+bindNav("partnershipBox", "partnershipPage");
+bindBack("partnershipBackButton", "pageTwo");
+bindBack("partnershipBottomBack", "pageTwo");
 
-const partsBottomBack =
-    document.getElementById("partsBottomBack");
+bindNav("silMentorBox", "silMentorPage");
+bindBack("silMentorBackButton", "pageTwo");
+bindBack("silMentorBottomBack", "pageTwo");
 
+bindNav("codingBox", "codingPage");
+bindBack("codingBackButton", "pageTwo");
+bindBack("codingBottomBack", "pageTwo");
+
+bindNav("resultsBox", "resultsPage");
+bindBack("resultsBackButton", "pageTwo");
+bindBack("resultsBottomBack", "pageTwo");
 
 /* =========================================
-   THEME SWITCH
+   EXPLAINING BOT
 ========================================= */
 
-const themeToggle =
-    document.getElementById("themeToggle");
+const explainingBotPage = $("explainingBotPage");
+const explainingBotBox = $("explainingBotBox");
+const explainingBotBackButton = $("explainingBotBackButton");
+const explainingBotChat = $("explainingBotChat");
+const explainingBotInput = $("explainingBotInput");
+const explainingBotSendButton = $("explainingBotSendButton");
 
+bindNav("explainingBotBox", "explainingBotPage");
+bindBack("explainingBotBackButton", "pageTwo");
 
-themeToggle.addEventListener(
-    "change",
-    function () {
+function cleanBotText(text) {
+    return text.replace(/\s+/g, " ").trim();
+}
 
-        document.body.classList.toggle(
-            "light",
-            themeToggle.checked
+function getBotCardData(selector) {
+    return qsa(selector).map(card => {
+        const title = cleanBotText(qs("h2", card)?.textContent || "");
+        const subtitle = cleanBotText(qs("h3", card)?.textContent || "");
+
+        const details = qsa("p, li", card)
+            .map(item => cleanBotText(item.textContent))
+            .filter(Boolean)
+            .join(" ");
+
+        return [title, subtitle, details]
+            .filter(Boolean)
+            .join(" — ");
+    });
+}
+
+function getBotAreaData() {
+    return qsa(".area-info-card").map(card => {
+        return cleanBotText(qs("h2", card)?.textContent || "") +
+            ": " +
+            cleanBotText(qs("p", card)?.textContent || "");
+    });
+}
+
+/* =========================================
+   REAL PROJECT SUMMARY
+========================================= */
+
+function getBotExplanation() {
+
+    return [
+        "🤖 SDG-E PROJECT SUMMARY",
+        "",
+        "Our project is a robot system designed around soil moisture monitoring and robot functions. It uses three Micro:bits, an Avishkaar Microcontroller, sensors, metal construction parts, strong DC motors and power switches.",
+        "",
+        "🌱 SOIL MOISTURE SYSTEM",
+        "The first Micro:bit reads the soil moisture sensor. When the soil is detected as WET, that reading can be sent through the system. The third Micro:bit receives the WET reading and lights its LED to show that the soil has sufficient moisture.",
+        "",
+        "⚙️ ROBOT FUNCTIONS",
+        "The second Micro:bit handles extra functions including the battery system, animations, speaker and radio broadcasting. The Avishkaar Microcontroller controls the robot's hatch. Strong DC motors drive the two wheels, and power switches control the motor system.",
+        "",
+        "👥 TEAM",
+        "Eshaan Kannan handles mechanical work and technical support, including wiring fixes and ideas. Sidharth Sukumar works on mechanics, coding, ideas and model/mechanical creations, and helps lead the parts and project work.",
+        "",
+        "📍 PROJECT INFORMATION",
+        "Country: India | State: Kerala | City: Kasaragod | School: TGES — The Guardian English School.",
+        "",
+        "🆔 SIL INFORMATION",
+        "SIL Unique ID: SIL2265157 | Mentor: Ms. Seema.",
+        "",
+        "💻 CODING",
+        "The project uses MakeCode for three Micro:bits and Avishkaar coding for the Avishkaar Micro Controller.",
+        "",
+        "🧪 TESTING",
+        "Final test results have not been added yet. They will be added after testing."
+    ].join("\n");
+
+}
+
+function answerExplainingBot(question) {
+
+    const q =
+        question.toLowerCase().trim();
+
+    if (!q) {
+        return "Type a question about the SDG-E project.";
+    }
+
+    if (
+        q === "hi" ||
+        q === "hello" ||
+        q === "hey"
+    ) {
+        return "Hey! Ask me about Parts, Area Info, Partnership, the SIL ID and mentor, Robots Coding, Results, or type explain.";
+    }
+
+    if (
+        /explain|full project|whole project|summary|overview/.test(q)
+    ) {
+        return getBotExplanation();
+    }
+
+    if (
+        /part|component|hardware|motor|sensor/.test(q)
+    ) {
+        return "PARTS: " +
+            getBotCardData(
+                "#partsPage .part-card"
+            ).join(" | ");
+    }
+
+    if (
+        /area|where|country|state|city|school|location/.test(q)
+    ) {
+        return "AREA INFO: " +
+            getBotAreaData().join(" | ");
+    }
+
+    if (
+        /partner|team|eshaan|sidharth|dut/.test(q)
+    ) {
+        return "PARTNERSHIP AND DUTIES: " +
+            getBotCardData(
+                "#partnershipPage .partner-card"
+            ).join(" | ");
+    }
+
+    if (
+        /mentor|sil|unique id|seema/.test(q)
+    ) {
+        return "SIL UNIQUE ID AND MENTOR: " +
+            getBotCardData(
+                "#silMentorPage .sil-info-card"
+            ).join(" | ");
+    }
+
+    if (
+        /coding|code|micro:bit|microbit|makecode|avishkaar/.test(q)
+    ) {
+        return "ROBOTS CODING: " +
+            getBotCardData(
+                "#codingPage .coding-card"
+            ).join(" | ");
+    }
+
+    if (
+        /result|test|testing|observation/.test(q)
+    ) {
+        return "RESULTS AFTER TEST: " +
+            getBotCardData(
+                "#resultsPage .results-coming-soon"
+            ).join(" | ");
+    }
+
+    return "I only know the information in the six SDG-E sections. Try asking about parts, area, partners, mentor, coding, results, or type explain.";
+}
+
+/* =========================================
+   DATE + TIME
+========================================= */
+
+function getBotTimestamp() {
+
+    const now =
+        new Date();
+
+    const date =
+        now.toLocaleDateString(
+            "en-IN",
+            {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }
+        );
+
+    const time =
+        now.toLocaleTimeString(
+            "en-IN",
+            {
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true
+            }
+        );
+
+    return date +
+        " • " +
+        time;
+}
+
+/* =========================================
+   COPY
+========================================= */
+
+function fallbackCopyBotText(
+    text,
+    button
+) {
+
+    const textarea =
+        document.createElement(
+            "textarea"
+        );
+
+    textarea.value =
+        text;
+
+    textarea.style.position =
+        "fixed";
+
+    textarea.style.opacity =
+        "0";
+
+    document.body.appendChild(
+        textarea
+    );
+
+    textarea.select();
+
+    try {
+
+        document.execCommand(
+            "copy"
+        );
+
+        button.textContent =
+            "✅ COPIED";
+
+        setTimeout(
+            () => button.textContent = "📋 COPY",
+            1200
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Copy failed:",
+            error
         );
 
     }
-);
 
-
-/* =========================================
-   PAGE 1 → PAGE 2
-========================================= */
-
-continueButton.addEventListener(
-    "click",
-    function () {
-
-        pageOne.classList.remove("active");
-
-        pageTwo.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   PAGE 2 → PAGE 1
-========================================= */
-
-backButton.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        pageOne.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   PARTS BOX → PARTS PAGE
-========================================= */
-
-partsBox.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        partsPage.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   PARTS PAGE → PAGE 2
-========================================= */
-
-function returnToPageTwo() {
-
-    partsPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
+    textarea.remove();
 }
 
+function copyBotText(
+    text,
+    button
+) {
 
-partsBackButton.addEventListener(
-    "click",
-    returnToPageTwo
-);
+    if (
+        navigator.clipboard?.writeText
+    ) {
 
+        navigator.clipboard
+            .writeText(text)
+            .then(
+                () => {
 
-partsBottomBack.addEventListener(
-    "click",
-    returnToPageTwo
-);
+                    button.textContent =
+                        "✅ COPIED";
 
+                    setTimeout(
+                        () => button.textContent = "📋 COPY",
+                        1200
+                    );
+
+                }
+            )
+            .catch(
+                () =>
+                    fallbackCopyBotText(
+                        text,
+                        button
+                    )
+            );
+
+    } else {
+
+        fallbackCopyBotText(
+            text,
+            button
+        );
+
+    }
+}
 
 /* =========================================
-   AREA INFO
+   SPEAK
 ========================================= */
 
-const areaInfoPage =
-    document.getElementById("areaInfoPage");
+function speakBotText(
+    text,
+    button
+) {
 
-const areaInfoBox =
-    document.getElementById("areaInfoBox");
+    if (
+        !("speechSynthesis" in window)
+    ) {
 
-const areaInfoBackButton =
-    document.getElementById("areaInfoBackButton");
+        button.textContent =
+            "❌ NOT SUPPORTED";
 
-const areaInfoBottomBack =
-    document.getElementById("areaInfoBottomBack");
+        return;
+    }
 
+    if (
+        speechSynthesis.speaking
+    ) {
 
-areaInfoBox.addEventListener(
-    "click",
-    function () {
+        speechSynthesis.cancel();
 
-        pageTwo.classList.remove("active");
+        button.textContent =
+            "🔊 SPEAK";
 
-        areaInfoPage.classList.add("active");
+        return;
+    }
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
 
+    speech.rate =
+        1;
+
+    speech.pitch =
+        1;
+
+    speech.volume =
+        1;
+
+    button.textContent =
+        "⏹ STOP";
+
+    speech.onend =
+        () => button.textContent = "🔊 SPEAK";
+
+    speech.onerror =
+        () => button.textContent = "🔊 SPEAK";
+
+    speechSynthesis.speak(
+        speech
+    );
+}
+
+/* =========================================
+   ADD BOT MESSAGE
+========================================= */
+
+function addExplainingBotMessage(
+    text,
+    type
+) {
+
+    const message =
+        document.createElement(
+            "div"
+        );
+
+    message.className =
+        "bot-message " +
+        (
+            type === "user"
+                ? "bot-message-user"
+                : "bot-message-bot"
+        );
+
+    const messageText =
+        document.createElement(
+            "div"
+        );
+
+    messageText.className =
+        "bot-message-text";
+
+    messageText.textContent =
+        text;
+
+    message.appendChild(
+        messageText
+    );
+
+    const timestamp =
+        document.createElement(
+            "div"
+        );
+
+    timestamp.className =
+        "bot-message-time";
+
+    timestamp.textContent =
+        getBotTimestamp();
+
+    message.appendChild(
+        timestamp
+    );
+
+    if (
+        type !== "user"
+    ) {
+
+        const actions =
+            document.createElement(
+                "div"
+            );
+
+        actions.className =
+            "bot-message-actions";
+
+        const copyButton =
+            document.createElement(
+                "button"
+            );
+
+        copyButton.type =
+            "button";
+
+        copyButton.textContent =
+            "📋 COPY";
+
+        copyButton.addEventListener(
+            "click",
+            () =>
+                copyBotText(
+                    text,
+                    copyButton
+                )
+        );
+
+        const speakButton =
+            document.createElement(
+                "button"
+            );
+
+        speakButton.type =
+            "button";
+
+        speakButton.textContent =
+            "🔊 SPEAK";
+
+        speakButton.addEventListener(
+            "click",
+            () =>
+                speakBotText(
+                    text,
+                    speakButton
+                )
+        );
+
+        actions.append(
+            copyButton,
+            speakButton
+        );
+
+        message.appendChild(
+            actions
+        );
+    }
+
+    explainingBotChat.appendChild(
+        message
+    );
+
+    explainingBotChat.scrollTop =
+        explainingBotChat.scrollHeight;
+
+    return message;
+}
+
+/* =========================================
+   HELP
+========================================= */
+
+function getBotHelp() {
+
+    return [
+        "🤖 HERE'S WHAT I CAN DO:",
+        "",
+        "• Ask about Parts",
+        "• Ask about Area Info",
+        "• Ask about Partnership",
+        "• Ask about the SIL ID and mentor",
+        "• Ask about Robots Coding",
+        "• Ask about Results",
+        "• Type \"explain\" for the full project",
+        "• Type \"surprise\" for a random fact"
+    ].join("\n");
+}
+
+/* =========================================
+   SURPRISE ME
+========================================= */
+
+function getRandomBotFact() {
+
+    const facts = [
+
+        "🤖 FACT: We use MakeCode for 3 Micro:bits.",
+
+        "🔧 FACT: Eshaan Kannan works on mechanics and technical support.",
+
+        "💻 FACT: Sidharth Sukumar works on mechanics, coding and part leadership.",
+
+        "🏫 FACT: The project is connected to TGES — The Guardian English School.",
+
+        "📍 FACT: The project area information is India → Kerala → Kasaragod.",
+
+        "🆔 FACT: The SIL Unique ID is SIL2265157.",
+
+        "👩‍🏫 FACT: The mentor listed for the project is Ms. Seema.",
+
+        "⚙️ FACT: The project uses an Avishkaar Microcontroller."
+
+    ];
+
+    return facts[
+        Math.floor(
+            Math.random() *
+            facts.length
+        )
+    ];
+}
+
+/* =========================================
+   BOT UTILITY BUTTONS
+========================================= */
+
+function addBotUtilityButtons() {
+
+    const quickActions =
+        qs(
+            "#explainingBotPage .explaining-bot-quick-actions"
+        );
+
+    if (
+        !quickActions ||
+        $("botHelpButton")
+    ) {
+        return;
+    }
+
+    const helpButton =
+        document.createElement(
+            "button"
+        );
+
+    helpButton.type =
+        "button";
+
+    helpButton.id =
+        "botHelpButton";
+
+    helpButton.textContent =
+        "❓ HELP";
+
+    helpButton.addEventListener(
+        "click",
+        () =>
+            addExplainingBotMessage(
+                getBotHelp(),
+                "bot"
+            )
+    );
+
+    const surpriseButton =
+        document.createElement(
+            "button"
+        );
+
+    surpriseButton.type =
+        "button";
+
+    surpriseButton.textContent =
+        "🎲 SURPRISE ME";
+
+    surpriseButton.addEventListener(
+        "click",
+        () =>
+            addExplainingBotMessage(
+                getRandomBotFact(),
+                "bot"
+            )
+    );
+
+    const clearButton =
+        document.createElement(
+            "button"
+        );
+
+    clearButton.type =
+        "button";
+
+    clearButton.textContent =
+        "🧹 CLEAR CHAT";
+
+    clearButton.addEventListener(
+        "click",
+        () => {
+
+            window.speechSynthesis?.cancel?.();
+
+            explainingBotChat.innerHTML =
+                "";
+
+            addExplainingBotMessage(
+                "Hey! Ask me about the SDG-E project. Type explain for the full project summary.",
+                "bot"
+            );
+
+            explainingBotInput.value =
+                "";
+
+            explainingBotInput.focus();
+        }
+    );
+
+    quickActions.append(
+        helpButton,
+        surpriseButton,
+        clearButton
+    );
+}
+
+/* =========================================
+   SMART SUGGESTIONS
+========================================= */
+
+function getSmartSuggestion(
+    question
+) {
+
+    const q =
+        question.toLowerCase();
+
+    if (
+        q.includes("part")
+    ) {
+
+        return "👥 PARTNERS";
+
+    }
+
+    if (
+        q.includes("partner") ||
+        q.includes("eshaan") ||
+        q.includes("sidharth")
+    ) {
+
+        return "👩‍🏫 MENTOR";
+
+    }
+
+    if (
+        q.includes("mentor") ||
+        q.includes("seema") ||
+        q.includes("sil")
+    ) {
+
+        return "💻 CODING";
+
+    }
+
+    if (
+        q.includes("coding") ||
+        q.includes("code") ||
+        q.includes("makecode")
+    ) {
+
+        return "🔧 PARTS";
+
+    }
+
+    if (
+        q.includes("result") ||
+        q.includes("test")
+    ) {
+
+        return "📋 FULL PROJECT";
+
+    }
+
+    return "💻 CODING";
+}
+
+function suggestionToQuestion(
+    label
+) {
+
+    if (
+        label.includes("PARTNERS")
+    ) {
+
+        return "Who are the partners?";
+
+    }
+
+    if (
+        label.includes("MENTOR")
+    ) {
+
+        return "Who is the mentor?";
+
+    }
+
+    if (
+        label.includes("CODING")
+    ) {
+
+        return "What coding do you use?";
+
+    }
+
+    if (
+        label.includes("PARTS")
+    ) {
+
+        return "What parts did you use?";
+
+    }
+
+    if (
+        label.includes("FULL PROJECT")
+    ) {
+
+        return "Explain the full project.";
+
+    }
+
+    return label;
+}
+
+function addBotSuggestion(
+    label
+) {
+
+    const suggestion =
+        document.createElement(
+            "button"
+        );
+
+    suggestion.type =
+        "button";
+
+    suggestion.className =
+        "bot-suggestion";
+
+    suggestion.textContent =
+        "→ " + label;
+
+    suggestion.addEventListener(
+        "click",
+        () => {
+
+            const question =
+                suggestionToQuestion(
+                    label
+                );
+
+            suggestion.remove();
+
+            sendExplainingBotMessage(
+                question
+            );
+        }
+    );
+
+    explainingBotChat.appendChild(
+        suggestion
+    );
+
+    explainingBotChat.scrollTop =
+        explainingBotChat.scrollHeight;
+}
+
+/* =========================================
+   SEND BOT MESSAGE
+========================================= */
+
+async function sendExplainingBotMessage(
+    questionOverride
+) {
+
+    const question =
+        typeof questionOverride === "string"
+            ? questionOverride.trim()
+            : explainingBotInput.value.trim();
+
+    if (!question) {
+        return;
+    }
+
+    const lowerQuestion =
+        question.toLowerCase();
+
+    addExplainingBotMessage(
+        question,
+        "user"
+    );
+
+    explainingBotInput.value =
+        "";
+
+    explainingBotSendButton.disabled =
+        true;
+
+    explainingBotInput.disabled =
+        true;
+
+    const typingMessage =
+        document.createElement(
+            "div"
+        );
+
+    typingMessage.className =
+        "bot-message bot-message-bot";
+
+    typingMessage.textContent =
+        "Typing...";
+
+    explainingBotChat.appendChild(
+        typingMessage
+    );
+
+    explainingBotChat.scrollTop =
+        explainingBotChat.scrollHeight;
+
+    await new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                1500
+            )
+    );
+
+    typingMessage.remove();
+
+    let answer;
+
+    if (
+        lowerQuestion === "help"
+    ) {
+
+        answer =
+            getBotHelp();
+
+    }
+
+    else if (
+        lowerQuestion === "surprise" ||
+        lowerQuestion === "surprise me"
+    ) {
+
+        answer =
+            getRandomBotFact();
+
+    }
+
+    else {
+
+        answer =
+            answerExplainingBot(
+                question
+            );
+    }
+
+    addExplainingBotMessage(
+        answer,
+        "bot"
+    );
+
+    if (
+        !/^(help|surprise|surprise me)$/.test(
+            lowerQuestion
+        )
+    ) {
+
+        addBotSuggestion(
+            getSmartSuggestion(
+                question
+            )
+        );
+    }
+
+    explainingBotSendButton.disabled =
+        false;
+
+    explainingBotInput.disabled =
+        false;
+
+    explainingBotInput.focus();
+}
+
+if (
+    explainingBotSendButton
+) {
+
+    explainingBotSendButton.addEventListener(
+        "click",
+        () =>
+            sendExplainingBotMessage()
+    );
+}
+
+if (
+    explainingBotInput
+) {
+
+    explainingBotInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                sendExplainingBotMessage();
+            }
+        }
+    );
+}
+
+qsa(
+    "[data-bot-question]"
+).forEach(
+    button => {
+
+        button.addEventListener(
+            "click",
+            () =>
+                sendExplainingBotMessage(
+                    button.dataset.botQuestion
+                )
+        );
     }
 );
 
-
-function returnFromAreaInfo() {
-
-    areaInfoPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-areaInfoBackButton.addEventListener(
-    "click",
-    returnFromAreaInfo
-);
-
-
-areaInfoBottomBack.addEventListener(
-    "click",
-    returnFromAreaInfo
-);
-
+addBotUtilityButtons();
 
 /* =========================================
-   PARTNERSHIP → PAGE
+   FULL SCREEN
 ========================================= */
-
-const partnershipPage =
-    document.getElementById("partnershipPage");
-
-const partnershipBox =
-    document.getElementById("partnershipBox");
-
-const partnershipBackButton =
-    document.getElementById("partnershipBackButton");
-
-const partnershipBottomBack =
-    document.getElementById("partnershipBottomBack");
-
-
-partnershipBox.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        partnershipPage.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   PARTNERSHIP → PAGE 2
-========================================= */
-
-function returnFromPartnership() {
-
-    partnershipPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-partnershipBackButton.addEventListener(
-    "click",
-    returnFromPartnership
-);
-
-
-partnershipBottomBack.addEventListener(
-    "click",
-    returnFromPartnership
-);
-
-
-/* =========================================
-   SIL UNIQUE ID & MENTOR → PAGE
-========================================= */
-
-const silMentorPage =
-    document.getElementById("silMentorPage");
-
-const silMentorBox =
-    document.getElementById("silMentorBox");
-
-const silMentorBackButton =
-    document.getElementById("silMentorBackButton");
-
-const silMentorBottomBack =
-    document.getElementById("silMentorBottomBack");
-
-
-silMentorBox.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        silMentorPage.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   SIL PAGE → PAGE 2
-========================================= */
-
-function returnFromSilMentor() {
-
-    silMentorPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-silMentorBackButton.addEventListener(
-    "click",
-    returnFromSilMentor
-);
-
-
-silMentorBottomBack.addEventListener(
-    "click",
-    returnFromSilMentor
-);
-
-
-/* =========================================
-   ROBOTS CODING → PAGE
-========================================= */
-
-const codingPage =
-    document.getElementById("codingPage");
-
-const codingBox =
-    document.getElementById("codingBox");
-
-const codingBackButton =
-    document.getElementById("codingBackButton");
-
-const codingBottomBack =
-    document.getElementById("codingBottomBack");
-
-
-codingBox.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        codingPage.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   CODING PAGE → PAGE 2
-========================================= */
-
-function returnFromCoding() {
-
-    codingPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-codingBackButton.addEventListener(
-    "click",
-    returnFromCoding
-);
-
-
-codingBottomBack.addEventListener(
-    "click",
-    returnFromCoding
-);
-
-
-/* =========================================
-   RESULTS → PAGE
-========================================= */
-
-const resultsPage =
-    document.getElementById("resultsPage");
-
-const resultsBox =
-    document.getElementById("resultsBox");
-
-const resultsBackButton =
-    document.getElementById("resultsBackButton");
-
-const resultsBottomBack =
-    document.getElementById("resultsBottomBack");
-
-
-resultsBox.addEventListener(
-    "click",
-    function () {
-
-        pageTwo.classList.remove("active");
-
-        resultsPage.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }
-);
-
-
-/* =========================================
-   RESULTS PAGE → PAGE 2
-========================================= */
-
-function returnFromResults() {
-
-    resultsPage.classList.remove("active");
-
-    pageTwo.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-}
-
-
-resultsBackButton.addEventListener(
-    "click",
-    returnFromResults
-);
-
-
-resultsBottomBack.addEventListener(
-    "click",
-    returnFromResults
-);
-
-// =========================================
-// FULL SCREEN
-// =========================================
 
 const fullscreenButton =
-    document.getElementById("fullscreenButton");
+    $("fullscreenButton");
+
+if (
+    fullscreenButton
+) {
+
+    fullscreenButton.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                if (
+                    !document.fullscreenElement
+                ) {
+
+                    await document
+                        .documentElement
+                        .requestFullscreen();
+
+                }
+
+                else {
+
+                    await document
+                        .exitFullscreen();
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Fullscreen error:",
+                    error
+                );
+            }
+        }
+    );
+
+    document.addEventListener(
+        "fullscreenchange",
+        () => {
+
+            fullscreenButton.textContent =
+                document.fullscreenElement
+                    ? "✕ Exit Full Screen"
+                    : "⛶ Full Screen";
+        }
+    );
+}
+
+/* =========================================
+   SECRET PAGE
+========================================= */
+
+const secretPassword =
+    $("secretPassword");
+
+const secretPage =
+    $("secretPage");
+
+const secretBackButton =
+    $("secretBackButton");
+
+if (
+    secretPassword &&
+    secretPage
+) {
+
+    secretPassword.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key !== "Enter"
+            ) {
+
+                return;
+            }
+
+            if (
+                secretPassword.value ===
+                "DA_BOYS"
+            ) {
+
+                showPage(
+                    secretPage
+                );
+
+                secretPassword.value =
+                    "";
+
+            }
+
+            else {
+
+                secretPassword.value =
+                    "";
+
+                secretPassword.placeholder =
+                    "Wrong password";
+
+                setTimeout(
+                    () =>
+                        secretPassword.placeholder =
+                            "Password",
+                    1500
+                );
+            }
+        }
+    );
+}
+
+if (
+    secretBackButton
+) {
+
+    secretBackButton.addEventListener(
+        "click",
+        () =>
+            showPage(
+                pageOne
+            )
+    );
+}
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+    "https://mwfpceardepjbwbualyp.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_FM6sWhxUus2Ou6oNKEU5uw_9VTiX-jp";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+/* =========================================
+   ROBLOX FRIENDS
+========================================= */
+
+const fullNameInput =
+    $("fullNameInput");
+
+const robloxUsernameInput =
+    $("robloxUsernameInput");
+
+const addRobloxFriend =
+    $("addRobloxFriend");
+
+const robloxMessage =
+    $("robloxMessage");
+
+const robloxFriendList =
+    $("robloxFriendList");
+
+async function loadRobloxFriends() {
+
+    if (
+        !robloxFriendList
+    ) {
+
+        return;
+    }
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from(
+                "roblox_friends"
+            )
+            .select(
+                "full_name, roblox_username"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: true
+                }
+            );
+
+    if (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+        robloxFriendList.textContent =
+            "Could not load the friend list.";
+
+        return;
+    }
+
+    robloxFriendList.innerHTML =
+        "";
+
+    if (
+        !data.length
+    ) {
+
+        robloxFriendList.innerHTML =
+            "<p style='opacity:.5;'>No friends added yet.</p>";
+
+        return;
+    }
+
+    data.forEach(
+        (friend, index) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "roblox-friend";
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+            number.className =
+                "roblox-friend-number";
+
+            number.textContent =
+                String(
+                    index + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "roblox-friend-info";
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "roblox-friend-name";
+
+            name.textContent =
+                friend.full_name;
+
+            const username =
+                document.createElement(
+                    "div"
+                );
+
+            username.className =
+                "roblox-friend-username";
+
+            username.textContent =
+                "@" +
+                friend.roblox_username;
+
+            info.append(
+                name,
+                username
+            );
+
+            card.append(
+                number,
+                info
+            );
+
+            robloxFriendList.appendChild(
+                card
+            );
+        }
+    );
+}
+
+if (
+    addRobloxFriend
+) {
+
+    addRobloxFriend.addEventListener(
+        "click",
+        async () => {
+
+            const fullName =
+                fullNameInput?.value.trim() ||
+                "";
+
+            const robloxUsername =
+                robloxUsernameInput?.value.trim() ||
+                "";
+
+            if (
+                !fullName ||
+                !robloxUsername
+            ) {
+
+                if (
+                    robloxMessage
+                ) {
+
+                    robloxMessage.textContent =
+                        "Fill in both boxes.";
+                }
+
+                return;
+            }
+
+            addRobloxFriend.disabled =
+                true;
+
+            if (
+                robloxMessage
+            ) {
+
+                robloxMessage.textContent =
+                    "Adding...";
+            }
+
+            const {
+                error
+            } =
+                await supabaseClient
+                    .from(
+                        "roblox_friends"
+                    )
+                    .insert({
+                        full_name:
+                            fullName,
+
+                        roblox_username:
+                            robloxUsername
+                    });
+
+            if (
+                error
+            ) {
+
+                console.error(
+                    error
+                );
+
+                if (
+                    robloxMessage
+                ) {
+
+                    robloxMessage.textContent =
+                        "Something went wrong.";
+                }
+
+                addRobloxFriend.disabled =
+                    false;
+
+                return;
+            }
+
+            if (
+                fullNameInput
+            ) {
+
+                fullNameInput.value =
+                    "";
+            }
+
+            if (
+                robloxUsernameInput
+            ) {
+
+                robloxUsernameInput.value =
+                    "";
+            }
+
+            if (
+                robloxMessage
+            ) {
+
+                robloxMessage.textContent =
+                    "Added! 🔥";
+            }
+
+            addRobloxFriend.disabled =
+                false;
+
+            await loadRobloxFriends();
+        }
+    );
+}
+
+/* =========================================
+   ADMIN
+========================================= */
+
+let adminToken =
+    null;
+
+const adminPasswordInput =
+    $("adminPasswordInput");
+
+const adminLoginButton =
+    $("adminLoginButton");
+
+const adminMessage =
+    $("adminMessage");
+
+const adminPanel =
+    $("adminPanel");
+
+const adminFriendList =
+    $("adminFriendList");
+
+function showFriendRemoval(
+    friend
+) {
+
+    return new Promise(
+        resolve => {
+
+            const overlay =
+                document.createElement(
+                    "div"
+                );
+
+            overlay.className =
+                "friend-remove-overlay";
+
+            const dialog =
+                document.createElement(
+                    "div"
+                );
+
+            dialog.className =
+                "friend-remove-dialog";
+
+            const warning =
+                document.createElement(
+                    "div"
+                );
+
+            warning.className =
+                "friend-remove-warning";
+
+            warning.textContent =
+                "⚠";
+
+            const title =
+                document.createElement(
+                    "div"
+                );
+
+            title.className =
+                "friend-remove-title";
+
+            title.textContent =
+                "REMOVE FRIEND?";
+
+            const subtitle =
+                document.createElement(
+                    "div"
+                );
+
+            subtitle.className =
+                "friend-remove-subtitle";
+
+            subtitle.textContent =
+                "You are about to remove:";
+
+            const targetName =
+                document.createElement(
+                    "div"
+                );
+
+            targetName.className =
+                "friend-remove-name";
+
+            targetName.textContent =
+                friend.full_name;
+
+            const targetUsername =
+                document.createElement(
+                    "div"
+                );
+
+            targetUsername.className =
+                "friend-remove-username";
+
+            targetUsername.textContent =
+                "@" +
+                friend.roblox_username;
+
+            const danger =
+                document.createElement(
+                    "div"
+                );
+
+            danger.className =
+                "friend-remove-danger";
+
+            danger.textContent =
+                "THIS WILL PERMANENTLY REMOVE THIS FRIEND FROM THE LIST.";
+
+            const actions =
+                document.createElement(
+                    "div"
+                );
+
+            actions.className =
+                "friend-remove-actions";
+
+            const cancelButton =
+                document.createElement(
+                    "button"
+                );
+
+            cancelButton.className =
+                "friend-remove-cancel";
+
+            cancelButton.textContent =
+                "KEEP FRIEND";
+
+            const confirmButton =
+                document.createElement(
+                    "button"
+                );
+
+            confirmButton.className =
+                "friend-remove-confirm";
+
+            confirmButton.textContent =
+                "REMOVE FRIEND";
+
+            actions.append(
+                cancelButton,
+                confirmButton
+            );
+
+            dialog.append(
+                warning,
+                title,
+                subtitle,
+                targetName,
+                targetUsername,
+                danger,
+                actions
+            );
+
+            overlay.appendChild(
+                dialog
+            );
+
+            document.body.appendChild(
+                overlay
+            );
+
+            requestAnimationFrame(
+                () =>
+                    overlay.classList.add(
+                        "open"
+                    )
+            );
+
+            const finish =
+                result => {
+
+                    overlay.classList.remove(
+                        "open"
+                    );
+
+                    setTimeout(
+                        () =>
+                            overlay.remove(),
+                        250
+                    );
+
+                    resolve(
+                        result
+                    );
+                };
+
+            cancelButton.addEventListener(
+                "click",
+                () =>
+                    finish(
+                        false
+                    )
+            );
+
+            confirmButton.addEventListener(
+                "click",
+                () =>
+                    finish(
+                        true
+                    )
+            );
+
+            overlay.addEventListener(
+                "click",
+                event => {
+
+                    if (
+                        event.target ===
+                        overlay
+                    ) {
+
+                        finish(
+                            false
+                        );
+                    }
+                }
+            );
+        }
+    );
+}
+
+async function loadAdminFriends() {
+
+    if (
+        !adminFriendList
+    ) {
+
+        return;
+    }
+
+    adminFriendList.textContent =
+        "Loading...";
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from(
+                "roblox_friends"
+            )
+            .select(
+                "id, full_name, roblox_username"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: true
+                }
+            );
+
+    if (
+        error
+    ) {
+
+        console.error(
+            error
+        );
+
+        adminFriendList.textContent =
+            "Could not load friends.";
+
+        return;
+    }
+
+    adminFriendList.innerHTML =
+        "";
+
+    if (
+        !data.length
+    ) {
+
+        adminFriendList.innerHTML =
+            "<p class='admin-empty'>No friends added yet.</p>";
+
+        return;
+    }
+
+    data.forEach(
+        (friend, index) => {
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "admin-friend";
+
+            const number =
+                document.createElement(
+                    "div"
+                );
+
+            number.className =
+                "admin-friend-number";
+
+            number.textContent =
+                String(
+                    index + 1
+                ).padStart(
+                    2,
+                    "0"
+                );
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "admin-friend-info";
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "admin-friend-name";
+
+            name.textContent =
+                friend.full_name;
+
+            const username =
+                document.createElement(
+                    "div"
+                );
+
+            username.className =
+                "admin-friend-username";
+
+            username.textContent =
+                "@" +
+                friend.roblox_username;
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+            deleteButton.className =
+                "admin-delete-button";
+
+            deleteButton.textContent =
+                "⚠ REMOVE";
+
+            deleteButton.addEventListener(
+                "click",
+                async () => {
+
+                    const confirmed =
+                        await showFriendRemoval(
+                            friend
+                        );
+
+                    if (
+                        !confirmed
+                    ) {
+
+                        return;
+                    }
+
+                    deleteButton.disabled =
+                        true;
+
+                    deleteButton.textContent =
+                        "REMOVING...";
+
+                    const {
+                        data:
+                            result,
+                        error:
+                            deleteError
+                    } =
+                        await supabaseClient
+                            .functions
+                            .invoke(
+                                "delete-roblox-friend",
+                                {
+                                    body: {
+                                        id:
+                                            friend.id,
+
+                                        adminToken:
+                                            adminToken
+                                    }
+                                }
+                            );
+
+                    if (
+                        deleteError ||
+                        !result?.success
+                    ) {
+
+                        console.error(
+                            deleteError ||
+                            result
+                        );
+
+                        deleteButton.disabled =
+                            false;
+
+                        deleteButton.textContent =
+                            "⚠ REMOVE";
+
+                        alert(
+                            result?.error ||
+                            "Could not remove friend."
+                        );
+
+                        return;
+                    }
+
+                    await loadAdminFriends();
+                    await loadRobloxFriends();
+                }
+            );
+
+            info.append(
+                name,
+                username
+            );
+
+            card.append(
+                number,
+                info,
+                deleteButton
+            );
+
+            adminFriendList.appendChild(
+                card
+            );
+        }
+    );
+}
+
+if (
+    adminLoginButton
+) {
+
+    adminLoginButton.addEventListener(
+        "click",
+        async () => {
+
+            const password =
+                adminPasswordInput?.value.trim() ||
+                "";
+
+            if (
+                !password
+            ) {
+
+                if (
+                    adminMessage
+                ) {
+
+                    adminMessage.textContent =
+                        "Enter the admin password.";
+                }
+
+                return;
+            }
+
+            adminLoginButton.disabled =
+                true;
+
+            if (
+                adminMessage
+            ) {
+
+                adminMessage.textContent =
+                    "Checking...";
+            }
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .functions
+                    .invoke(
+                        "admin-login",
+                        {
+                            body: {
+                                password
+                            }
+                        }
+                    );
+
+            if (
+                error ||
+                !data?.success
+            ) {
+
+                console.error(
+                    error ||
+                    data
+                );
+
+                if (
+                    adminMessage
+                ) {
+
+                    adminMessage.textContent =
+                        data?.error ||
+                        "Login failed.";
+                }
+
+                adminLoginButton.disabled =
+                    false;
+
+                return;
+            }
+
+            adminToken =
+                data.adminToken;
+
+            if (
+                adminPasswordInput
+            ) {
+
+                adminPasswordInput.value =
+                    "";
+            }
+
+            if (
+                adminMessage
+            ) {
+
+                adminMessage.textContent =
+                    "ADMIN ACCESS GRANTED.";
+            }
+
+            if (
+                adminPanel
+            ) {
+
+                adminPanel.style.display =
+                    "block";
+            }
+
+            adminLoginButton.disabled =
+                false;
+
+            await loadAdminFriends();
+        }
+    );
+}
+
+/* =========================================
+   SETTINGS
+========================================= */
+
+const settingsButton =
+    $("settingsButton");
+
+const settingsMenu =
+    $("settingsMenu");
+
+const exitSettingsButton =
+    $("exitSettingsButton");
+
+const settingsThemeButton =
+    $("settingsThemeButton");
+
+const settingsFullscreenButton =
+    $("settingsFullscreenButton") ||
+    $("fullscreenButton");
+
+const settingsRefreshButton =
+    $("settingsRefreshButton") ||
+    $("refreshButton");
+
+if (
+    settingsButton &&
+    settingsMenu
+) {
+
+    settingsButton.addEventListener(
+        "click",
+        () =>
+            settingsMenu.classList.toggle(
+                "open"
+            )
+    );
+}
+
+if (
+    exitSettingsButton &&
+    settingsMenu
+) {
+
+    exitSettingsButton.addEventListener(
+        "click",
+        () =>
+            settingsMenu.classList.remove(
+                "open"
+            )
+    );
+}
+
+if (
+    settingsFullscreenButton
+) {
+
+    settingsFullscreenButton.addEventListener(
+        "click",
+        async () => {
+
+            try {
+
+                if (
+                    !document.fullscreenElement
+                ) {
+
+                    await document
+                        .documentElement
+                        .requestFullscreen();
+
+                } else {
+
+                    await document
+                        .exitFullscreen();
+                }
+
+            } catch (
+                error
+            ) {
+
+                console.error(
+                    "Fullscreen error:",
+                    error
+                );
+            }
+        }
+    );
+}
+
+if (
+    settingsRefreshButton
+) {
+
+    settingsRefreshButton.addEventListener(
+        "click",
+        () =>
+            window.location.reload()
+    );
+}
+
+/* =========================================
+   THEMES
+========================================= */
+
+const THEME_PRESETS = {
+
+    white: {
+
+        label:
+            "WHITE",
+
+        background:
+            "#ffffff",
+
+        text:
+            "#000000",
+
+        card:
+            "#f5f5f5",
+
+        border:
+            "rgba(0,0,0,0.12)",
+
+        shadow:
+            "0 15px 40px rgba(0,0,0,0.08)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff3cac,#784ba0,#2b86c5,#00f5a0,#ffd166)",
+
+        colorfulBackground:
+            false,
+
+        colorfulText:
+            false,
+
+        preview:
+            "#ffffff"
+    },
+
+    black: {
+
+        label:
+            "BLACK",
+
+        background:
+            "#070707",
+
+        text:
+            "#ffffff",
+
+        card:
+            "#111111",
+
+        border:
+            "rgba(255,255,255,0.12)",
+
+        shadow:
+            "0 15px 40px rgba(0,0,0,0.35)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff3cac,#784ba0,#2b86c5,#00f5a0,#ffd166)",
+
+        colorfulBackground:
+            false,
+
+        colorfulText:
+            false,
+
+        preview:
+            "#070707"
+    },
+
+    colorfulWhite: {
+
+        label:
+            "COLOR BG / WHITE TEXT",
+
+        background:
+            "linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5,#00f5a0)",
+
+        text:
+            "#ffffff",
+
+        card:
+            "rgba(255,255,255,0.08)",
+
+        border:
+            "rgba(255,255,255,0.18)",
+
+        shadow:
+            "0 15px 50px rgba(0,0,0,0.25)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff3cac,#ffd166,#00f5a0,#2b86c5)",
+
+        colorfulBackground:
+            true,
+
+        colorfulText:
+            false,
+
+        preview:
+            "linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5,#00f5a0)"
+    },
+
+    colorfulBlack: {
+
+        label:
+            "COLOR BG / BLACK TEXT",
+
+        background:
+            "linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5,#00f5a0)",
+
+        text:
+            "#050505",
+
+        card:
+            "rgba(255,255,255,0.18)",
+
+        border:
+            "rgba(0,0,0,0.18)",
+
+        shadow:
+            "0 15px 50px rgba(0,0,0,0.22)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff006e,#7b2cff,#0099ff,#00c853,#ff9f1c)",
+
+        colorfulBackground:
+            true,
+
+        colorfulText:
+            false,
+
+        preview:
+            "linear-gradient(135deg,#ff3cac,#784ba0,#2b86c5,#00f5a0)"
+    },
+
+    textBlack: {
+
+        label:
+            "COLOR TEXT / BLACK BG",
+
+        background:
+            "#070707",
+
+        text:
+            "#ffffff",
+
+        card:
+            "#111111",
+
+        border:
+            "rgba(255,255,255,0.12)",
+
+        shadow:
+            "0 15px 40px rgba(0,0,0,0.35)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff3cac,#784ba0,#2b86c5,#00f5a0,#ffd166)",
+
+        colorfulBackground:
+            false,
+
+        colorfulText:
+            true,
+
+        preview:
+            "#070707"
+    },
+
+    textWhite: {
+
+        label:
+            "COLOR TEXT / WHITE BG",
+
+        background:
+            "#ffffff",
+
+        text:
+            "#000000",
+
+        card:
+            "#f5f5f5",
+
+        border:
+            "rgba(0,0,0,0.12)",
+
+        shadow:
+            "0 15px 40px rgba(0,0,0,0.08)",
+
+        textGradient:
+            "linear-gradient(90deg,#ff006e,#7b2cff,#0099ff,#00c853,#ff9f1c)",
+
+        colorfulBackground:
+            false,
+
+        colorfulText:
+            true,
+
+        preview:
+            "#ffffff"
+    },
+
+    fullColor: {
+
+        label:
+            "FULL COLOR",
+
+        background:
+            "linear-gradient(135deg,#ff006e,#7b2cff,#0099ff,#00c853,#ffd000)",
+
+        text:
+            "#ffffff",
+
+        card:
+            "rgba(255,255,255,0.07)",
+
+        border:
+            "rgba(255,255,255,0.2)",
+
+        shadow:
+            "0 15px 60px rgba(0,0,0,0.3)",
+
+        textGradient:
+            "linear-gradient(90deg,#ffea00,#ff3cac,#00f5ff,#00ff88,#ffffff)",
+
+        colorfulBackground:
+            true,
+
+        colorfulText:
+            true,
+
+        preview:
+            "linear-gradient(135deg,#ff006e,#7b2cff,#0099ff,#00c853,#ffd000)"
+    }
+};
+
+/* =========================================
+   APPLY THEME
+========================================= */
+
+function applyTheme(
+    themeKey
+) {
+
+    const theme =
+        THEME_PRESETS[
+            themeKey
+        ];
+
+    if (
+        !theme
+    ) {
+
+        return;
+    }
+
+    document.body.classList.remove(
+        "light",
+        "colorful",
+        "theme-system",
+        "theme-colorful-background",
+        "theme-colorful-text"
+    );
+
+    document.body.classList.add(
+        "theme-system"
+    );
+
+    if (
+        themeKey === "white" ||
+        themeKey === "textWhite"
+    ) {
+
+        document.body.classList.add(
+            "light"
+        );
+    }
+
+    if (
+        theme.colorfulBackground
+    ) {
+
+        document.body.classList.add(
+            "theme-colorful-background"
+        );
+    }
+
+    if (
+        theme.colorfulText
+    ) {
+
+        document.body.classList.add(
+            "theme-colorful-text"
+        );
+    }
+
+    const root =
+        document.documentElement.style;
+
+    root.setProperty(
+        "--theme-background",
+        theme.background
+    );
+
+    root.setProperty(
+        "--theme-text",
+        theme.text
+    );
+
+    root.setProperty(
+        "--theme-card",
+        theme.card
+    );
+
+    root.setProperty(
+        "--theme-border",
+        theme.border
+    );
+
+    root.setProperty(
+        "--theme-shadow",
+        theme.shadow
+    );
+
+    root.setProperty(
+        "--theme-text-gradient",
+        theme.textGradient
+    );
+
+    const themeToggle =
+        $("themeToggle");
+
+    if (
+        themeToggle
+    ) {
+
+        themeToggle.checked =
+            themeKey === "white";
+    }
+
+    qsa(
+        ".theme-option"
+    ).forEach(
+        option => {
+
+            option.classList.toggle(
+                "selected",
+                option.dataset.theme ===
+                    themeKey
+            );
+        }
+    );
+
+    const currentTheme =
+        $("themeCurrentName");
+
+    if (
+        currentTheme
+    ) {
+
+        currentTheme.textContent =
+            theme.label;
+    }
+}
+
+if (
+    settingsThemeButton &&
+    settingsMenu
+) {
+
+    settingsThemeButton.addEventListener(
+        "click",
+        () => {
+
+            const picker =
+                settingsMenu.querySelector(
+                    ".theme-picker"
+                );
+
+            if (
+                !picker
+            ) {
+
+                return;
+            }
+
+            picker.classList.toggle(
+                "open"
+            );
+
+            settingsMenu.classList.toggle(
+                "theme-picker-open"
+            );
+        }
+    );
+}
+
+if (
+    settingsMenu
+) {
+
+    const themePicker =
+        document.createElement(
+            "div"
+        );
+
+    themePicker.className =
+        "theme-picker";
+
+    themePicker.innerHTML = `
+        <div class="theme-picker-header">
+            <span>THEME MODES</span>
+            <span id="themeCurrentName">BLACK</span>
+        </div>
+        <div class="theme-grid"></div>
+    `;
+
+    settingsMenu.appendChild(
+        themePicker
+    );
+
+    const themeGrid =
+        qs(
+            ".theme-grid",
+            themePicker
+        );
+
+    Object.entries(
+        THEME_PRESETS
+    ).forEach(
+        (
+            [key, theme]
+        ) => {
+
+            const option =
+                document.createElement(
+                    "button"
+                );
+
+            option.className =
+                "theme-option";
+
+            option.dataset.theme =
+                key;
+
+            const swatch =
+                document.createElement(
+                    "span"
+                );
+
+            swatch.className =
+                "theme-swatch";
+
+            swatch.style.background =
+                theme.preview;
+
+            const swatchText =
+                document.createElement(
+                    "span"
+                );
+
+            swatchText.textContent =
+                "Aa";
+
+            if (
+                theme.colorfulText
+            ) {
+
+                swatchText.style.setProperty(
+                    "color",
+                    "transparent",
+                    "important"
+                );
+
+                swatchText.style.setProperty(
+                    "background",
+                    theme.textGradient,
+                    "important"
+                );
+
+                swatchText.style.setProperty(
+                    "-webkit-background-clip",
+                    "text",
+                    "important"
+                );
+
+                swatchText.style.setProperty(
+                    "background-clip",
+                    "text",
+                    "important"
+                );
+
+            } else {
+
+                swatchText.style.setProperty(
+                    "color",
+                    theme.text,
+                    "important"
+                );
+            }
+
+            swatch.appendChild(
+                swatchText
+            );
+
+            const label =
+                document.createElement(
+                    "span"
+                );
+
+            label.className =
+                "theme-option-label";
+
+            label.textContent =
+                theme.label;
+
+            option.append(
+                swatch,
+                label
+            );
+
+            option.addEventListener(
+                "click",
+                () => {
+
+                    applyTheme(
+                        key
+                    );
+
+                    themePicker.classList.remove(
+                        "open"
+                    );
+
+                    settingsMenu.classList.remove(
+                        "theme-picker-open"
+                    );
+                }
+            );
+
+            themeGrid.appendChild(
+                option
+            );
+        }
+    );
+}
+
+const themeToggle =
+    $("themeToggle");
+
+if (
+    themeToggle
+) {
+
+    themeToggle.addEventListener(
+        "change",
+        () => {
+
+            applyTheme(
+                themeToggle.checked
+                    ? "white"
+                    : "black"
+            );
+        }
+    );
+}
+
+applyTheme(
+    "black"
+);
+
+loadRobloxFriends();
+
+/* =========================================
+   SOIL SENSOR LAB
+========================================= */
+
+const sensorLabPage =
+    document.getElementById("sensorLabPage");
+
+const sensorLabBox =
+    document.getElementById("sensorLabBox");
+
+const sensorLabBackButton =
+    document.getElementById("sensorLabBackButton");
+
+const drySoil =
+    document.getElementById("drySoil");
+
+const wetSoil =
+    document.getElementById("wetSoil");
+
+const sensorDropZone =
+    document.getElementById("sensorDropZone");
+
+const soilOnSensor =
+    document.getElementById("soilOnSensor");
+
+const sensorReading =
+    document.getElementById("sensorReading");
+
+const sensorStatus =
+    document.getElementById("sensorStatus");
+
+const sensorButtonA =
+    document.getElementById("sensorButtonA");
+
+const virtualButtonA =
+    document.getElementById("virtualButtonA");
+
+const sensorResetButton =
+    document.getElementById("sensorResetButton");
+
+const microbitLedGrid =
+    document.getElementById("microbitLedGrid");
 
 
-fullscreenButton.addEventListener(
-    "click",
-    function () {
+/* =========================================
+   OPEN / CLOSE SENSOR LAB
+========================================= */
 
-        if (!document.fullscreenElement) {
+if (
+    sensorLabBox &&
+    sensorLabPage
+) {
 
-            document.documentElement.requestFullscreen();
+    sensorLabBox.addEventListener(
+        "click",
+        function () {
 
-        } else {
+            if (typeof showPage === "function") {
 
-            document.exitFullscreen();
+                showPage(
+                    sensorLabPage
+                );
+
+            } else {
+
+                document
+                    .querySelectorAll(".page")
+                    .forEach(function(page) {
+
+                        page.classList.remove(
+                            "active"
+                        );
+
+                    });
+
+                sensorLabPage.classList.add(
+                    "active"
+                );
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
 
         }
+    );
+
+}
+
+
+if (
+    sensorLabBackButton
+) {
+
+    sensorLabBackButton.addEventListener(
+        "click",
+        function () {
+
+            if (typeof showPage === "function") {
+
+                showPage(
+                    document.getElementById(
+                        "pageTwo"
+                    )
+                );
+
+            } else {
+
+                sensorLabPage.classList.remove(
+                    "active"
+                );
+
+                document
+                    .getElementById("pageTwo")
+                    .classList.add(
+                        "active"
+                    );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   MICROBIT LED MATRIX
+========================================= */
+
+if (
+    microbitLedGrid
+) {
+
+    for (
+        let i = 0;
+        i < 25;
+        i++
+    ) {
+
+        const led =
+            document.createElement(
+                "div"
+            );
+
+        led.className =
+            "microbit-led";
+
+        microbitLedGrid.appendChild(
+            led
+        );
 
     }
+
+}
+
+function showMicrobitPattern(
+    pattern
+) {
+
+    if (
+        !microbitLedGrid
+    ) {
+
+        return;
+    }
+
+    const leds =
+        [
+            ...microbitLedGrid.children
+        ];
+
+    leds.forEach(
+        function(led, index) {
+
+            led.classList.toggle(
+                "on",
+                pattern.includes(index)
+            );
+
+        }
+    );
+
+}
+
+
+const ledPatterns = {
+
+    ready: [
+        0, 4,
+        6, 8,
+        12,
+        16, 18,
+        20, 24
+    ],
+
+    dry: [
+        0, 1, 2, 3, 4,
+        6, 8,
+        10, 12, 14,
+        16,
+        18,
+        20, 21, 22, 23, 24
+    ],
+
+    wet: [
+        0, 4,
+        5, 9,
+        10, 14,
+        15, 19,
+        20, 24
+    ],
+
+    error: [
+        0, 2, 4,
+        6, 8,
+        10, 11, 12, 13, 14,
+        16, 18,
+        20, 22, 24
+    ]
+
+};
+
+
+showMicrobitPattern(
+    ledPatterns.ready
 );
 
 
-// Change button text when fullscreen changes
+/* =========================================
+   SOIL STATE
+========================================= */
+
+let soilState = {
+
+    dry: false,
+
+    wet: false
+
+};
+
+
+function renderSoilOnSensor() {
+
+    if (
+        !soilOnSensor
+    ) {
+
+        return;
+    }
+
+    soilOnSensor.innerHTML =
+        "";
+
+    if (
+        soilState.dry
+    ) {
+
+        const dryPiece =
+            document.createElement(
+                "div"
+            );
+
+        dryPiece.className =
+            "placed-soil placed-dry";
+
+        dryPiece.title =
+            "Dry soil";
+
+        soilOnSensor.appendChild(
+            dryPiece
+        );
+
+    }
+
+
+    if (
+        soilState.wet
+    ) {
+
+        const wetPiece =
+            document.createElement(
+                "div"
+            );
+
+        wetPiece.className =
+            "placed-soil placed-wet";
+
+        wetPiece.title =
+            "Wet soil";
+
+        soilOnSensor.appendChild(
+            wetPiece
+        );
+
+    }
+
+
+    if (
+        !soilState.dry &&
+        !soilState.wet
+    ) {
+
+        const message =
+            document.createElement(
+                "div"
+            );
+
+        message.className =
+            "drop-message";
+
+        message.textContent =
+            "DROP SOIL HERE";
+
+        soilOnSensor.appendChild(
+            message
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   DRAG SOIL
+========================================= */
+
+function setupSoilDrag(
+    element,
+    soilType
+) {
+
+    if (
+        !element
+    ) {
+
+        return;
+    }
+
+
+    element.addEventListener(
+        "dragstart",
+        function(event) {
+
+            event.dataTransfer.setData(
+                "text/plain",
+                soilType
+            );
+
+        }
+    );
+
+
+    element.addEventListener(
+        "click",
+        function() {
+
+            placeSoil(
+                soilType
+            );
+
+        }
+    );
+
+}
+
+
+setupSoilDrag(
+    drySoil,
+    "dry"
+);
+
+
+setupSoilDrag(
+    wetSoil,
+    "wet"
+);
+
+
+/* =========================================
+   DROP ZONE
+========================================= */
+
+if (
+    sensorDropZone
+) {
+
+    sensorDropZone.addEventListener(
+        "dragover",
+        function(event) {
+
+            event.preventDefault();
+
+            sensorDropZone.classList.add(
+                "drag-over"
+            );
+
+        }
+    );
+
+
+    sensorDropZone.addEventListener(
+        "dragleave",
+        function() {
+
+            sensorDropZone.classList.remove(
+                "drag-over"
+            );
+
+        }
+    );
+
+
+    sensorDropZone.addEventListener(
+        "drop",
+        function(event) {
+
+            event.preventDefault();
+
+            sensorDropZone.classList.remove(
+                "drag-over"
+            );
+
+            const soilType =
+                event.dataTransfer.getData(
+                    "text/plain"
+                );
+
+            placeSoil(
+                soilType
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   PLACE SOIL
+========================================= */
+
+function placeSoil(
+    soilType
+) {
+
+    if (
+        soilType !== "dry" &&
+        soilType !== "wet"
+    ) {
+
+        return;
+    }
+
+
+    soilState[
+        soilType
+    ] = true;
+
+
+    renderSoilOnSensor();
+
+
+    sensorReading.textContent =
+        "READY";
+
+
+    sensorReading.classList.remove(
+        "sensor-error"
+    );
+
+
+    sensorStatus.textContent =
+        "Soil placed. Press A.";
+
+
+    showMicrobitPattern(
+        ledPatterns.ready
+    );
+
+}
+
+
+/* =========================================
+   SENSOR READING
+========================================= */
+
+function readSensor() {
+
+    const hasDry =
+        soilState.dry;
+
+    const hasWet =
+        soilState.wet;
+
+
+    sensorReading.classList.remove(
+        "sensor-error"
+    );
+
+
+    if (
+        hasDry &&
+        hasWet
+    ) {
+
+        sensorReading.textContent =
+            "ERROR";
+
+        sensorReading.classList.add(
+            "sensor-error"
+        );
+
+        sensorStatus.textContent =
+            "Multiple soil types detected.";
+
+        showMicrobitPattern(
+            ledPatterns.error
+        );
+
+        return;
+    }
+
+
+    if (
+        hasWet
+    ) {
+
+        sensorReading.textContent =
+            "WET";
+
+        sensorStatus.textContent =
+            "High moisture detected.";
+
+        showMicrobitPattern(
+            ledPatterns.wet
+        );
+
+        return;
+    }
+
+
+    if (
+        hasDry
+    ) {
+
+        sensorReading.textContent =
+            "DRY";
+
+        sensorStatus.textContent =
+            "Low moisture detected.";
+
+        showMicrobitPattern(
+            ledPatterns.dry
+        );
+
+        return;
+    }
+
+
+    sensorReading.textContent =
+        "ERROR";
+
+    sensorReading.classList.add(
+        "sensor-error"
+    );
+
+    sensorStatus.textContent =
+        "No soil detected.";
+
+    showMicrobitPattern(
+        ledPatterns.error
+    );
+
+}
+
+
+/* =========================================
+   A BUTTON
+========================================= */
+
+function pressVirtualA() {
+
+    if (
+        !sensorReading
+    ) {
+
+        return;
+    }
+
+
+    sensorReading.animate(
+        [
+            {
+                transform:
+                    "scale(1)"
+            },
+            {
+                transform:
+                    "scale(1.05)"
+            },
+            {
+                transform:
+                    "scale(1)"
+            }
+        ],
+        {
+            duration:
+                220
+        }
+    );
+
+
+    readSensor();
+
+}
+
+
+if (
+    sensorButtonA
+) {
+
+    sensorButtonA.addEventListener(
+        "click",
+        pressVirtualA
+    );
+
+}
+
+
+if (
+    virtualButtonA
+) {
+
+    virtualButtonA.addEventListener(
+        "click",
+        pressVirtualA
+    );
+
+}
+
+
+/* REAL KEYBOARD A */
 
 document.addEventListener(
-    "fullscreenchange",
-    function () {
+    "keydown",
+    function(event) {
 
-        if (document.fullscreenElement) {
+        if (
+            event.key.toLowerCase() === "a" &&
+            sensorLabPage?.classList.contains(
+                "active"
+            )
+        ) {
 
-            fullscreenButton.textContent =
-                "✕ Exit Full Screen";
-
-        } else {
-
-            fullscreenButton.textContent =
-                "⛶ Full Screen";
+            pressVirtualA();
 
         }
 
     }
 );
+
+
+/* =========================================
+   RESET
+========================================= */
+
+function resetSensorLab() {
+
+    soilState.dry =
+        false;
+
+    soilState.wet =
+        false;
+
+
+    renderSoilOnSensor();
+
+
+    sensorReading.textContent =
+        "READY";
+
+
+    sensorReading.classList.remove(
+        "sensor-error"
+    );
+
+
+    sensorStatus.textContent =
+        "Waiting for soil...";
+
+
+    showMicrobitPattern(
+        ledPatterns.ready
+    );
+
+}
+
+
+if (
+    sensorResetButton
+) {
+
+    sensorResetButton.addEventListener(
+        "click",
+        resetSensorLab
+    );
+
+}
+
+
+renderSoilOnSensor();
+
+/* =========================================
+   AUTO THEME — SYNCED TO SCREEN SHINE
+========================================= */
+
+const settingsAutoThemeButton =
+    document.getElementById("settingsAutoThemeButton");
+
+const autoThemePage =
+    document.getElementById("pageOne");
+
+const AUTO_THEME_SEQUENCE = [
+    "black",
+    "white",
+    "colorfulWhite",
+    "colorfulBlack",
+    "textBlack",
+    "textWhite",
+    "fullColor"
+];
+
+let autoThemeEnabled = false;
+let autoThemeRaf = null;
+let autoThemeCrossedThisCycle = false;
+let autoThemeIndex = 0;
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+function updateAutoThemeButton() {
+
+    if (!settingsAutoThemeButton) {
+        return;
+    }
+
+    const label =
+        settingsAutoThemeButton.querySelector(
+            "span:last-child"
+        );
+
+    if (autoThemeEnabled) {
+
+        settingsAutoThemeButton.classList.add(
+            "auto-theme-active"
+        );
+
+        if (label) {
+            label.textContent =
+                "Auto Theme: ON";
+        }
+
+    } else {
+
+        settingsAutoThemeButton.classList.remove(
+            "auto-theme-active"
+        );
+
+        if (label) {
+            label.textContent =
+                "Auto Theme: OFF";
+        }
+    }
+}
+
+
+/* =========================================
+   GET CURRENT THEME
+========================================= */
+
+function getCurrentAutoThemeIndex() {
+
+    const selectedTheme =
+        document.querySelector(
+            ".theme-option.selected"
+        );
+
+    if (
+        selectedTheme &&
+        selectedTheme.dataset.theme
+    ) {
+
+        const foundIndex =
+            AUTO_THEME_SEQUENCE.indexOf(
+                selectedTheme.dataset.theme
+            );
+
+        if (foundIndex >= 0) {
+
+            return foundIndex;
+        }
+    }
+
+    return 0;
+}
+
+
+/* =========================================
+   CHANGE TO NEXT THEME
+========================================= */
+
+function applyNextAutoTheme() {
+
+    autoThemeIndex =
+        (
+            autoThemeIndex + 1
+        ) %
+        AUTO_THEME_SEQUENCE.length;
+
+    applyTheme(
+        AUTO_THEME_SEQUENCE[
+            autoThemeIndex
+        ]
+    );
+}
+
+
+/* =========================================
+   WATCH THE ACTUAL SHINE
+========================================= */
+
+function autoThemeTick() {
+
+    if (
+        !autoThemeEnabled ||
+        !autoThemePage ||
+        !autoThemePage.classList.contains(
+            "active"
+        )
+    ) {
+
+        autoThemeRaf = null;
+
+        return;
+    }
+
+
+    const shine =
+        getComputedStyle(
+            autoThemePage,
+            "::after"
+        );
+
+
+    const shineLeft =
+        parseFloat(
+            shine.left
+        );
+
+
+    const pageWidth =
+        autoThemePage.getBoundingClientRect()
+            .width;
+
+
+    /*
+       The bright center of the shine
+       crosses the screen center when
+       the pseudo-element's LEFT position
+       reaches 22.5% of the page width.
+
+       Shine width = 55%
+       Center of shine = 27.5%
+       Screen center = 50%
+
+       50% - 27.5% = 22.5%
+    */
+
+    const crossingPoint =
+        pageWidth * 0.225;
+
+
+    /*
+       Shine has looped back to the left.
+       Prepare for the next crossing.
+    */
+
+    if (
+        shineLeft <
+        crossingPoint
+    ) {
+
+        autoThemeCrossedThisCycle =
+            false;
+    }
+
+
+    /*
+       SHINE JUST CROSSED THE CENTER
+    */
+
+    if (
+        shineLeft >= crossingPoint &&
+        !autoThemeCrossedThisCycle
+    ) {
+
+        autoThemeCrossedThisCycle =
+            true;
+
+        applyNextAutoTheme();
+    }
+
+
+    autoThemeRaf =
+        requestAnimationFrame(
+            autoThemeTick
+        );
+}
+
+
+/* =========================================
+   START AUTO THEME
+========================================= */
+
+function startAutoTheme() {
+
+    if (
+        !autoThemePage
+    ) {
+        return;
+    }
+
+    autoThemeEnabled =
+        true;
+
+    autoThemeIndex =
+        getCurrentAutoThemeIndex();
+
+    autoThemeCrossedThisCycle =
+        false;
+
+    updateAutoThemeButton();
+
+
+    if (
+        autoThemeRaf === null &&
+        autoThemePage.classList.contains(
+            "active"
+        )
+    ) {
+
+        autoThemeRaf =
+            requestAnimationFrame(
+                autoThemeTick
+            );
+    }
+}
+
+
+/* =========================================
+   STOP AUTO THEME
+========================================= */
+
+function stopAutoTheme() {
+
+    autoThemeEnabled =
+        false;
+
+    autoThemeCrossedThisCycle =
+        false;
+
+    updateAutoThemeButton();
+
+
+    if (
+        autoThemeRaf !== null
+    ) {
+
+        cancelAnimationFrame(
+            autoThemeRaf
+        );
+
+        autoThemeRaf =
+            null;
+    }
+}
+
+
+/* =========================================
+   BUTTON CLICK
+========================================= */
+
+if (
+    settingsAutoThemeButton
+) {
+
+    settingsAutoThemeButton.addEventListener(
+        "click",
+        function () {
+
+            if (
+                autoThemeEnabled
+            ) {
+
+                stopAutoTheme();
+
+            } else {
+
+                startAutoTheme();
+            }
+        }
+    );
+}
+
+
+/* =========================================
+   STOP AUTO THEME WHEN USER
+   CHOOSES A MANUAL THEME
+========================================= */
+
+document
+    .querySelectorAll(
+        ".theme-option"
+    )
+    .forEach(
+        option => {
+
+            option.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        autoThemeEnabled
+                    ) {
+
+                        stopAutoTheme();
+                    }
+                }
+            );
+        }
+    );
+
+
+/* =========================================
+   STOP AUTO THEME WHEN TOGGLE IS USED
+========================================= */
+
+const autoThemeToggle =
+    document.getElementById(
+        "themeToggle"
+    );
+
+if (
+    autoThemeToggle
+) {
+
+    autoThemeToggle.addEventListener(
+        "change",
+        function () {
+
+            if (
+                autoThemeEnabled
+            ) {
+
+                stopAutoTheme();
+            }
+        }
+    );
+}
+
+
+/* =========================================
+   WATCH PAGE 1
+   SO IT RESTARTS WHEN YOU RETURN
+========================================= */
+
+if (
+    autoThemePage
+) {
+
+    const autoThemeObserver =
+        new MutationObserver(
+            function () {
+
+                if (
+                    !autoThemeEnabled
+                ) {
+                    return;
+                }
+
+
+                if (
+                    autoThemePage.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    if (
+                        autoThemeRaf === null
+                    ) {
+
+                        autoThemeRaf =
+                            requestAnimationFrame(
+                                autoThemeTick
+                            );
+                    }
+
+                } else {
+
+                    if (
+                        autoThemeRaf !== null
+                    ) {
+
+                        cancelAnimationFrame(
+                            autoThemeRaf
+                        );
+
+                        autoThemeRaf =
+                            null;
+                    }
+                }
+            }
+        );
+
+
+    autoThemeObserver.observe(
+        autoThemePage,
+        {
+            attributes: true,
+            attributeFilter: [
+                "class"
+            ]
+        }
+    );
+}
+
+
+updateAutoThemeButton();

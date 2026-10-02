@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SDG-E</title>
+    <title>THIS IS THE REAL FILE</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -42,6 +42,205 @@
 
     <section id="pageOne" class="page active">
 
+       <div class="screen-shine"></div>
+       <style>
+/* =========================================
+   REAL SDG-E FIRST PAGE SHINE
+========================================= */
+
+#pageOne {
+    position: relative !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+}
+
+#pageOne .screen-shine {
+    display: none !important;
+}
+
+#pageOne::after {
+    content: "";
+    position: absolute;
+
+    top: -60%;
+    left: -120%;
+
+    width: 55%;
+    height: 220%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 30%,
+            rgba(255,255,255,0.03) 38%,
+            rgba(255,255,255,0.22) 45%,
+            rgba(255,255,255,0.95) 50%,
+            rgba(255,255,255,0.22) 55%,
+            rgba(255,255,255,0.03) 62%,
+            transparent 70%,
+            transparent 100%
+        );
+
+    transform: skewX(-22deg);
+
+    pointer-events: none;
+
+    z-index: 999999;
+
+    animation:
+        SDGE_REAL_SCREEN_SHINE
+        4.5s
+        ease-in-out
+        infinite;
+}
+
+#pageOne > *:not(.screen-shine) {
+    position: relative;
+    z-index: 1000000;
+}
+
+@keyframes SDGE_REAL_SCREEN_SHINE {
+
+    0% {
+        left: -120%;
+    }
+
+    45% {
+        left: 135%;
+    }
+
+    100% {
+        left: 135%;
+    }
+
+}
+
+/* =========================================
+   CREATOR CREDIT — FINAL
+========================================= */
+
+#pageOne p.creator-credit {
+    opacity: 0.38 !important;
+
+    color: rgba(255,255,255,0.45) !important;
+
+    transition:
+        opacity 0.4s ease,
+        color 0.4s ease,
+        text-shadow 0.4s ease,
+        transform 0.4s ease;
+
+    animation: none !important;
+}
+
+#pageOne p.creator-credit:hover {
+    opacity: 1 !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-2px) scale(1.03);
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.6),
+        0 0 18px rgba(255,255,255,0.3);
+}
+
+/* =========================================
+   ROBLOX FRIEND CARDS — FINAL THEME
+========================================= */
+
+/* BLACK */
+body.theme-system:not(.theme-colorful-background):not(.theme-colorful-text):not(.light)
+.roblox-friend {
+    background: #111111 !important;
+    border-color: rgba(255,255,255,0.12) !important;
+    color: #ffffff !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35) !important;
+}
+
+
+/* WHITE */
+body.theme-system.light:not(.theme-colorful-background):not(.theme-colorful-text)
+.roblox-friend {
+    background: #f5f5f5 !important;
+    border-color: rgba(0,0,0,0.12) !important;
+    color: #000000 !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important;
+}
+
+
+/* COLOR BG / WHITE TEXT */
+body.theme-system.theme-colorful-background:not(.theme-colorful-text)
+.roblox-friend {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: rgba(255,255,255,0.18) !important;
+    color: #ffffff !important;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.25) !important;
+}
+
+
+/* COLOR BG / BLACK TEXT */
+body.theme-system.theme-colorful-background.roblox-friend {
+    color: #ffffff !important;
+}
+
+
+/* COLOR TEXT / BLACK BG */
+body.theme-system.theme-colorful-text:not(.light):not(.theme-colorful-background)
+.roblox-friend {
+    background: #111111 !important;
+    border-color: rgba(255,255,255,0.12) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35) !important;
+}
+
+
+/* COLOR TEXT / WHITE BG */
+body.theme-system.light.theme-colorful-text:not(.theme-colorful-background)
+.roblox-friend {
+    background: #f5f5f5 !important;
+    border-color: rgba(0,0,0,0.12) !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08) !important;
+}
+
+
+/* FULL COLOR */
+body.theme-system.theme-colorful-background.theme-colorful-text
+.roblox-friend {
+    background: rgba(255,255,255,0.07) !important;
+    border-color: rgba(255,255,255,0.20) !important;
+    box-shadow: 0 15px 60px rgba(0,0,0,0.30) !important;
+}
+
+
+/* FRIEND TEXT */
+body.theme-system .roblox-friend-number,
+body.theme-system .roblox-friend-name,
+body.theme-system .roblox-friend-username {
+    color: var(--theme-text) !important;
+}
+
+
+/* COLORED TEXT */
+body.theme-system.theme-colorful-text
+.roblox-friend-name,
+body.theme-system.theme-colorful-text
+.roblox-friend-username {
+    color: transparent !important;
+
+    background-image: var(--theme-text-gradient) !important;
+
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+
+/* HOVER */
+.roblox-friend:hover {
+    transform: translateY(-3px) !important;
+}
+
+</style> 
        <div class="welcome">
 
     <h1>
@@ -56,10 +255,64 @@
         Creator · Sidharth Sukumar · Eshaan Kannan
     </p>
 
+    <input
+        type="password"
+        id="secretPassword"
+        class="secret-password"
+        placeholder="Password"
+    >
+
 </div>
 
 </section>
 
+<!-- SETTINGS -->
+
+<div class="settings-container">
+
+    <button id="settingsButton" class="settings-button">
+        ⚙
+    </button>
+
+    <div id="settingsMenu" class="settings-menu">
+
+        <div class="settings-header">
+            <span>SETTINGS</span>
+            <span class="settings-status">SYSTEM</span>
+        </div>
+
+        <div class="settings-options">
+
+            <button id="exitSettingsButton">
+                <span>←</span>
+                <span>Exit Menu</span>
+            </button>
+
+            <button id="settingsThemeButton">
+                <span>◐</span>
+                <span>Theme Change</span>
+            </button>
+  
+            <button id="settingsAutoThemeButton">
+                <span>✦</span>
+                <span>Auto Theme: OFF</span>
+            </button>
+
+            <button id="settingsFullscreenButton">
+                <span>⛶</span>
+                <span>Full Screen</span>
+            </button>
+
+            <button id="settingsRefreshButton">
+                <span>↻</span>
+                <span>Refresh</span>
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ================================
      PAGE 2
@@ -223,12 +476,56 @@
                 </span>
 
             </div>
+            
+                        <!-- BOX 7 -->
 
-        </div>
+            <div class="info-box clickable-box explaining-bot-launch" id="explainingBotBox">
 
-    </section>
+                <span class="box-number">
+                    07
+                </span>
 
+                <h2>
+                    🤖 OUR EXPLAINING BOT!
+                </h2>
 
+                <p>
+                    Ask questions about the six SDG-E sections.
+                </p>
+
+                <span class="click-hint">
+                    Click to ask →
+                </span>
+
+            </div>
+
+            <!-- BOX 8 -->
+  <div
+        class="info-box clickable-box"
+        id="sensorLabBox"
+        onclick="window.location.href='soil-lab.html'"
+    >
+
+        <span class="box-number">
+            08
+        </span>
+
+        <h2>
+            🌱 Soil Sensor Lab
+        </h2>
+
+        <p>
+            Test our micro:bit soil moisture sensor
+            with dry and wet soil.
+        </p>
+
+        <span class="click-hint">
+            Open Sensor Lab →
+        </span>
+
+    </div>
+
+</div>
     <!-- ================================
          PAGE 3 - PARTS
     ================================= -->
@@ -989,9 +1286,420 @@
 
     </section>
 
+<!-- ================================
+     PAGE 9 - EXPLAINING BOT
+================================= -->
 
-    <script src="script.js"></script>
+<section id="explainingBotPage" class="page explaining-bot-page">
+
+    <button id="explainingBotBackButton" class="back-button">
+        ← Back
+    </button>
+
+    <div class="explaining-bot-header">
+
+        <span class="section-label">
+            SDG-E • EXPLAINING BOT
+        </span>
+
+        <h1>
+            🤖 OUR EXPLAINING BOT!
+        </h1>
+
+        <p>
+            Ask about any of the six SDG-E sections.
+        </p>
+
+    </div>
+
+
+    <div class="explaining-bot-shell">
+
+        <div id="explainingBotChat" class="explaining-bot-chat">
+
+            <div class="bot-message bot-message-bot">
+                Hey! Ask me about the SDG-E project. Type <strong>explain</strong> for the full project summary.
+            </div>
+
+        </div>
+
+        <div class="explaining-bot-quick-actions">
+            <button type="button" data-bot-question="What parts did you use?">Parts</button>
+            <button type="button" data-bot-question="Who are the partners?">Partners</button>
+            <button type="button" data-bot-question="Who is the mentor?">Mentor</button>
+            <button type="button" data-bot-question="What coding do you use?">Coding</button>
+            <button type="button" data-bot-question="explain">Explain</button>
+        </div>
+
+        <div class="explaining-bot-input-row">
+
+            <input
+                type="text"
+                id="explainingBotInput"
+                placeholder="Ask a question..."
+                autocomplete="off"
+            >
+
+            <button type="button" id="explainingBotSendButton">
+                ASK
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- SECRET PAGE -->
+
+<section id="secretPage" class="page secret-page">
+
+    <button id="secretBackButton" class="back-button">
+        ← Back
+    </button>
+
+    <div class="secret-content">
+
+        <span class="section-label">
+            SDG-E • CLASSIFIED
+        </span>
+
+        <h1>
+            ROBLOX FRIENDS AND USERNAMES
+        </h1>
+
+        <p>
+            You found the secret.
+        </p>
+
+        <div class="roblox-form">
+
+            <input
+                type="text"
+                id="fullNameInput"
+                placeholder="Full Name"
+                maxlength="80"
+            >
+
+            <input
+                type="text"
+                id="robloxUsernameInput"
+                placeholder="Roblox Username"
+                maxlength="30"
+            >
+
+            <button id="addRobloxFriend">
+                ADD ME
+            </button>
+
+            <p id="robloxMessage"></p>
+
+        </div>
+
+        <div class="roblox-list-section">
+
+            <h2>FRIEND LIST</h2>
+
+            <div id="robloxFriendList">
+                Loading...
+            </div>
+
+        </div>
+
+    </div>
+
+<div class="roblox-list-section">
+
+    <h2>FRIEND LIST</h2>
+
+    <div id="robloxFriendList">
+        Loading...
+    </div>
+
+</div>
+
+
+<!-- ADMIN MENU -->
+
+<div class="admin-section">
+
+    <h2>ADMIN MENU</h2>
+
+    <input
+        type="password"
+        id="adminPasswordInput"
+        placeholder="Admin Password"
+    >
+
+    <button id="adminLoginButton">
+        ADMIN LOGIN
+    </button>
+
+    <p id="adminMessage"></p>
+
+    <div id="adminPanel" style="display:none;">
+
+        <h3>FRIEND MANAGEMENT</h3>
+
+        <div id="adminFriendList">
+            Loading...
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =================================
+     PAGE 10 - SOIL SENSOR LAB
+================================= -->
+
+<section id="sensorLabPage" class="page sensor-lab-page">
+
+    <button id="sensorLabBackButton" class="back-button" type="button">
+        ← Back
+    </button>
+
+    <div class="sensor-lab-header">
+
+        <span class="section-label">
+            SDG-E • SENSOR LAB
+        </span>
+
+        <h1>
+            🌱 Soil Sensor Lab
+        </h1>
+
+        <p>
+            Test the micro:bit soil moisture sensor with dry and wet soil.
+            Place soil on the sensor, then press A.
+        </p>
+
+    </div>
+
+    <div class="sensor-lab-grid">
+
+        <!-- STATION 01 -->
+
+        <section class="sensor-panel soil-panel">
+
+            <div class="sensor-panel-top">
+                <div>
+                    <span class="sensor-panel-number">01</span>
+                    <span class="sensor-panel-label">SOIL BENCH</span>
+                </div>
+                <span class="sensor-panel-tag">INPUT</span>
+            </div>
+
+            <h2>Choose the soil</h2>
+
+            <p class="sensor-panel-description">
+                Drag a sample onto the sensor. Clicking a card works too.
+            </p>
+
+            <div class="soil-samples">
+
+                <div id="drySoil" class="soil-sample dry-soil" draggable="true">
+                    <div class="soil-sample-visual"><span></span></div>
+                    <div class="soil-sample-copy">
+                        <strong>Dry Soil</strong>
+                        <small>Low moisture</small>
+                    </div>
+                    <span class="soil-sample-arrow">→</span>
+                </div>
+
+                <div id="wetSoil" class="soil-sample wet-soil" draggable="true">
+                    <div class="soil-sample-visual"><span></span></div>
+                    <div class="soil-sample-copy">
+                        <strong>Wet Soil</strong>
+                        <small>High moisture</small>
+                    </div>
+                    <span class="soil-sample-arrow">→</span>
+                </div>
+
+            </div>
+
+            <div class="soil-note">
+                <span>i</span>
+                <p>Dry + wet together produces <strong>ERROR</strong>.</p>
+            </div>
+
+        </section>
+
+        <!-- STATION 02 -->
+
+        <section class="sensor-panel hardware-panel">
+
+            <div class="sensor-panel-top">
+                <div>
+                    <span class="sensor-panel-number">02</span>
+                    <span class="sensor-panel-label">HARDWARE BENCH</span>
+                </div>
+                <span class="sensor-panel-tag connected">CONNECTED</span>
+            </div>
+
+            <h2>Micro:bit + soil sensor</h2>
+
+            <p class="sensor-panel-description">
+                The sensor connects to the micro:bit. Press A on the board or keyboard.
+            </p>
+
+            <div class="hardware-workbench">
+
+                <svg class="hardware-cables" viewBox="0 0 900 340" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="cable cable-red" d="M288 154 C390 126 478 126 612 151" />
+                    <path class="cable cable-black" d="M288 173 C400 162 490 163 612 173" />
+                    <path class="cable cable-yellow" d="M288 192 C400 218 500 213 612 194" />
+                </svg>
+
+                <div class="microbit-device">
+
+                    <div class="microbit-device-header">
+                        <span>micro:bit</span>
+                        <strong>V2</strong>
+                    </div>
+
+                    <div class="microbit-face">
+                        <button id="virtualButtonA" class="microbit-button microbit-button-a" type="button">A</button>
+                        <div id="microbitLedGrid" class="microbit-led-grid"></div>
+                        <button class="microbit-button microbit-button-b" type="button">B</button>
+                    </div>
+
+                    <div class="microbit-pins">
+                        <span>0</span>
+                        <span>1</span>
+                        <span>2</span>
+                        <span>3V</span>
+                        <span>GND</span>
+                    </div>
+
+                </div>
+
+                <div id="sensorDropZone" class="soil-sensor-device">
+
+                    <span class="soil-sensor-label">
+                        2-PIN SOIL MOISTURE SENSOR
+                    </span>
+
+                    <div class="soil-sensor-board">
+                        <div class="soil-sensor-top-line"></div>
+                        <div class="soil-sensor-connector"></div>
+                        <div class="soil-sensor-prongs">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div id="soilOnSensor" class="soil-on-sensor"></div>
+                    </div>
+
+                    <span class="soil-sensor-drop-text">
+                        DROP SOIL HERE
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- STATION 03 -->
+
+        <section class="sensor-panel reading-panel">
+
+            <div class="sensor-panel-top">
+                <div>
+                    <span class="sensor-panel-number">03</span>
+                    <span class="sensor-panel-label">LIVE MONITOR</span>
+                </div>
+                <span class="sensor-panel-tag">READOUT</span>
+            </div>
+
+            <h2>Sensor reading</h2>
+
+            <p class="sensor-panel-description">
+                Place soil on the sensor and press A to read the result.
+            </p>
+
+            <div class="reading-display">
+                <span>CURRENT STATE</span>
+                <div id="sensorReading" class="reading-screen">READY</div>
+            </div>
+
+            <div id="sensorStatus" class="reading-status">
+                Waiting for soil...
+            </div>
+
+            <button id="sensorButtonA" class="sensor-read-button" type="button">
+                <strong>A</strong>
+                <span>READ SENSOR</span>
+            </button>
+
+            <button id="sensorResetButton" class="sensor-reset-button" type="button">
+                RESET LAB
+            </button>
+
+            <div class="sensor-connection-list">
+                <div><span></span>Micro:bit connected</div>
+                <div><span></span>Soil sensor connected</div>
+            </div>
+
+        </section>
+
+        <!-- STATION 04 -->
+
+        <section class="sensor-panel guide-panel">
+
+            <div class="sensor-panel-top">
+                <div>
+                    <span class="sensor-panel-number">04</span>
+                    <span class="sensor-panel-label">HOW IT WORKS</span>
+                </div>
+                <span class="sensor-panel-tag">GUIDE</span>
+            </div>
+
+            <h2>Three test states</h2>
+
+            <p class="sensor-panel-description">
+                The simulator gives a result based on the soil samples placed on the sensor.
+            </p>
+
+            <div class="guide-list">
+                <div class="guide-item">
+                    <span>01</span>
+                    <div>
+                        <strong>Dry soil → DRY</strong>
+                        <p>Low moisture is detected.</p>
+                    </div>
+                </div>
+                <div class="guide-item">
+                    <span>02</span>
+                    <div>
+                        <strong>Wet soil → WET</strong>
+                        <p>High moisture is detected.</p>
+                    </div>
+                </div>
+                <div class="guide-item">
+                    <span>03</span>
+                    <div>
+                        <strong>Dry + wet → ERROR</strong>
+                        <p>Multiple soil types are detected.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="keyboard-tip">
+                <span>A</span>
+                <p>Press the <strong>A</strong> key to read the sensor too.</p>
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>

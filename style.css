@@ -247,18 +247,17 @@ input:checked + .slider::before {
 
 #continueButton:hover {
 
-    background: #fff;
+    background: rgba(255,255,255,0.08);
 
-    color: #000;
+    color: inherit;
 
     transform: translateY(-5px);
 
     box-shadow:
         0 10px 30px
-        rgba(255,255,255,0.2);
+        rgba(255,255,255,0.12);
 
 }
-
 
 @keyframes buttonFloat {
 
@@ -418,10 +417,6 @@ input:checked + .slider::before {
     justify-content: center;
 
     overflow: hidden;
-
-    animation:
-        boxFloat 5s ease-in-out infinite;
-
     transition:
         background 0.5s ease,
         border 0.3s ease,
@@ -431,46 +426,7 @@ input:checked + .slider::before {
 }
 
 
-.info-box:nth-child(1) {
-    animation-delay: 0s;
-}
 
-.info-box:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.info-box:nth-child(3) {
-    animation-delay: 0.8s;
-}
-
-.info-box:nth-child(4) {
-    animation-delay: 1.2s;
-}
-
-.info-box:nth-child(5) {
-    animation-delay: 1.6s;
-}
-
-.info-box:nth-child(6) {
-    animation-delay: 2s;
-}
-
-
-@keyframes boxFloat {
-
-    0% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-5px);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
-
-}
 
 
 /* =========================================
@@ -502,8 +458,16 @@ input:checked + .slider::before {
 
 .info-box:hover {
 
+    transform:
+        translateY(-9px)
+        scale(1.02);
+
     border-color:
-        rgba(255,255,255,0.4);
+        rgba(255,255,255,0.5);
+
+    box-shadow:
+        0 15px 45px
+        rgba(255,255,255,0.12);
 
 }
 
@@ -1987,31 +1951,39 @@ body.light .fullscreen-button:hover {
 
 }
 
-/* =========================================
-   CREATOR CREDIT
-========================================= */
-
 .creator-credit {
-
     margin-top: 28px;
-
     font-size: 14px;
-
     letter-spacing: 0.8px;
-
     text-align: center;
-
-    opacity: 0.28;
-
+    opacity: 0.10;
     cursor: default;
-
-    transition:
-        opacity 0.4s ease,
-        transform 0.4s ease,
-        text-shadow 0.4s ease;
 
     animation: creatorFloat 4s ease-in-out infinite;
 
+    transition:
+        opacity 0.4s ease,
+        text-shadow 0.4s ease,
+        scale 0.4s ease;
+}
+
+@keyframes creatorFloat {
+    0%, 100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -3px;
+    }
+}
+
+.creator-credit:hover {
+    opacity: 1;
+    scale: 1.03;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.5),
+        0 0 18px rgba(255,255,255,0.25);
 }
 
 
@@ -2053,4 +2025,4677 @@ body.light .creator-credit:hover {
         0 0 8px rgba(0,0,0,0.25),
         0 0 18px rgba(0,0,0,0.12);
 
+}
+
+/* =========================================
+   SECRET PASSWORD
+========================================= */
+
+.secret-password {
+    margin-top: 18px;
+    width: 220px;
+    padding: 10px 16px;
+
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.secret-password::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+
+.secret-password:focus {
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 15px rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+}
+
+body.light .secret-password {
+    color: #000;
+    border-color: rgba(0,0,0,0.25);
+}
+
+body.light .secret-password::placeholder {
+    color: rgba(0,0,0,0.35);
+}
+
+/* =========================================
+   SECRET PAGE
+========================================= */
+
+.secret-page {
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+}
+
+.secret-content {
+    width: min(800px, 90%);
+    text-align: center;
+    padding-top: 120px;
+}
+
+.secret-content h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin: 20px 0;
+    animation: floating 4s ease-in-out infinite;
+}
+
+.secret-content > p {
+    opacity: 0.55;
+    font-size: 18px;
+}
+
+.secret-card {
+    margin: 50px auto 0;
+    width: min(600px, 100%);
+    padding: 50px 30px;
+
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 25px;
+
+    box-shadow:
+        0 0 40px rgba(255,255,255,0.05);
+}
+
+.secret-card h2 {
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
+.secret-card p {
+    opacity: 0.6;
+}
+
+body.light .secret-card {
+    background: #f5f5f5;
+    border-color: rgba(0,0,0,0.15);
+}
+
+/* =========================================
+   ROBLOX INPUT BARS
+========================================= */
+
+#fullNameInput,
+#robloxUsernameInput {
+    margin-top: 14px;
+    width: 220px;
+    padding: 10px 16px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    outline: none;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+#fullNameInput::placeholder,
+#robloxUsernameInput::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+
+#fullNameInput:focus,
+#robloxUsernameInput:focus {
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 15px rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+}
+
+body.light #fullNameInput,
+body.light #robloxUsernameInput {
+    color: #000;
+    border-color: rgba(0,0,0,0.25);
+}
+
+body.light #fullNameInput::placeholder,
+body.light #robloxUsernameInput::placeholder {
+    color: rgba(0,0,0,0.35);
+}
+
+body.light #fullNameInput:focus,
+body.light #robloxUsernameInput:focus {
+    border-color: rgba(0,0,0,0.6);
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* =========================================
+   ROBLOX ADD ME BUTTON
+========================================= */
+
+#addRobloxFriend {
+    margin-top: 8px;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease,
+        background .3s ease,
+        color .3s ease;
+}
+
+#addRobloxFriend:hover {
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: 0 0 15px rgba(255,255,255,0.12);
+    transform: translateY(-2px);
+    background: #fff;
+    color: #000;
+}
+
+/* =========================================
+   MORE SPACE BEFORE FRIEND LIST
+========================================= */
+
+#robloxMessage {
+    margin-top: 5px;
+    min-height: 20px;
+    opacity: 0.6;
+}
+
+.roblox-list-section {
+    width: min(700px, 90%);
+    margin: 90px auto 0;
+    text-align: center;
+}
+
+.roblox-list-section h2 {
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+#robloxFriendList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* =========================================
+   ROBLOX FRIEND NUMBERS
+========================================= */
+
+.roblox-friend {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 18px 22px;
+
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 18px;
+
+    text-align: left;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.roblox-friend:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(255,255,255,0.25);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.05);
+}
+
+.roblox-friend-number {
+    width: 45px;
+    flex-shrink: 0;
+
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 2px;
+
+    opacity: 0.28;
+
+    color: #fff;
+
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.35),
+        0 0 14px rgba(255,255,255,0.12);
+
+    transition:
+        opacity 0.35s ease,
+        text-shadow 0.35s ease,
+        transform 0.35s ease;
+}
+
+.roblox-friend:hover .roblox-friend-number {
+    opacity: 0.75;
+
+    text-shadow:
+        0 0 6px rgba(255,255,255,0.7),
+        0 0 14px rgba(255,255,255,0.35),
+        0 0 25px rgba(255,255,255,0.15);
+
+    transform: translateX(2px);
+}
+
+.roblox-friend-info {
+    flex: 1;
+}
+
+/* =========================================
+   SPECIAL ADMIN MENU
+========================================= */
+
+.admin-section {
+    position: relative;
+
+    width: min(600px, 90%);
+    margin: 110px auto 80px;
+    padding: 42px 30px;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 24px;
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.04),
+        inset 0 0 25px rgba(255,255,255,0.015);
+
+    overflow: hidden;
+
+    animation: adminPulse 5s ease-in-out infinite;
+}
+
+/* Subtle moving shine */
+
+.admin-section::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.06),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    animation: adminShine 6s ease-in-out infinite;
+}
+
+@keyframes adminShine {
+
+    0%, 55% {
+        left: -120%;
+    }
+
+    75%, 100% {
+        left: 140%;
+    }
+}
+
+@keyframes adminPulse {
+
+    0%, 100% {
+        box-shadow:
+            0 0 30px rgba(255,255,255,0.04),
+            inset 0 0 25px rgba(255,255,255,0.015);
+    }
+
+    50% {
+        box-shadow:
+            0 0 40px rgba(255,255,255,0.07),
+            inset 0 0 30px rgba(255,255,255,0.025);
+    }
+}
+
+.admin-section h2 {
+    position: relative;
+
+    margin-bottom: 25px;
+
+    font-size: 25px;
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,0.25);
+}
+
+/* Admin password */
+
+#adminPasswordInput {
+    position: relative;
+
+    width: 220px;
+    padding: 11px 18px;
+
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 30px;
+
+    color: #fff;
+
+    text-align: center;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+#adminPasswordInput::placeholder {
+    color: rgba(255,255,255,0.35);
+}
+
+#adminPasswordInput:focus {
+    border-color: rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 0 10px rgba(255,255,255,0.18),
+        0 0 25px rgba(255,255,255,0.08);
+
+    transform: translateY(-2px);
+}
+
+/* Admin login button */
+
+#adminLoginButton {
+    position: relative;
+
+    margin-top: 14px;
+
+    padding: 10px 24px;
+
+    background: transparent;
+
+    border: 1px solid rgba(255,255,255,0.28);
+    border-radius: 30px;
+
+    color: #fff;
+
+    font-size: 13px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+#adminLoginButton:hover {
+    background: #fff;
+    color: #000;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,0.35),
+        0 0 30px rgba(255,255,255,0.12);
+}
+
+#adminMessage {
+    min-height: 20px;
+    margin-top: 12px;
+
+    font-size: 13px;
+    opacity: 0.55;
+}
+
+#adminPanel {
+    position: relative;
+
+    margin-top: 35px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+#adminPanel h3 {
+    margin-bottom: 20px;
+
+    font-size: 14px;
+    letter-spacing: 2px;
+
+    opacity: 0.55;
+}
+
+/* =========================================
+   SETTINGS SYSTEM
+========================================= */
+
+.settings-container {
+    position: fixed;
+    top: 25px;
+    left: 90px;
+    right: auto;
+    z-index: 9999;
+}
+}
+
+/* MAIN SETTINGS BUTTON */
+
+.settings-button {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(15, 15, 15, 0.75);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 50%;
+
+    color: #fff;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(12px);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.settings-button:hover {
+    transform: rotate(20deg) scale(1.06);
+
+    border-color: rgba(255,255,255,0.5);
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,0.12),
+        0 0 35px rgba(255,255,255,0.05);
+}
+
+.settings-menu {
+    position: fixed;
+
+    top: 85px;
+    left: 25px;
+
+    width: 245px;
+    padding: 14px;
+
+    box-sizing: border-box;
+
+    background: rgba(12,12,12,0.92);
+
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 20px;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.45),
+        inset 0 0 25px rgba(255,255,255,0.015);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-10px) scale(.96);
+
+    transform-origin: top left;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease,
+        visibility .25s ease;
+
+    z-index: 10000;
+}
+
+/* OPEN STATE */
+
+.settings-menu.open {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+/* HEADER */
+
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 8px 10px 14px;
+
+    margin-bottom: 5px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.09);
+
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.settings-status {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+
+    opacity: .3;
+}
+
+/* OPTIONS */
+
+.settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.settings-options button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 12px 13px;
+
+    background: transparent;
+
+    border: 1px solid transparent;
+    border-radius: 12px;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 13px;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease,
+        transform .25s ease;
+}
+
+.settings-options button span:first-child {
+    width: 20px;
+
+    font-size: 16px;
+
+    text-align: center;
+
+    opacity: .55;
+
+    transition:
+        opacity .25s ease,
+        transform .25s ease;
+}
+
+.settings-options button:hover {
+    background: rgba(255,255,255,0.07);
+
+    border-color:
+        rgba(255,255,255,0.08);
+
+    color: #fff;
+
+    transform: translateX(3px);
+}
+
+.settings-options button:hover span:first-child {
+    opacity: .95;
+
+    transform: scale(1.1);
+}
+
+/* LIGHT MODE */
+
+body.light .settings-button {
+    background: rgba(245,245,245,0.82);
+    color: #000;
+    border-color: rgba(0,0,0,0.16);
+}
+
+body.light .settings-menu {
+    background: rgba(245,245,245,0.92);
+
+    border-color: rgba(0,0,0,0.12);
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,0.15),
+        inset 0 0 25px rgba(0,0,0,0.015);
+}
+
+body.light .settings-header {
+    border-color: rgba(0,0,0,0.08);
+}
+
+body.light .settings-options button {
+    color: rgba(0,0,0,0.65);
+}
+
+body.light .settings-options button:hover {
+    background: rgba(0,0,0,0.06);
+    border-color: rgba(0,0,0,0.08);
+    color: #000;
+}
+
+/* =========================================
+   DRAMATIC FRIEND DELETE
+========================================= */
+
+.delete-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0,0,0,0.78);
+
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 20000;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+.delete-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.delete-dialog {
+    width: min(430px, 90%);
+
+    padding: 35px 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #171717,
+            #0a0a0a
+        );
+
+    border:
+        1px solid
+        rgba(255,70,70,0.35);
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 0 20px rgba(255,0,0,0.08),
+        0 0 70px rgba(255,0,0,0.08);
+
+    transform:
+        scale(.82)
+        translateY(20px);
+
+    transition:
+        transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.delete-overlay.open .delete-dialog {
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+.delete-warning {
+    font-size: 42px;
+
+    color: #ff5b5b;
+
+    text-shadow:
+        0 0 8px rgba(255,70,70,0.7),
+        0 0 25px rgba(255,70,70,0.35);
+
+    animation:
+        warningPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes warningPulse {
+
+    0%,100% {
+        transform: scale(1);
+        opacity: .75;
+    }
+
+    50% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+}
+
+.delete-title {
+    margin-top: 12px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+.delete-subtitle {
+    margin-top: 10px;
+
+    opacity: .55;
+
+    font-size: 14px;
+}
+
+.delete-target {
+    margin: 24px auto 18px;
+
+    padding: 13px 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255,255,255,0.035);
+
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+.delete-danger {
+    color: #ff6b6b;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    opacity: .8;
+}
+
+.delete-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 28px;
+}
+
+.delete-actions button {
+    padding: 11px 18px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease,
+        color .25s ease;
+}
+
+#deleteCancelButton {
+    background: transparent;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.2);
+
+    color: #fff;
+}
+
+#deleteCancelButton:hover {
+    transform: translateY(-2px);
+
+    background: #fff;
+
+    color: #000;
+}
+
+#deleteConfirmButton {
+    background: transparent;
+
+    border:
+        1px solid
+        rgba(255,70,70,0.45);
+
+    color: #ff6b6b;
+}
+
+#deleteConfirmButton:hover {
+    background: #ff5555;
+
+    color: #fff;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 0 12px rgba(255,70,70,0.45),
+        0 0 35px rgba(255,70,70,0.15);
+}
+
+/* =========================================
+   ADMIN REMOVE BUTTON
+========================================= */
+
+.admin-delete-button {
+
+    padding: 9px 15px;
+
+    background: rgba(255, 50, 50, 0.035);
+
+    border: 1px solid rgba(255, 75, 75, 0.32);
+
+    border-radius: 12px;
+
+    color: rgba(255, 105, 105, 0.85);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.2px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        color .25s ease,
+        box-shadow .25s ease;
+}
+
+.admin-delete-button:hover {
+
+    transform:
+        translateY(-2px)
+        scale(1.03);
+
+    background:
+        rgba(255, 55, 55, 0.12);
+
+    border-color:
+        rgba(255, 80, 80, 0.7);
+
+    color:
+        #ff7777;
+
+    box-shadow:
+        0 0 12px rgba(255, 60, 60, 0.14),
+        0 0 28px rgba(255, 60, 60, 0.06);
+}
+
+.admin-delete-button:disabled {
+
+    opacity: .45;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================================
+   FRIEND REMOVAL MODAL
+========================================= */
+
+.friend-remove-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(0, 0, 0, 0.82);
+
+    backdrop-filter:
+        blur(12px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    z-index: 30000;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+}
+
+.friend-remove-overlay.open {
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.friend-remove-dialog {
+
+    width:
+        min(430px, 90%);
+
+    padding:
+        36px 30px;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #191919,
+            #080808
+        );
+
+    border:
+        1px solid
+        rgba(255, 70, 70, 0.32);
+
+    border-radius:
+        24px;
+
+    box-shadow:
+        0 0 30px rgba(255, 50, 50, 0.08),
+        0 25px 80px rgba(0,0,0,.6);
+
+    transform:
+        scale(.85)
+        translateY(20px);
+
+    transition:
+        transform .3s ease;
+}
+
+.friend-remove-overlay.open
+.friend-remove-dialog {
+
+    transform:
+        scale(1)
+        translateY(0);
+}
+
+
+.friend-remove-warning {
+
+    font-size: 44px;
+
+    color:
+        #ff6262;
+
+    text-shadow:
+        0 0 10px rgba(255, 70, 70, .7),
+        0 0 30px rgba(255, 70, 70, .25);
+
+    animation:
+        removeWarningPulse
+        1.2s ease-in-out infinite;
+}
+
+
+@keyframes removeWarningPulse {
+
+    0%, 100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.12);
+    }
+
+}
+
+
+.friend-remove-title {
+
+    margin-top: 12px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.friend-remove-subtitle {
+
+    margin-top: 12px;
+
+    opacity: .45;
+
+    font-size: 13px;
+}
+
+
+.friend-remove-name {
+
+    margin-top: 18px;
+
+    font-size: 19px;
+
+    font-weight: 600;
+}
+
+
+.friend-remove-username {
+
+    margin-top: 4px;
+
+    opacity: .42;
+
+    font-size: 13px;
+}
+
+
+.friend-remove-danger {
+
+    margin-top: 24px;
+
+    padding:
+        12px 14px;
+
+    color:
+        #ff6c6c;
+
+    background:
+        rgba(255, 50, 50, .045);
+
+    border:
+        1px solid
+        rgba(255, 70, 70, .15);
+
+    border-radius:
+        12px;
+
+    font-size: 10px;
+
+    letter-spacing: 1.7px;
+
+}
+
+
+.friend-remove-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 26px;
+}
+
+
+.friend-remove-actions button {
+
+    padding:
+        11px 17px;
+
+    border-radius:
+        30px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+
+.friend-remove-cancel {
+
+    background:
+        transparent;
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    color:
+        rgba(255,255,255,.7);
+}
+
+
+.friend-remove-cancel:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #fff;
+
+    color:
+        #000;
+}
+
+
+.friend-remove-confirm {
+
+    background:
+        rgba(255, 55, 55, .08);
+
+    border:
+        1px solid
+        rgba(255, 75, 75, .4);
+
+    color:
+        #ff7373;
+}
+
+
+.friend-remove-confirm:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #ff5555;
+
+    color:
+        #fff;
+
+    box-shadow:
+        0 0 15px rgba(255, 60, 60, .3),
+        0 0 35px rgba(255, 60, 60, .12);
+}
+
+/* =========================================
+   CLEAN FUTURISTIC SETTINGS UI
+========================================= */
+
+/* SETTINGS ICON */
+
+.settings-button {
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(10,10,10,0.72);
+
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+
+    color: rgba(255,255,255,0.8);
+
+    font-size: 18px;
+
+    backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.25);
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+}
+
+.settings-button:hover {
+    transform: translateY(-2px);
+
+    background: rgba(25,25,25,0.9);
+
+    border-color:
+        rgba(255,255,255,0.38);
+
+    color: #fff;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.35),
+        0 0 18px rgba(255,255,255,0.06);
+}
+
+
+/* SETTINGS PANEL */
+
+.settings-menu {
+    width: 220px;
+
+    padding: 10px;
+
+    background:
+        rgba(10,10,10,0.92);
+
+    border:
+        1px solid rgba(255,255,255,0.12);
+
+    border-radius: 18px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,0.45),
+        inset 0 0 20px rgba(255,255,255,0.015);
+}
+
+
+/* HEADER */
+
+.settings-header {
+    padding:
+        8px 10px 11px;
+
+    margin-bottom: 5px;
+
+    font-size: 11px;
+
+    letter-spacing: 2.5px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+/* SETTINGS OPTIONS */
+
+.settings-options {
+    gap: 3px;
+}
+
+.settings-options button {
+    position: relative;
+
+    min-height: 40px;
+
+    padding:
+        9px 11px;
+
+    background: transparent;
+
+    border:
+        1px solid transparent;
+
+    border-radius: 10px;
+
+    color:
+        rgba(255,255,255,0.65);
+
+    font-size: 12px;
+
+    letter-spacing: .2px;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
+}
+
+.settings-options button span:first-child {
+    width: 22px;
+
+    font-size: 15px;
+
+    opacity: .45;
+}
+
+.settings-options button:hover {
+    transform: translateX(2px);
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border-color:
+        rgba(255,255,255,0.07);
+
+    color: #fff;
+}
+
+.settings-options button:hover span:first-child {
+    opacity: .85;
+}
+
+
+/* LIGHT MODE */
+
+body.light .settings-button {
+    background:
+        rgba(245,245,245,0.86);
+
+    color: rgba(0,0,0,0.72);
+
+    border-color:
+        rgba(0,0,0,0.14);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.12);
+}
+
+body.light .settings-button:hover {
+    background: #fff;
+
+    border-color:
+        rgba(0,0,0,0.28);
+
+    color: #000;
+}
+
+body.light .settings-menu {
+    background:
+        rgba(248,248,248,0.94);
+
+    border-color:
+        rgba(0,0,0,0.10);
+
+    box-shadow:
+        0 20px 55px rgba(0,0,0,0.15);
+}
+
+body.light .settings-header {
+    border-color:
+        rgba(0,0,0,0.08);
+}
+
+body.light .settings-options button {
+    color:
+        rgba(0,0,0,0.62);
+}
+
+body.light .settings-options button:hover {
+    background:
+        rgba(0,0,0,0.045);
+
+    border-color:
+        rgba(0,0,0,0.06);
+
+    color: #000;
+}
+
+/* =========================================
+   SETTINGS ICON — FADED SQUARE + TILT
+========================================= */
+
+.settings-button {
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.035);
+
+    border: 1px solid rgba(255,255,255,0.10);
+
+    border-radius: 11px;
+
+    color: rgba(255,255,255,0.45);
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 12px rgba(255,255,255,0.015);
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        color .3s ease,
+        box-shadow .3s ease,
+        transform .35s ease;
+}
+
+.settings-button:hover {
+    background: rgba(255,255,255,0.07);
+
+    border-color:
+        rgba(255,255,255,0.22);
+
+    color: rgba(255,255,255,0.85);
+
+    box-shadow:
+        0 0 16px rgba(255,255,255,0.05);
+
+    transform:
+        rotate(10deg)
+        translateY(-1px)
+        scale(1.04);
+}
+
+
+/* LIGHT MODE */
+
+body.light .settings-button {
+    background:
+        rgba(0,0,0,0.025);
+
+    border-color:
+        rgba(0,0,0,0.10);
+
+    color:
+        rgba(0,0,0,0.42);
+}
+
+body.light .settings-button:hover {
+    background:
+        rgba(0,0,0,0.055);
+
+    border-color:
+        rgba(0,0,0,0.2);
+
+    color:
+        rgba(0,0,0,0.8);
+
+    transform:
+        rotate(10deg)
+        translateY(-1px)
+        scale(1.04);
+}
+
+/* =========================================
+   COLORFUL THEME
+========================================= */
+
+body.colorful {
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255, 0, 140, 0.28),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(0, 180, 255, 0.28),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 70% 85%,
+            rgba(120, 0, 255, 0.25),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #090014,
+            #001522,
+            #12001f
+        );
+}
+
+/* Main cards */
+
+body.colorful .info-box,
+body.colorful .part-card,
+body.colorful .area-info-card,
+body.colorful .partner-card,
+body.colorful .sil-info-card,
+body.colorful .coding-card,
+body.colorful .results-coming-soon {
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border-color:
+        rgba(255,255,255,0.18);
+
+    box-shadow:
+        0 0 30px rgba(120,80,255,0.08);
+}
+
+body.colorful .info-box:hover,
+body.colorful .area-info-card:hover,
+body.colorful .partner-card:hover {
+
+    border-color:
+        rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 0 35px rgba(0,200,255,0.13);
+}
+
+/* Buttons */
+
+body.colorful #continueButton,
+body.colorful .back-button,
+body.colorful .bottom-back {
+
+    color: #fff;
+
+    border-color:
+        rgba(255,255,255,0.28);
+
+    background:
+        rgba(255,255,255,0.035);
+}
+
+body.colorful #continueButton:hover,
+body.colorful .back-button:hover,
+body.colorful .bottom-back:hover {
+
+    background: #fff;
+
+    color: #12001f;
+}
+
+/* Settings */
+
+body.colorful .settings-button {
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border-color:
+        rgba(255,255,255,0.18);
+
+    color:
+        rgba(255,255,255,0.65);
+
+    box-shadow:
+        0 0 20px rgba(0,180,255,0.08);
+}
+
+body.colorful .settings-menu {
+
+    background:
+        rgba(8,5,20,0.9);
+
+    border-color:
+        rgba(255,255,255,0.16);
+
+    box-shadow:
+        0 20px 70px rgba(0,0,0,0.5),
+        0 0 35px rgba(120,0,255,0.08);
+}
+
+body.colorful .settings-options button {
+
+    color:
+        rgba(255,255,255,0.68);
+}
+
+body.colorful .settings-options button:hover {
+
+    background:
+        rgba(255,255,255,0.075);
+
+    color: #fff;
+}
+
+/* =========================================
+   SETTINGS POSITION FIX
+========================================= */
+
+.settings-container {
+    position: fixed;
+
+    top: 25px;
+    left: 92px;
+
+    right: auto;
+
+    z-index: 9999;
+}
+
+.settings-menu {
+    position: fixed;
+
+    top: 82px;
+    left: 92px;
+
+    right: auto;
+
+    width: 220px;
+
+    box-sizing: border-box;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .settings-container {
+        left: 82px;
+    }
+
+    .settings-menu {
+        left: 82px;
+        width: 205px;
+    }
+}
+
+/* =========================================
+   WELCOME TITLE WARP
+========================================= */
+
+#pageOne .welcome h1 {
+    cursor: pointer;
+
+    transform-origin: center;
+
+    transition:
+        text-shadow .25s ease;
+}
+
+#pageOne .welcome h1:hover {
+
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.18),
+        0 0 25px rgba(255,255,255,0.07);
+}
+
+#pageOne .welcome h1.title-warp {
+
+    animation:
+        titleWarp 1.35s cubic-bezier(.7,0,.3,1) forwards;
+}
+
+@keyframes titleWarp {
+
+    0% {
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    42% {
+        transform:
+            translateX(120vw)
+            scale(0.05);
+
+        opacity: 0;
+    }
+
+    43% {
+        transform:
+            translateX(-120vw)
+            scale(0.05);
+
+        opacity: 0;
+    }
+
+    72% {
+        transform:
+            translateX(-20vw)
+            scale(0.65);
+
+        opacity: 0.35;
+    }
+
+    100% {
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   SETTINGS — CENTER POSITION
+========================================= */
+
+.settings-container {
+    position: fixed;
+
+    top: 22px;
+    left: 50%;
+    right: auto;
+
+    transform: translateX(-50%);
+
+    z-index: 9999;
+}
+
+.settings-menu {
+    position: fixed;
+
+    top: 70px;
+    left: 50%;
+    right: auto;
+
+    width: 240px;
+    max-width: calc(100vw - 24px);
+
+    box-sizing: border-box;
+
+    transform:
+        translate(-50%, -10px)
+        scale(.96);
+}
+
+.settings-menu.open {
+    transform:
+        translate(-50%, 0)
+        scale(1);
+}
+
+/* When the theme chart opens */
+
+.settings-menu.theme-picker-open {
+    width: 310px;
+}
+
+@media (max-width: 700px) {
+
+    .settings-menu.theme-picker-open {
+        width: 275px;
+    }
+
+}
+
+/* =========================================
+   AUTOMATIC TITLE WHOOSH
+========================================= */
+
+#pageOne .welcome h1 {
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        welcomeTitleWhoosh
+        7s
+        cubic-bezier(.7,0,.3,1)
+        2s
+        infinite;
+}
+
+@keyframes welcomeTitleWhoosh {
+
+    0%,
+    62% {
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    71% {
+
+        transform:
+            translateX(115vw)
+            scale(.04);
+
+        opacity: 0;
+    }
+
+    72% {
+
+        transform:
+            translateX(-115vw)
+            scale(.04);
+
+        opacity: 0;
+    }
+
+    87% {
+
+        transform:
+            translateX(-12vw)
+            scale(.82);
+
+        opacity: .7;
+    }
+
+    100% {
+
+        transform:
+            translateX(0)
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+/* =========================================
+   THEME SYSTEM
+========================================= */
+
+body.theme-system {
+
+    background:
+        var(--theme-background)
+        !important;
+
+    color:
+        var(--theme-text)
+        !important;
+
+    transition:
+        background .45s ease,
+        color .45s ease;
+}
+
+
+body.theme-system .page {
+
+    color:
+        var(--theme-text);
+}
+
+
+/* CARDS */
+
+body.theme-system
+.info-box,
+body.theme-system
+.part-card,
+body.theme-system
+.area-info-card,
+body.theme-system
+.partner-card,
+body.theme-system
+.sil-info-card,
+body.theme-system
+.coding-card,
+body.theme-system
+.results-coming-soon,
+body.theme-system
+.secret-card,
+body.theme-system
+.admin-section {
+
+    background:
+        var(--theme-card)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+
+    box-shadow:
+        var(--theme-shadow);
+}
+
+
+/* GENERAL TEXT */
+
+body.theme-system
+h1,
+body.theme-system
+h2,
+body.theme-system
+h3,
+body.theme-system
+h4,
+body.theme-system
+p,
+body.theme-system
+li,
+body.theme-system
+span,
+body.theme-system
+label {
+
+    color:
+        var(--theme-text);
+}
+
+
+/* BUTTONS */
+
+body.theme-system
+#continueButton,
+body.theme-system
+.back-button,
+body.theme-system
+.bottom-back,
+body.theme-system
+#addRobloxFriend,
+body.theme-system
+.settings-button,
+body.theme-system
+.settings-options button,
+body.theme-system
+.admin-delete-button {
+
+    color:
+        var(--theme-text);
+}
+
+
+/* INPUTS */
+
+body.theme-system
+.secret-password,
+body.theme-system
+#fullNameInput,
+body.theme-system
+#robloxUsernameInput,
+body.theme-system
+#adminPasswordInput {
+
+    color:
+        var(--theme-text);
+}
+
+
+
+
+/* COLORFUL BACKGROUND */
+
+body.theme-system.theme-colorful-background {
+
+    background:
+        var(--theme-background)
+        fixed
+        !important;
+}
+
+
+/* SETTINGS */
+
+.settings-menu {
+
+    background:
+        var(--theme-card)
+        !important;
+
+    border-color:
+        var(--theme-border)
+        !important;
+}
+
+
+/* =========================================
+   THEME PICKER
+========================================= */
+
+.theme-picker {
+
+    max-height: 0;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    margin-top: 0;
+
+    transition:
+        max-height .35s ease,
+        opacity .3s ease,
+        margin-top .3s ease;
+}
+
+
+.theme-picker.open {
+
+    max-height:
+        470px;
+
+    opacity: 1;
+
+    margin-top: 10px;
+}
+
+
+.theme-picker-header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    padding:
+        10px 8px;
+
+    border-top:
+        1px solid var(--theme-border);
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        1.8px;
+
+    opacity:
+        .7;
+}
+
+
+#themeCurrentName {
+
+    opacity:
+        .55;
+
+    letter-spacing:
+        1px;
+}
+
+
+.theme-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap:
+        6px;
+}
+
+
+.theme-option {
+
+    min-height:
+        58px;
+
+    padding:
+        6px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        stretch;
+
+    gap:
+        5px;
+
+    background:
+        transparent;
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        11px;
+
+    cursor:
+        pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+
+.theme-option:hover {
+
+    background:
+        rgba(255,255,255,.06);
+
+    border-color:
+        var(--theme-border);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.theme-option.selected {
+
+    border-color:
+        rgba(255,255,255,.35);
+
+    background:
+        rgba(255,255,255,.07);
+}
+
+
+.theme-swatch {
+
+    height:
+        30px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        8px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+}
+
+
+.theme-option-label {
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        1px;
+
+    text-align:
+        center;
+
+    opacity:
+        .6;
+}
+
+
+@media (max-width: 700px) {
+
+    .theme-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+/* =========================================
+   THEME SYSTEM FIX
+========================================= */
+
+/* Keep ALL normal content visible */
+body.theme-system .info-box,
+body.theme-system .part-card,
+body.theme-system .area-info-card,
+body.theme-system .partner-card,
+body.theme-system .sil-info-card,
+body.theme-system .coding-card,
+body.theme-system .results-coming-soon,
+body.theme-system .secret-card,
+body.theme-system .admin-section {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+/* Keep headings and normal text visible */
+body.theme-system h1,
+body.theme-system h2,
+body.theme-system h3,
+body.theme-system h4,
+body.theme-system p,
+body.theme-system li,
+body.theme-system label {
+    opacity: 1;
+}
+
+
+/* =========================================
+   COLORFUL TEXT — ONLY REAL CONTENT
+========================================= */
+
+body.theme-system.theme-colorful-text .welcome h1,
+body.theme-system.theme-colorful-text .page-heading h1,
+body.theme-system.theme-colorful-text .parts-header h1,
+body.theme-system.theme-colorful-text .area-info-header h1,
+body.theme-system.theme-colorful-text .partnership-header h1,
+body.theme-system.theme-colorful-text .sil-mentor-header h1,
+body.theme-system.theme-colorful-text .coding-header h1,
+body.theme-system.theme-colorful-text .results-header h1,
+
+body.theme-system.theme-colorful-text
+.info-box h2,
+body.theme-system.theme-colorful-text
+.part-card h2,
+body.theme-system.theme-colorful-text
+.area-info-card h2,
+body.theme-system.theme-colorful-text
+.partner-card h2,
+body.theme-system.theme-colorful-text
+.sil-info-card h2,
+body.theme-system.theme-colorful-text
+.coding-card h2,
+body.theme-system.theme-colorful-text
+.results-coming-soon h2,
+
+body.theme-system.theme-colorful-text
+.info-box p,
+body.theme-system.theme-colorful-text
+.part-card p,
+body.theme-system.theme-colorful-text
+.area-info-card p,
+body.theme-system.theme-colorful-text
+.partner-card p,
+body.theme-system.theme-colorful-text
+.sil-info-card p,
+body.theme-system.theme-colorful-text
+.coding-card p,
+body.theme-system.theme-colorful-text
+.results-coming-soon p {
+
+    background:
+        var(--theme-text-gradient);
+
+    -webkit-background-clip:
+        text;
+
+    background-clip:
+        text;
+
+    -webkit-text-fill-color:
+        transparent;
+
+    color:
+        transparent !important;
+}
+
+
+/* =========================================
+   KEEP THEME PICKER NORMAL
+========================================= */
+
+.theme-picker,
+.theme-picker * {
+    -webkit-text-fill-color: initial !important;
+}
+
+.theme-picker-header,
+.theme-option-label,
+#themeCurrentName {
+    color:
+        var(--theme-text) !important;
+
+    background: none !important;
+}
+
+.theme-swatch {
+    -webkit-text-fill-color:
+        initial !important;
+
+    color: inherit !important;
+}
+
+
+/* =========================================
+   KEEP SETTINGS BUTTONS VISIBLE
+========================================= */
+
+.settings-menu,
+.settings-menu * {
+    -webkit-text-fill-color:
+        initial;
+}
+
+.settings-menu .settings-header,
+.settings-menu .settings-status,
+.settings-menu .settings-options button,
+.settings-menu .settings-options button span,
+.settings-menu .theme-option-label,
+.settings-menu #themeCurrentName {
+    color:
+        var(--theme-text) !important;
+}
+
+
+/* =========================================
+   KEEP BOX NUMBERS / LABELS VISIBLE
+========================================= */
+
+body.theme-system .box-number,
+body.theme-system .part-number,
+body.theme-system .coding-number,
+body.theme-system .results-number,
+body.theme-system .section-label,
+body.theme-system .click-hint {
+    -webkit-text-fill-color:
+        var(--theme-text) !important;
+
+    background:
+        none !important;
+
+    color:
+        var(--theme-text) !important;
+}
+
+/* =========================================
+   THEME SYSTEM TEXT
+========================================= */
+
+/* Normal theme text */
+body.theme-system:not(.theme-colorful-text) {
+    color: var(--theme-text);
+}
+
+body.theme-system:not(.theme-colorful-text)
+h1,
+body.theme-system:not(.theme-colorful-text)
+h2,
+body.theme-system:not(.theme-colorful-text)
+h3,
+body.theme-system:not(.theme-colorful-text)
+p,
+body.theme-system:not(.theme-colorful-text)
+li,
+body.theme-system:not(.theme-colorful-text)
+strong {
+    color: var(--theme-text);
+}
+
+
+/* Colorful text themes */
+body.theme-system.theme-colorful-text
+h1,
+body.theme-system.theme-colorful-text
+h2,
+body.theme-system.theme-colorful-text
+h3,
+body.theme-system.theme-colorful-text
+p,
+body.theme-system.theme-colorful-text
+li,
+body.theme-system.theme-colorful-text
+strong {
+    color: transparent;
+    background-image: var(--theme-text-gradient);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+
+/* =========================================
+   THEME CHART PREVIEW
+========================================= */
+
+.theme-picker .theme-swatch {
+    color: inherit !important;
+    background-clip: initial !important;
+    -webkit-background-clip: initial !important;
+}
+
+.theme-picker .theme-swatch span {
+    color: inherit !important;
+    background: none !important;
+    background-image: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+/* =========================================
+   THEME SWATCH PREVIEWS
+========================================= */
+
+.theme-swatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.theme-swatch > span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* =========================================
+   THEME PICKER
+========================================= */
+
+.theme-picker {
+    display: none;
+    width: min(520px, 92vw);
+    margin: 20px auto 0;
+    padding: 20px;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    z-index: 10000;
+}
+
+.theme-picker.open {
+    display: block;
+}
+
+.theme-picker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.theme-option {
+    width: 100%;
+    min-height: 95px;
+    padding: 10px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    background: #181818;
+    color: #fff;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+
+    transition:
+        transform 0.2s ease,
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.theme-option:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.theme-option.selected {
+    border-color: #fff;
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,0.12);
+}
+
+.theme-swatch {
+    width: 100%;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+    font-size: 25px;
+    font-weight: 800;
+
+    overflow: hidden;
+}
+
+.theme-option-label {
+    display: block;
+    margin-top: 9px;
+    font-size: 11px;
+    line-height: 1.2;
+    opacity: 0.75;
+    text-align: left;
+}
+
+@media (max-width: 700px) {
+
+    .theme-picker {
+        width: 94vw;
+    }
+
+    .theme-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================
+   THEME-AWARE CONTINUE BUTTON
+========================================= */
+
+/* BLACK */
+body.theme-system:not(.theme-colorful-background) #continueButton {
+    background: transparent;
+    color: var(--theme-text);
+    border-color: var(--theme-border);
+}
+
+/* COLORED BACKGROUND */
+body.theme-colorful-background #continueButton {
+    background: transparent;
+    color: var(--theme-text);
+    border-color: rgba(255,255,255,0.35);
+}
+
+/* COLORED TEXT / BLACK BG */
+body.theme-colorful-text:not(.theme-colorful-background) #continueButton {
+    background: transparent;
+    color: transparent;
+    background-image: var(--theme-text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* COLORED TEXT + COLORED BG */
+body.theme-colorful-text.theme-colorful-background #continueButton {
+    background: transparent;
+    color: transparent;
+    background-image: var(--theme-text-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    border-color: rgba(255,255,255,0.35);
+}
+
+/* =========================================
+   MAIN PAGE EXTRA ANIMATION
+========================================= */
+
+#pageOne .welcome {
+    animation: welcomeFloat 5s ease-in-out infinite;
+}
+
+#pageOne .welcome h1 {
+    animation:
+        floating 4s ease-in-out infinite,
+        welcomePulse 3s ease-in-out infinite;
+}
+
+@keyframes welcomeFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+
+}
+
+@keyframes welcomePulse {
+
+    0%, 100% {
+        text-shadow: none;
+    }
+
+    50% {
+        text-shadow:
+            0 0 20px rgba(255,255,255,0.22);
+    }
+
+} 
+
+/* =========================================
+   MAIN PAGE - LIGHTWEIGHT EXTRA ANIMATION
+========================================= */
+
+#pageOne .welcome {
+    position: relative;
+}
+
+/* Moving light streak */
+
+#pageOne .welcome::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 70px;
+    height: 3px;
+
+    left: 50%;
+    top: 52%;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.75);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation: mainLightSweep 4s ease-in-out infinite;
+
+}
+
+/* Tiny title movement */
+
+#pageOne .welcome h1 {
+    animation:
+        floating 4s ease-in-out infinite,
+        mainTitleTilt 6s ease-in-out infinite;
+}
+
+@keyframes mainLightSweep {
+
+    0% {
+        transform:
+            translateX(-180px)
+            rotate(-12deg);
+
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform:
+            translateX(180px)
+            rotate(12deg);
+
+        opacity: 0;
+    }
+
+    100% {
+        transform:
+            translateX(-180px)
+            rotate(-12deg);
+
+        opacity: 0;
+    }
+
+}
+
+@keyframes mainTitleTilt {
+
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(0.6deg);
+    }
+
+}
+
+
+/* =========================================
+   MAIN PAGE EXTRA EFFECT
+========================================= */
+
+#pageOne #continueButton {
+    position: relative;
+    overflow: hidden;
+}
+
+#pageOne #continueButton::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: rgba(255,255,255,0.18);
+
+    transform: skewX(-25deg);
+
+    pointer-events: none;
+
+    animation: continueShine 3s ease-in-out infinite;
+
+}
+
+@keyframes continueShine {
+
+    0% {
+        left: -120%;
+    }
+
+    35% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+
+}
+
+#pageOne {
+    outline: 10px solid red !important;
+}
+
+/* =========================================
+   FINAL SDG-E ANIMATION FIX
+========================================= */
+
+/* ---------- PAGE 1 ---------- */
+
+#pageOne .welcome {
+    position: relative;
+    isolation: isolate;
+    will-change: transform;
+    animation: sdgeWelcomeFloat 4.5s ease-in-out infinite !important;
+}
+
+@keyframes sdgeWelcomeFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+
+/* ---------- TITLE ---------- */
+
+#pageOne .welcome h1 {
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    will-change: transform, filter;
+    animation: sdgeTitleFloat 3.5s ease-in-out infinite !important;
+}
+
+@keyframes sdgeTitleFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: translateY(-5px) rotate(0.5deg);
+        filter: brightness(1.12);
+    }
+}
+
+
+/* Moving shine across title */
+
+#pageOne .welcome h1::after {
+    content: "";
+    position: absolute;
+
+    top: -35%;
+    left: -70%;
+
+    width: 35%;
+    height: 170%;
+
+    background: linear-gradient(
+        100deg,
+        transparent 0%,
+        rgba(255,255,255,0.05) 30%,
+        rgba(255,255,255,0.8) 50%,
+        rgba(255,255,255,0.05) 70%,
+        transparent 100%
+    );
+
+    transform: skewX(-20deg);
+    pointer-events: none;
+
+    animation: sdgeTitleShine 3.2s ease-in-out infinite;
+}
+
+@keyframes sdgeTitleShine {
+    0% {
+        left: -70%;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    55% {
+        left: 135%;
+        opacity: 1;
+    }
+
+    100% {
+        left: 135%;
+        opacity: 0;
+    }
+}
+
+
+/* ---------- CONTINUE BUTTON ---------- */
+
+#pageOne #continueButton {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    will-change: transform;
+}
+
+#pageOne #continueButton::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255,255,255,0.5),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+    pointer-events: none;
+
+    animation: sdgeButtonShine 2.8s ease-in-out infinite;
+}
+
+@keyframes sdgeButtonShine {
+    0% {
+        left: -120%;
+    }
+
+    40% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+}
+
+#pageOne #continueButton:hover {
+    transform: translateY(-6px) scale(1.03) !important;
+}
+
+
+/* ---------- PAGE 2 BOXES ---------- */
+
+/* Remove constant animation and make movement only happen on hover */
+
+.info-box,
+.clickable-box {
+    will-change: transform;
+    transform: translateZ(0);
+
+    transition:
+        transform 0.28s cubic-bezier(.2,.8,.2,1),
+        border-color 0.28s ease,
+        box-shadow 0.28s ease,
+        background 0.28s ease !important;
+}
+
+
+/* Normal state */
+
+.info-box {
+    animation: none !important;
+}
+
+
+/* Hover */
+
+.info-box:hover,
+.clickable-box:hover {
+    transform:
+        translateY(-10px)
+        scale(1.025) !important;
+
+    border-color:
+        rgba(255,255,255,0.5) !important;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.28),
+        0 0 22px rgba(255,255,255,0.06) !important;
+}
+
+
+/* Box content also lifts slightly */
+
+.info-box:hover h2 {
+    transform: translateY(-2px);
+}
+
+.info-box h2 {
+    transition:
+        transform 0.28s ease;
+}
+
+
+/* Click hint becomes stronger */
+
+.info-box:hover .click-hint {
+    opacity: 0.9;
+    transform: translateX(4px);
+}
+
+.click-hint {
+    transition:
+        opacity 0.28s ease,
+        transform 0.28s ease;
+}
+
+
+/* ---------- LIGHT MODE ---------- */
+
+body.light .info-box:hover,
+body.light .clickable-box:hover {
+    border-color:
+        rgba(0,0,0,0.28) !important;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,0.12) !important;
+}
+
+
+/* ---------- REDUCED-MOTION SAFETY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #pageOne .welcome,
+    #pageOne .welcome h1,
+    #pageOne .welcome h1::after,
+    #pageOne #continueButton::before {
+        animation: none !important;
+    }
+}
+
+/* =========================================
+   FULL FIRST-PAGE SCREEN SHINE
+========================================= */
+
+#pageOne {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* The actual HTML element is .screen-shine */
+
+#pageOne .screen-shine {
+    position: absolute;
+
+    top: -40%;
+    left: -45%;
+
+    width: 28%;
+    height: 180%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 25%,
+            rgba(255,255,255,0.18) 40%,
+            rgba(255,255,255,0.95) 50%,
+            rgba(255,255,255,0.18) 60%,
+            transparent 75%,
+            transparent 100%
+        );
+
+    transform: skewX(-22deg);
+
+    opacity: 1;
+
+    pointer-events: none;
+
+    z-index: 999999;
+
+    display: block;
+
+    animation:
+        SDGE_SCREEN_SHINE
+        4s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes SDGE_SCREEN_SHINE {
+
+    0% {
+        left: -45%;
+    }
+
+    45% {
+        left: 125%;
+    }
+
+    100% {
+        left: 125%;
+    }
+}
+
+
+/* Keep first-page content above the shine */
+
+#pageOne .welcome,
+#pageOne .settings-container,
+#pageOne .theme-switch,
+#pageOne .fullscreen-button {
+    position: relative;
+    z-index: 1000000;
+}
+
+
+/* =========================================
+   CREATOR CREDIT
+========================================= */
+
+body.theme-system p.creator-credit {
+    opacity: 0.10 !important;
+}
+
+body.theme-system p.creator-credit:hover {
+    opacity: 1 !important;
+}
+
+/* =========================================
+   ROBLOX FRIEND LIST — THEME MATCH
+========================================= */
+
+body.theme-system .roblox-friend {
+    background: var(--theme-card) !important;
+
+    border: 1px solid var(--theme-border) !important;
+
+    color: var(--theme-text) !important;
+
+    box-shadow: var(--theme-shadow) !important;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.4s ease,
+        color 0.4s ease;
+}
+
+
+body.theme-system .roblox-friend:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--theme-text) !important;
+
+    box-shadow:
+        var(--theme-shadow),
+        0 0 22px rgba(255,255,255,0.08) !important;
+}
+
+
+/* Number */
+
+body.theme-system .roblox-friend-number {
+    color: var(--theme-text) !important;
+
+    opacity: 0.4;
+
+    text-shadow: none;
+}
+
+
+/* Name */
+
+body.theme-system .roblox-friend-name {
+    color: var(--theme-text) !important;
+
+    font-weight: 700;
+}
+
+
+/* Username */
+
+body.theme-system .roblox-friend-username {
+    color: var(--theme-text) !important;
+
+    opacity: 0.55;
+}
+
+
+/* Colored-text themes */
+
+body.theme-colorful-text .roblox-friend-name {
+    color: transparent !important;
+
+    background-image: var(--theme-text-gradient);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+
+body.theme-colorful-text .roblox-friend-username {
+    color: transparent !important;
+
+    background-image: var(--theme-text-gradient);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+
+/* Empty-list message */
+
+body.theme-system #robloxFriendList p {
+    color: var(--theme-text) !important;
+}
+
+/* =========================================
+   ROBLOX FRIEND CARDS — REAL THEME MATCH
+========================================= */
+
+.roblox-friend {
+    background: var(--theme-card, #111) !important;
+    border: 1px solid var(--theme-border, rgba(255,255,255,0.12)) !important;
+    color: var(--theme-text, #fff) !important;
+
+    box-shadow: var(--theme-shadow, 0 15px 40px rgba(0,0,0,0.35)) !important;
+
+    transition:
+        background 0.4s ease,
+        border-color 0.4s ease,
+        color 0.4s ease,
+        box-shadow 0.4s ease,
+        transform 0.3s ease;
+}
+
+.roblox-friend:hover {
+    transform: translateY(-3px);
+
+    border-color: var(--theme-text, #fff) !important;
+
+    box-shadow:
+        var(--theme-shadow, 0 15px 40px rgba(0,0,0,0.35)),
+        0 0 25px rgba(255,255,255,0.08) !important;
+}
+
+
+/* FRIEND NUMBER */
+
+.roblox-friend-number {
+    color: var(--theme-text, #fff) !important;
+}
+
+
+/* FRIEND NAME */
+
+.roblox-friend-name {
+    color: var(--theme-text, #fff) !important;
+    font-weight: 700;
+}
+
+
+/* ROBLOX USERNAME */
+
+.roblox-friend-username {
+    color: var(--theme-text, #fff) !important;
+    opacity: 0.55;
+}
+
+
+/* COLOR-TEXT THEMES */
+
+body.theme-colorful-text .roblox-friend-name,
+body.theme-colorful-text .roblox-friend-username {
+    color: transparent !important;
+
+    background-image: var(--theme-text-gradient) !important;
+
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+
+/* COLOR BACKGROUND THEMES */
+
+body.theme-colorful-background .roblox-friend {
+    background: var(--theme-card) !important;
+    border-color: var(--theme-border) !important;
+}
+
+
+/* WHITE THEMES */
+
+body.light .roblox-friend {
+    background: var(--theme-card) !important;
+    border-color: var(--theme-border) !important;
+    color: var(--theme-text) !important;
+}
+
+body.light .roblox-friend-number,
+body.light .roblox-friend-name,
+body.light .roblox-friend-username {
+    color: var(--theme-text) !important;
+}
+
+/* =========================================
+   EXPLAINING BOT — CLEAN FINAL DESIGN
+========================================= */
+
+.explaining-bot-page {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 110px 20px 80px;
+}
+
+.explaining-bot-header {
+    width: min(900px, 90%);
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.explaining-bot-header h1 {
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    margin: 18px 0 12px;
+}
+
+.explaining-bot-header p {
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: 0.6;
+}
+
+
+/* =========================================
+   BOT MAIN AREA
+========================================= */
+
+.explaining-bot-shell {
+    width: min(950px, 90%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* =========================================
+   CHAT WINDOW
+========================================= */
+
+.explaining-bot-chat {
+    width: 100%;
+    height: 420px;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    padding: 25px;
+
+    background:
+        var(--theme-card, #111111) !important;
+
+    border:
+        1px solid
+        var(--theme-border, rgba(255,255,255,0.12)) !important;
+
+    border-radius: 25px;
+
+    box-shadow:
+        var(--theme-shadow,
+        0 15px 40px rgba(0,0,0,0.35)) !important;
+}
+
+
+/* =========================================
+   BOT MESSAGES
+========================================= */
+
+.bot-message {
+    max-width: 78%;
+
+    padding: 14px 18px;
+
+    border:
+        1px solid
+        var(--theme-border, rgba(255,255,255,0.12));
+
+    border-radius: 18px;
+
+    line-height: 1.6;
+
+    color:
+        var(--theme-text, #fff);
+
+    white-space: pre-wrap;
+
+    word-wrap: break-word;
+}
+
+.bot-message-bot {
+    align-self: flex-start;
+
+    background:
+        rgba(255,255,255,0.045);
+}
+
+.bot-message-user {
+    align-self: flex-end;
+
+    background:
+        var(--theme-card, #111111);
+}
+
+
+/* =========================================
+   QUICK QUESTIONS
+========================================= */
+
+.explaining-bot-quick-actions {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 14px;
+}
+
+
+/* MAKE THEM MATCH THE SITE BUTTON STYLE */
+
+.explaining-bot-quick-actions button {
+    min-height: 58px;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid
+        var(--theme-border, rgba(255,255,255,0.12));
+
+    border-radius: 18px;
+
+    background:
+        var(--theme-card, #111111);
+
+    color:
+        var(--theme-text, #fff);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.28s cubic-bezier(.2,.8,.2,1),
+        border-color 0.28s ease,
+        box-shadow 0.28s ease,
+        background 0.28s ease;
+}
+
+
+/* SAME FEEL AS THE PAGE 2 BOXES */
+
+.explaining-bot-quick-actions button:hover {
+    transform:
+        translateY(-7px)
+        scale(1.025);
+
+    border-color:
+        var(--theme-text, #fff);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.22),
+        0 0 18px rgba(255,255,255,0.06);
+}
+
+
+/* =========================================
+   INPUT AREA
+========================================= */
+
+.explaining-bot-input-row {
+    width: 100%;
+
+    display: flex;
+    align-items: stretch;
+
+    gap: 14px;
+}
+
+#explainingBotInput {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 54px;
+
+    padding:
+        0 18px;
+
+    border:
+        1px solid
+        var(--theme-border, rgba(255,255,255,0.12));
+
+    border-radius: 18px;
+
+    background:
+        var(--theme-card, #111111);
+
+    color:
+        var(--theme-text, #fff);
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+#explainingBotInput:focus {
+    border-color:
+        var(--theme-text, #fff);
+
+    box-shadow:
+        0 0 18px rgba(255,255,255,0.08);
+
+    transform:
+        translateY(-2px);
+}
+
+#explainingBotInput::placeholder {
+    color:
+        var(--theme-text, #fff);
+
+    opacity: 0.4;
+}
+
+
+/* ASK BUTTON */
+
+#explainingBotSendButton {
+    flex:
+        0 0 110px;
+
+    height: 54px;
+
+    border:
+        1px solid
+        var(--theme-border, rgba(255,255,255,0.12));
+
+    border-radius: 18px;
+
+    background:
+        var(--theme-card, #111111);
+
+    color:
+        var(--theme-text, #fff);
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.28s cubic-bezier(.2,.8,.2,1),
+        border-color 0.28s ease,
+        box-shadow 0.28s ease,
+        background 0.28s ease;
+}
+
+#explainingBotSendButton:hover {
+    transform:
+        translateY(-7px)
+        scale(1.025);
+
+    border-color:
+        var(--theme-text, #fff);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.22),
+        0 0 18px rgba(255,255,255,0.06);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .explaining-bot-quick-actions {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .explaining-bot-page {
+        padding:
+            95px
+            15px
+            60px;
+    }
+
+    .explaining-bot-shell {
+        width: 94%;
+    }
+
+    .explaining-bot-chat {
+        height: 52vh;
+        padding: 18px;
+    }
+
+    .bot-message {
+        max-width: 90%;
+    }
+
+    .explaining-bot-quick-actions {
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+    }
+
+    .explaining-bot-quick-actions button {
+        min-height: 54px;
+    }
+
+    .explaining-bot-input-row {
+        gap: 10px;
+    }
+
+    #explainingBotSendButton {
+        flex-basis: 90px;
+    }
+
+}
+
+/* =========================================
+   EXPLAINING BOT - CLEAN ACTION UI
+========================================= */
+
+.bot-message-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin-top: 10px !important;
+    flex-wrap: wrap !important;
+}
+
+.bot-message-actions button {
+    appearance: none !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+
+    padding: 6px 10px !important;
+
+    border-radius: 999px !important;
+
+    border: 1px solid var(--theme-border) !important;
+
+    background: transparent !important;
+
+    color: var(--theme-text) !important;
+
+    font-family: inherit !important;
+
+    font-size: 10px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.8px !important;
+
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    opacity: 0.6 !important;
+
+    box-shadow: none !important;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease !important;
+}
+
+.bot-message-actions button:hover {
+    opacity: 1 !important;
+
+    transform:
+        translateY(-2px) !important;
+
+    background:
+        var(--theme-card) !important;
+
+    border-color:
+        var(--theme-text) !important;
+}
+
+
+/* =========================================
+   SMART SUGGESTION
+========================================= */
+
+.bot-suggestion {
+    appearance: none !important;
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    width: auto !important;
+
+    min-width: 110px !important;
+
+    margin-top: 10px !important;
+
+    padding: 8px 13px !important;
+
+    border-radius: 999px !important;
+
+    border: 1px solid var(--theme-border) !important;
+
+    background:
+        var(--theme-card) !important;
+
+    color:
+        var(--theme-text) !important;
+
+    font-family: inherit !important;
+
+    font-size: 11px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.6px !important;
+
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    opacity: 0.72 !important;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,0.08) !important;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        border-color 0.2s ease !important;
+}
+
+.bot-suggestion:hover {
+    opacity: 1 !important;
+
+    transform:
+        translateY(-3px) !important;
+
+    border-color:
+        var(--theme-text) !important;
+}
+
+
+/* =========================================
+   DATE + TIME
+========================================= */
+
+.bot-message-time {
+    margin-top: 6px !important;
+
+    font-size: 10px !important;
+
+    line-height: 1 !important;
+
+    opacity: 0.38 !important;
+
+    letter-spacing: 0.3px !important;
+}
+
+
+/* =========================================
+   BOT MESSAGE TEXT
+========================================= */
+
+.bot-message-text {
+    white-space: pre-wrap !important;
+
+    line-height: 1.6 !important;
+}
+
+
+/* =========================================
+   UTILITY BUTTONS
+========================================= */
+
+#explainingBotPage
+.explaining-bot-quick-actions
+button {
+    border-radius: 18px !important;
+
+    border: 1px solid var(--theme-border) !important;
+
+    background: var(--theme-card) !important;
+
+    color: var(--theme-text) !important;
+
+    padding: 10px 14px !important;
+
+    font-family: inherit !important;
+
+    font-size: 11px !important;
+
+    font-weight: 700 !important;
+
+    letter-spacing: 0.5px !important;
+
+    cursor: pointer !important;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease !important;
+}
+
+#explainingBotPage
+.explaining-bot-quick-actions
+button:hover {
+    transform:
+        translateY(-3px) !important;
+
+    border-color:
+        var(--theme-text) !important;
+
+    box-shadow:
+        var(--theme-shadow) !important;
+}
+
+/* =========================================
+   SOIL SENSOR LAB — POLISHED / ISOLATED
+========================================= */
+
+#sensorLabPage {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 96px 24px 72px;
+    box-sizing: border-box;
+}
+
+#sensorLabPage .sensor-lab-header {
+    width: min(1080px, 100%);
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+#sensorLabPage .sensor-lab-header .section-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    opacity: .48;
+}
+
+#sensorLabPage .sensor-lab-header h1 {
+    margin: 0;
+    font-size: clamp(40px, 6vw, 68px);
+    line-height: 1;
+    letter-spacing: -2.6px;
+}
+
+#sensorLabPage .sensor-lab-header p {
+    max-width: 720px;
+    margin: 16px auto 0;
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: .58;
+}
+
+#sensorLabPage .sensor-lab-grid {
+    width: min(1220px, 100%);
+    display: grid;
+    grid-template-columns: minmax(280px, .82fr) minmax(520px, 1.6fr);
+    gap: 18px;
+    align-items: stretch;
+}
+
+#sensorLabPage .sensor-panel {
+    position: relative;
+    min-width: 0;
+    padding: 24px;
+    box-sizing: border-box;
+    border: 1px solid var(--theme-border);
+    border-radius: 24px;
+    background: var(--theme-card);
+    color: var(--theme-text);
+    box-shadow: var(--theme-shadow);
+    overflow: hidden;
+}
+
+#sensorLabPage .sensor-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(255,255,255,.025), transparent 48%);
+}
+
+#sensorLabPage .sensor-panel-top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+#sensorLabPage .sensor-panel-top > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#sensorLabPage .sensor-panel-number {
+    width: 28px;
+    height: 28px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 900;
+    opacity: .72;
+}
+
+#sensorLabPage .sensor-panel-label {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    opacity: .45;
+}
+
+#sensorLabPage .sensor-panel-tag {
+    padding: 6px 9px;
+    border: 1px solid var(--theme-border);
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.1px;
+    opacity: .55;
+}
+
+#sensorLabPage .sensor-panel-tag.connected {
+    color: #2df39a;
+    border-color: rgba(45,243,154,.28);
+    opacity: .92;
+}
+
+#sensorLabPage .sensor-panel h2 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-size: 24px;
+    letter-spacing: -.6px;
+}
+
+#sensorLabPage .sensor-panel-description {
+    position: relative;
+    z-index: 2;
+    max-width: 620px;
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.65;
+    opacity: .55;
+}
+
+#sensorLabPage .soil-samples {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+#sensorLabPage .soil-sample {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 13px;
+    min-height: 78px;
+    padding: 11px;
+    box-sizing: border-box;
+    border: 1px solid var(--theme-border);
+    border-radius: 18px;
+    background: var(--theme-background);
+    color: var(--theme-text);
+    cursor: grab;
+    user-select: none;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+#sensorLabPage .soil-sample:hover {
+    transform: translateY(-3px);
+    border-color: var(--theme-text);
+    box-shadow: var(--theme-shadow);
+}
+
+#sensorLabPage .soil-sample:active {
+    cursor: grabbing;
+    transform: scale(.985);
+}
+
+#sensorLabPage .soil-sample-visual {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+}
+
+#sensorLabPage .soil-sample-visual span {
+    width: 23px;
+    height: 14px;
+    border-radius: 52% 48% 44% 56%;
+    transform: rotate(-10deg);
+    box-shadow: 7px 7px 0 rgba(0,0,0,.12), -5px 2px 0 rgba(255,255,255,.05);
+}
+
+#sensorLabPage .dry-soil .soil-sample-visual {
+    background: radial-gradient(circle at 35% 30%, #c98a52, #70401f 62%, #321a0f 100%);
+}
+
+#sensorLabPage .dry-soil .soil-sample-visual span {
+    background: #8f512b;
+}
+
+#sensorLabPage .wet-soil .soil-sample-visual {
+    background: radial-gradient(circle at 35% 30%, #665047, #281c17 62%, #0f0b09 100%);
+}
+
+#sensorLabPage .wet-soil .soil-sample-visual span {
+    background: #3e2c26;
+}
+
+#sensorLabPage .soil-sample-copy strong {
+    display: block;
+    font-size: 16px;
+}
+
+#sensorLabPage .soil-sample-copy small {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    opacity: .48;
+}
+
+#sensorLabPage .soil-sample-arrow {
+    font-size: 18px;
+    opacity: .38;
+}
+
+#sensorLabPage .soil-note {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 16px;
+    padding: 12px 13px;
+    border: 1px solid var(--theme-border);
+    border-radius: 14px;
+}
+
+#sensorLabPage .soil-note > span {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 900;
+}
+
+#sensorLabPage .soil-note p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .54;
+}
+
+#sensorLabPage .hardware-workbench {
+    position: relative;
+    z-index: 2;
+    min-height: 360px;
+    margin-top: 24px;
+    border: 1px solid var(--theme-border);
+    border-radius: 22px;
+    background: radial-gradient(circle at 50% 45%, rgba(49,184,255,.06), transparent 52%), var(--theme-background);
+    overflow: hidden;
+}
+
+#sensorLabPage .hardware-workbench::after {
+    content: "CONNECTED SIGNAL PATH";
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    z-index: 5;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    opacity: .25;
+}
+
+#sensorLabPage .hardware-cables {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#sensorLabPage .cable {
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+#sensorLabPage .cable-red { stroke: #ff4a4a; }
+#sensorLabPage .cable-black { stroke: #15191d; }
+#sensorLabPage .cable-yellow { stroke: #f2c13c; }
+
+#sensorLabPage .microbit-device,
+#sensorLabPage .soil-sensor-device {
+    position: absolute;
+    z-index: 3;
+}
+
+#sensorLabPage .microbit-device {
+    left: 5%;
+    top: 74px;
+    width: 275px;
+    height: 210px;
+    box-sizing: border-box;
+    border: 2px solid rgba(255,255,255,.15);
+    border-radius: 22px;
+    background: linear-gradient(145deg, #18232e, #080c11);
+    box-shadow: 0 25px 45px rgba(0,0,0,.42), inset 0 0 35px rgba(255,255,255,.025);
+}
+
+#sensorLabPage .microbit-device-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px 7px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    opacity: .62;
+}
+
+#sensorLabPage .microbit-face {
+    position: relative;
+    height: 148px;
+}
+
+#sensorLabPage .microbit-led-grid {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    width: 92px;
+    height: 92px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    transform: translateX(-50%);
+}
+
+#sensorLabPage .microbit-led {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    background: rgba(0,150,255,.14);
+    box-shadow: inset 0 0 5px rgba(255,255,255,.05);
+    transition: background .15s ease, box-shadow .15s ease;
+}
+
+#sensorLabPage .microbit-led.on {
+    background: #31b8ff;
+    box-shadow: 0 0 8px #31b8ff, 0 0 18px rgba(49,184,255,.45);
+}
+
+#sensorLabPage .microbit-button {
+    position: absolute;
+    top: 44px;
+    width: 38px;
+    height: 38px;
+    border: 2px solid rgba(255,255,255,.22);
+    border-radius: 50%;
+    background: #101820;
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: inset 0 0 8px rgba(255,255,255,.05), 0 5px 12px rgba(0,0,0,.35);
+    transition: transform .1s ease, background .1s ease;
+}
+
+#sensorLabPage .microbit-button:active {
+    transform: scale(.88);
+    background: #1d2b38;
+}
+
+#sensorLabPage .microbit-button-a { left: 17px; }
+#sensorLabPage .microbit-button-b { right: 17px; }
+
+#sensorLabPage .microbit-pins {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 9px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    text-align: center;
+    font-size: 8px;
+    opacity: .4;
+}
+
+#sensorLabPage .soil-sensor-device {
+    right: 6%;
+    top: 54px;
+    width: 212px;
+    min-height: 270px;
+    padding: 12px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed rgba(49,184,255,.34);
+    border-radius: 22px;
+    background: rgba(0,120,255,.025);
+    transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+#sensorLabPage .soil-sensor-device.drag-over {
+    border-color: #31b8ff;
+    background: rgba(49,184,255,.08);
+    box-shadow: 0 0 28px rgba(49,184,255,.12);
+}
+
+#sensorLabPage .soil-sensor-label {
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+    opacity: .42;
+}
+
+#sensorLabPage .soil-sensor-board {
+    position: relative;
+    width: 108px;
+    height: 138px;
+    margin-top: 14px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 14px 14px 18px 18px;
+    background: linear-gradient(145deg, #3b4c5a, #111920);
+    box-shadow: 0 18px 30px rgba(0,0,0,.4);
+}
+
+#sensorLabPage .soil-sensor-top-line {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 48px;
+    height: 6px;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: rgba(255,255,255,.08);
+}
+
+#sensorLabPage .soil-sensor-connector {
+    position: absolute;
+    top: -10px;
+    left: 37px;
+    width: 34px;
+    height: 14px;
+    border: 1px solid #4d555d;
+    border-radius: 4px;
+    background: #0e1012;
+}
+
+#sensorLabPage .soil-sensor-prongs {
+    position: absolute;
+    left: 50%;
+    bottom: -56px;
+    display: flex;
+    gap: 22px;
+    transform: translateX(-50%);
+}
+
+#sensorLabPage .soil-sensor-prongs span {
+    width: 18px;
+    height: 88px;
+    display: block;
+    border-radius: 4px 4px 13px 13px;
+    background: linear-gradient(90deg, #66757f, #e0e6ea, #67757e);
+    box-shadow: 0 9px 15px rgba(0,0,0,.42);
+}
+
+#sensorLabPage .soil-on-sensor {
+    position: absolute;
+    left: 50%;
+    bottom: 13px;
+    width: 150px;
+    min-height: 38px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+#sensorLabPage .placed-soil {
+    width: 62px;
+    height: 35px;
+    border-radius: 60% 45% 50% 55%;
+    box-shadow: 0 8px 15px rgba(0,0,0,.4);
+}
+
+#sensorLabPage .placed-dry {
+    background: radial-gradient(circle at 35% 35%, #b97740, #74411f 60%, #3c2214);
+}
+
+#sensorLabPage .placed-wet {
+    background: radial-gradient(circle at 35% 35%, #5c4035, #291d18 60%, #100c0a);
+}
+
+#sensorLabPage .soil-sensor-drop-text {
+    margin-top: 70px;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.4px;
+    opacity: .28;
+}
+
+#sensorLabPage .reading-display {
+    position: relative;
+    z-index: 2;
+    margin-top: 24px;
+    padding: 14px;
+    border: 1px solid var(--theme-border);
+    border-radius: 18px;
+    background: var(--theme-background);
+}
+
+#sensorLabPage .reading-display > span {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 8px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    opacity: .42;
+}
+
+#sensorLabPage .reading-screen {
+    min-height: 92px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(49,184,255,.25);
+    border-radius: 15px;
+    background: #02070b;
+    color: #31b8ff;
+    font-family: monospace;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 12px #31b8ff;
+}
+
+#sensorLabPage .reading-status {
+    position: relative;
+    z-index: 2;
+    min-height: 22px;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .54;
+}
+
+#sensorLabPage .sensor-read-button {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 68px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1px solid rgba(49,184,255,.34);
+    border-radius: 17px;
+    background: linear-gradient(145deg, rgba(49,184,255,.15), rgba(49,184,255,.04));
+    color: var(--theme-text);
+    cursor: pointer;
+    font: inherit;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+#sensorLabPage .sensor-read-button strong {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #1597ff;
+    color: #fff;
+    font-size: 19px;
+    box-shadow: 0 0 18px rgba(21,151,255,.4);
+}
+
+#sensorLabPage .sensor-read-button span {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+#sensorLabPage .sensor-read-button:hover {
+    transform: translateY(-3px);
+    border-color: #31b8ff;
+    box-shadow: 0 12px 25px rgba(49,184,255,.12);
+}
+
+#sensorLabPage .sensor-reset-button {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    min-height: 42px;
+    margin-top: 9px;
+    border: 1px solid var(--theme-border);
+    border-radius: 14px;
+    background: transparent;
+    color: var(--theme-text);
+    font: inherit;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    opacity: .62;
+    transition: opacity .2s ease, border-color .2s ease;
+}
+
+#sensorLabPage .sensor-reset-button:hover {
+    opacity: 1;
+    border-color: var(--theme-text);
+}
+
+#sensorLabPage .sensor-connection-list {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 9px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid var(--theme-border);
+    font-size: 10px;
+    opacity: .55;
+}
+
+#sensorLabPage .sensor-connection-list > div {
+    display: flex;
+    align-items: center;
+}
+
+#sensorLabPage .sensor-connection-list > div > span {
+    width: 8px;
+    height: 8px;
+    margin-right: 7px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #2df39a;
+    box-shadow: 0 0 10px rgba(45,243,154,.5);
+}
+
+#sensorLabPage .guide-list {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+#sensorLabPage .guide-item {
+    display: grid;
+    grid-template-columns: 34px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+    padding: 13px;
+    border: 1px solid var(--theme-border);
+    border-radius: 16px;
+    background: var(--theme-background);
+}
+
+#sensorLabPage .guide-item > span {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 900;
+    opacity: .65;
+}
+
+#sensorLabPage .guide-item strong {
+    font-size: 13px;
+}
+
+#sensorLabPage .guide-item p {
+    margin: 4px 0 0;
+    font-size: 11px;
+    line-height: 1.5;
+    opacity: .5;
+}
+
+#sensorLabPage .keyboard-tip {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    padding: 12px 13px;
+    border: 1px solid var(--theme-border);
+    border-radius: 14px;
+}
+
+#sensorLabPage .keyboard-tip > span {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--theme-border);
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 900;
+}
+
+#sensorLabPage .keyboard-tip p {
+    margin: 0;
+    font-size: 11px;
+    opacity: .55;
+}
+
+#sensorLabPage .sensor-error {
+    color: #ff5c5c !important;
+    text-shadow: 0 0 12px rgba(255,92,92,.7) !important;
+    border-color: rgba(255,92,92,.4) !important;
+}
+
+@media (max-width: 1080px) {
+    #sensorLabPage .sensor-lab-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    #sensorLabPage {
+        padding: 84px 14px 55px;
+    }
+
+    #sensorLabPage .sensor-lab-header h1 {
+        font-size: 44px;
+    }
+
+    #sensorLabPage .hardware-workbench {
+        min-height: 580px;
+    }
+
+    #sensorLabPage .microbit-device {
+        left: 50%;
+        top: 52px;
+        transform: translateX(-50%);
+    }
+
+    #sensorLabPage .soil-sensor-device {
+        top: 305px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+
+/* =========================================
+   AUTO THEME
+========================================= */
+
+#settingsAutoThemeButton.auto-theme-active {
+    background:
+        rgba(49,184,255,.08) !important;
+
+    border-color:
+        rgba(49,184,255,.22) !important;
+
+    color:
+        #31b8ff !important;
+}
+
+
+#settingsAutoThemeButton.auto-theme-active span:first-child {
+    opacity: 1 !important;
+
+    text-shadow:
+        0 0 10px
+        rgba(49,184,255,.65);
+}
+
+
+#settingsAutoThemeButton.auto-theme-active::after {
+    content: "SYNCED";
+
+    margin-left: auto;
+
+    font-size: 8px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    opacity: .5;
+}
+
+
+/* FIRST PAGE ONLY */
+
+#pageOne.auto-theme-running {
+    --auto-theme-glow:
+        rgba(255,255,255,.18);
+}
+
+
+#pageOne.auto-theme-running::after {
+    filter:
+        drop-shadow(
+            0 0 18px
+            var(--auto-theme-glow)
+        );
 }

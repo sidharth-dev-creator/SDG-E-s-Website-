@@ -1,3 +1,32 @@
+function bindNav(buttonId, targetId) {
+    const button = document.getElementById(buttonId);
+    const target = document.getElementById(targetId);
+
+    if (!button || !target) {
+        console.warn("Navigation missing:", buttonId, targetId);
+        return;
+    }
+
+    button.addEventListener("click", function () {
+        showPage(target);
+    });
+}
+
+function bindBack(buttonId, targetId) {
+    const button = document.getElementById(buttonId);
+    const target = document.getElementById(targetId);
+
+    if (!button || !target) {
+        console.warn("Back navigation missing:", buttonId, targetId);
+        return;
+    }
+
+    button.addEventListener("click", function () {
+        showPage(target);
+    });
+}
+
+
 /* =========================================
    SDG-E WEBSITE — FINAL SCRIPT
 ========================================= */
@@ -10,23 +39,90 @@ const pageOne = $("pageOne");
 const pageTwo = $("pageTwo");
 
 function showPage(page) {
-    qsa(".page").forEach(p => p.classList.remove("active"));
-    if (page) page.classList.add("active");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
 
-function bindNav(buttonId, targetId) {
-    const button = $(buttonId);
-    const target = $(targetId);
-    if (!button || !target) return;
-    button.addEventListener("click", () => showPage(target));
-}
+    const allPages = qsa(".page");
 
-function bindBack(buttonId, targetId) {
-    const button = $(buttonId);
-    const target = $(targetId);
-    if (!button || !target) return;
-    button.addEventListener("click", () => showPage(target));
+    // Restore anything hidden by a previously opened detail page.
+    qsa('[data-page-nav-hidden="true"]').forEach(child => {
+
+        child.style.removeProperty("display");
+        child.removeAttribute("data-page-nav-hidden");
+
+    });
+
+    // Hide every page.
+    allPages.forEach(p => {
+        p.classList.remove("active");
+    });
+
+    if (!page) {
+        return;
+    }
+
+    /*
+        IMPORTANT:
+        The detail pages are currently nested inside #pageTwo.
+
+        Example:
+
+        pageTwo
+          ├── dashboard
+          ├── partsPage
+          ├── areaInfoPage
+          ├── codingPage
+          └── ...
+
+        If we activate partsPage while pageTwo is hidden,
+        partsPage also becomes invisible.
+
+        So we keep pageTwo active and temporarily hide
+        its dashboard children.
+    */
+
+    const hostPage = page.parentElement
+        ? page.parentElement.closest(".page")
+        : null;
+
+    if (hostPage && hostPage !== page) {
+
+        // Keep the parent page visible.
+        hostPage.classList.add("active");
+
+        // Hide everything inside the parent except
+        // the detail page we want.
+        [...hostPage.children].forEach(child => {
+
+            if (child !== page) {
+
+                child.style.setProperty(
+                    "display",
+                    "none",
+                    "important"
+                );
+
+                child.setAttribute(
+                    "data-page-nav-hidden",
+                    "true"
+                );
+
+            }
+
+        });
+
+        // Show the selected detail page.
+        page.classList.add("active");
+
+    } else {
+
+        // Normal top-level page.
+        page.classList.add("active");
+
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 /* =========================================
@@ -3779,3 +3875,476 @@ if (
 
 
 updateAutoThemeButton();
+
+/* =========================================================
+   SDG-E — VISIBILITY REPAIR ONLY
+   Does NOT change navigation or page structure.
+========================================================= */
+
+(function restoreSectionVisibility() {
+
+    function repairVisibility() {
+
+        /* Restore information inside the main boxes */
+        document.querySelectorAll(".info-box").forEach(box => {
+
+            box.style.setProperty(
+                "opacity",
+                "1",
+                "important"
+            );
+
+            box.style.setProperty(
+                "visibility",
+                "visible",
+                "important"
+            );
+
+            box.querySelectorAll("*").forEach(el => {
+
+                el.style.setProperty(
+                    "opacity",
+                    "1",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "visibility",
+                    "visible",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "-webkit-text-fill-color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "background-image",
+                    "none",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "background-clip",
+                    "initial",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "-webkit-background-clip",
+                    "initial",
+                    "important"
+                );
+
+            });
+
+        });
+
+
+        /* Restore information inside opened section pages */
+        document.querySelectorAll(
+            ".part-card, .area-info-card, .partner-card, " +
+            ".sil-info-card, .coding-card, .results-coming-soon"
+        ).forEach(card => {
+
+            card.style.setProperty(
+                "opacity",
+                "1",
+                "important"
+            );
+
+            card.style.setProperty(
+                "visibility",
+                "visible",
+                "important"
+            );
+
+            card.querySelectorAll("*").forEach(el => {
+
+                el.style.setProperty(
+                    "opacity",
+                    "1",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "visibility",
+                    "visible",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "-webkit-text-fill-color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "background-image",
+                    "none",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "background-clip",
+                    "initial",
+                    "important"
+                );
+
+                el.style.setProperty(
+                    "-webkit-background-clip",
+                    "initial",
+                    "important"
+                );
+
+            });
+
+        });
+
+
+        /* Restore EVERY existing Back button */
+        document.querySelectorAll(".back-button, .bottom-back")
+            .forEach(button => {
+
+                button.style.setProperty(
+                    "display",
+                    "block",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "visibility",
+                    "visible",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "opacity",
+                    "1",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "pointer-events",
+                    "auto",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "z-index",
+                    "999999",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "-webkit-text-fill-color",
+                    "var(--theme-text, #ffffff)",
+                    "important"
+                );
+
+                button.style.setProperty(
+                    "background-image",
+                    "none",
+                    "important"
+                );
+
+            });
+
+    }
+
+    /* Initial repair */
+    repairVisibility();
+
+    /* Repair again whenever the page changes */
+    document.querySelectorAll(".page").forEach(page => {
+
+        new MutationObserver(repairVisibility).observe(page, {
+            attributes: true,
+            attributeFilter: ["class", "style"]
+        });
+
+    });
+
+    /* Repair when the theme changes */
+    new MutationObserver(repairVisibility).observe(
+        document.body,
+        {
+            attributes: true,
+            attributeFilter: ["class", "style"]
+        }
+    );
+
+})();
+
+/* =========================================
+   FINAL NAVIGATION FIX
+   DO NOT REMOVE EXISTING CODE ABOVE
+========================================= */
+
+(function () {
+
+    const pageTwo = document.getElementById("pageTwo");
+
+    if (!pageTwo) return;
+
+    const routes = {
+
+        continueButton: "pageTwo",
+
+        partsBox: "partsPage",
+        areaInfoBox: "areaInfoPage",
+        partnershipBox: "partnershipPage",
+        silMentorBox: "silMentorPage",
+        codingBox: "codingPage",
+        resultsBox: "resultsPage",
+        explainingBotBox: "explainingBotPage"
+
+    };
+
+    const backRoutes = {
+
+        backButton: "pageOne",
+
+        partsBackButton: "pageTwo",
+        partsBottomBack: "pageTwo",
+
+        areaInfoBackButton: "pageTwo",
+        areaInfoBottomBack: "pageTwo",
+
+        partnershipBackButton: "pageTwo",
+        partnershipBottomBack: "pageTwo",
+
+        silMentorBackButton: "pageTwo",
+        silMentorBottomBack: "pageTwo",
+
+        codingBackButton: "pageTwo",
+        codingBottomBack: "pageTwo",
+
+        resultsBackButton: "pageTwo",
+        resultsBottomBack: "pageTwo",
+
+        explainingBotBackButton: "pageTwo"
+    };
+
+
+    function hideEverything() {
+
+        document.querySelectorAll(".page").forEach(function (page) {
+
+            page.classList.remove("active");
+
+            page.style.removeProperty("display");
+
+        });
+
+    }
+
+
+    function openPage(targetId) {
+
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+
+
+        hideEverything();
+
+
+        /*
+           PAGE 2 contains the other pages.
+
+           Therefore, when opening a detail page,
+           PAGE 2 itself must stay active.
+        */
+
+        if (target !== pageTwo && pageTwo.contains(target)) {
+
+            pageTwo.classList.add("active");
+
+            /*
+               Hide PAGE 2's normal dashboard content.
+            */
+
+            Array.from(pageTwo.children).forEach(function (child) {
+
+                if (child !== target) {
+
+                    child.style.setProperty(
+                        "display",
+                        "none",
+                        "important"
+                    );
+
+                }
+
+            });
+
+
+            /*
+               Show the requested detail page.
+            */
+
+            target.classList.add("active");
+
+            target.style.setProperty(
+                "display",
+                "flex",
+                "important"
+            );
+
+        } else {
+
+            /*
+               Normal top-level page.
+            */
+
+            target.classList.add("active");
+
+            target.style.setProperty(
+                "display",
+                "flex",
+                "important"
+            );
+
+        }
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    function openDashboard() {
+
+        hideEverything();
+
+        pageTwo.classList.add("active");
+
+        /*
+           Restore every direct child of PAGE 2.
+        */
+
+        Array.from(pageTwo.children).forEach(function (child) {
+
+            child.style.removeProperty("display");
+
+        });
+
+        pageTwo.style.removeProperty("display");
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /*
+       CLICK CONTROLLER
+
+       Using ONE document listener means the old
+       navigation code cannot prevent this controller
+       from repairing the page afterwards.
+    */
+
+    document.addEventListener("click", function (event) {
+
+        const element = event.target.closest(
+            "[id]"
+        );
+
+        if (!element) return;
+
+
+        const id = element.id;
+
+
+        /*
+           BACK BUTTONS
+        */
+
+        if (backRoutes[id]) {
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            if (backRoutes[id] === "pageTwo") {
+
+                openDashboard();
+
+            } else {
+
+                openPage(backRoutes[id]);
+
+            }
+
+            return;
+        }
+
+
+        /*
+           OPEN BUTTONS / BOXES
+        */
+
+        if (routes[id]) {
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            if (routes[id] === "pageTwo") {
+
+                openDashboard();
+
+            } else {
+
+                openPage(routes[id]);
+
+            }
+
+        }
+
+    }, true);
+
+
+    /*
+       Make sure the initial dashboard is visible.
+    */
+
+    window.addEventListener("load", function () {
+
+        const activePage =
+            document.querySelector(".page.active");
+
+        if (!activePage) {
+
+            pageTwo.classList.add("active");
+
+        }
+
+    });
+
+})();

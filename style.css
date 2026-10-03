@@ -6699,3 +6699,31 @@ button:hover {
             var(--auto-theme-glow)
         );
 }
+
+/* =========================================
+   FINAL INFO BOX TEXT VISIBILITY FIX
+========================================= */
+
+body.theme-system .info-box h2,
+body.theme-system .info-box p,
+body.theme-system .info-box .click-hint,
+body.theme-system .part-card h2,
+body.theme-system .part-card p,
+body.theme-system .part-card li,
+body.theme-system .area-info-card h2,
+body.theme-system .area-info-card p,
+body.theme-system .partner-card h2,
+body.theme-system .partner-card p,
+body.theme-system .sil-info-card h2,
+body.theme-system .sil-info-card p,
+body.theme-system .coding-card h2,
+body.theme-system .coding-card p,
+body.theme-system .results-coming-soon h2,
+body.theme-system .results-coming-soon p {
+    -webkit-text-fill-color: var(--theme-text) !important;
+    color: var(--theme-text) !important;
+    background: none !important;
+    background-image: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+}

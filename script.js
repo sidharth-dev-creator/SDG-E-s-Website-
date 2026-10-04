@@ -502,6 +502,232 @@ function speakBotText(
 }
 
 /* =========================================
+   FUTURISTIC BOT CONTROLS
+   FINAL VERSION
+========================================= */
+
+(function injectBotHUDStyle() {
+
+    if (document.getElementById("sdgeBotHUDStyle")) {
+        return;
+    }
+
+    const style =
+        document.createElement("style");
+
+    style.id =
+        "sdgeBotHUDStyle";
+
+    style.textContent = `
+        /* ================================
+           BOT ACTION BAR
+        ================================= */
+
+        .bot-message-actions {
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
+            margin-top: 10px !important;
+            flex-wrap: wrap !important;
+        }
+
+        /* ================================
+           COPY / SPEAK
+        ================================= */
+
+        .bot-message-actions button {
+            appearance: none !important;
+
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            width: auto !important;
+            min-width: 96px !important;
+            height: 34px !important;
+
+            padding: 0 13px !important;
+            margin: 0 !important;
+
+            border: 1px solid var(--theme-border) !important;
+            border-radius: 6px !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.018)
+                ) !important;
+
+            color: var(--theme-text) !important;
+
+            font-family: inherit !important;
+            font-size: 9px !important;
+            font-weight: 800 !important;
+            letter-spacing: 1.1px !important;
+
+            line-height: 1 !important;
+
+            cursor: pointer !important;
+
+            opacity: .78 !important;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.018),
+                0 4px 14px rgba(0,0,0,.12) !important;
+
+            transition:
+                transform .18s ease,
+                opacity .18s ease,
+                border-color .18s ease,
+                background .18s ease,
+                box-shadow .18s ease !important;
+        }
+
+        .bot-message-actions button::before {
+            content: "" !important;
+            width: 3px !important;
+            height: 3px !important;
+            margin-right: 7px !important;
+            background: currentColor !important;
+            box-shadow:
+                6px 0 currentColor,
+                0 6px currentColor,
+                6px 6px currentColor !important;
+            opacity: .55 !important;
+        }
+
+        .bot-message-actions button:hover {
+            opacity: 1 !important;
+            transform: translateY(-2px) !important;
+
+            border-color:
+                var(--theme-text) !important;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.13),
+                    rgba(255,255,255,.035)
+                ) !important;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.04),
+                0 7px 20px rgba(0,0,0,.2),
+                0 0 14px rgba(255,255,255,.07) !important;
+        }
+
+        .bot-message-actions button:active {
+            transform:
+                translateY(0) scale(.97) !important;
+        }
+
+        /* ================================
+           SUGGESTION
+        ================================= */
+
+        .bot-suggestion {
+            appearance: none !important;
+
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+
+            width: min(250px, 100%) !important;
+            min-width: 180px !important;
+            height: 38px !important;
+
+            margin-top: 10px !important;
+            padding: 0 12px 0 15px !important;
+
+            border: 1px solid var(--theme-border) !important;
+            border-radius: 6px !important;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(255,255,255,.075),
+                    rgba(255,255,255,.018)
+                ) !important;
+
+            color: var(--theme-text) !important;
+
+            font-family: inherit !important;
+            font-size: 9px !important;
+            font-weight: 800 !important;
+            letter-spacing: 1px !important;
+
+            line-height: 1 !important;
+
+            cursor: pointer !important;
+
+            opacity: .82 !important;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.015),
+                0 5px 16px rgba(0,0,0,.12) !important;
+
+            transition:
+                transform .2s ease,
+                opacity .2s ease,
+                border-color .2s ease,
+                background .2s ease,
+                box-shadow .2s ease !important;
+        }
+
+        .bot-suggestion::after {
+            content: "↗" !important;
+
+            font-size: 14px !important;
+            font-weight: 400 !important;
+
+            opacity: .55 !important;
+
+            transition:
+                transform .2s ease,
+                opacity .2s ease !important;
+        }
+
+        .bot-suggestion:hover {
+            opacity: 1 !important;
+
+            transform:
+                translateX(5px) !important;
+
+            border-color:
+                var(--theme-text) !important;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(255,255,255,.12),
+                    rgba(255,255,255,.035)
+                ) !important;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(255,255,255,.035),
+                0 7px 20px rgba(0,0,0,.18),
+                0 0 15px rgba(255,255,255,.06) !important;
+        }
+
+        .bot-suggestion:hover::after {
+            opacity: 1 !important;
+            transform:
+                translate(2px,-2px) !important;
+        }
+
+        .bot-suggestion:active {
+            transform:
+                translateX(2px) scale(.98) !important;
+        }
+    `;
+
+    document.head.appendChild(style);
+
+})();
+
+
+/* =========================================
    ADD BOT MESSAGE
 ========================================= */
 
@@ -523,6 +749,11 @@ function addExplainingBotMessage(
                 : "bot-message-bot"
         );
 
+
+    /* =====================================
+       MESSAGE TEXT
+    ===================================== */
+
     const messageText =
         document.createElement(
             "div"
@@ -537,6 +768,11 @@ function addExplainingBotMessage(
     message.appendChild(
         messageText
     );
+
+
+    /* =====================================
+       TIMESTAMP
+    ===================================== */
 
     const timestamp =
         document.createElement(
@@ -553,6 +789,11 @@ function addExplainingBotMessage(
         timestamp
     );
 
+
+    /* =====================================
+       BOT ACTIONS
+    ===================================== */
+
     if (
         type !== "user"
     ) {
@@ -565,6 +806,11 @@ function addExplainingBotMessage(
         actions.className =
             "bot-message-actions";
 
+
+        /* ================================
+           COPY
+        ================================= */
+
         const copyButton =
             document.createElement(
                 "button"
@@ -573,17 +819,30 @@ function addExplainingBotMessage(
         copyButton.type =
             "button";
 
-        copyButton.textContent =
-            "📋 COPY";
+        copyButton.innerHTML =
+            "COPY";
+
+        copyButton.setAttribute(
+            "aria-label",
+            "Copy bot message"
+        );
 
         copyButton.addEventListener(
             "click",
-            () =>
+            () => {
+
                 copyBotText(
                     text,
                     copyButton
-                )
+                );
+
+            }
         );
+
+
+        /* ================================
+           SPEAK
+        ================================= */
 
         const speakButton =
             document.createElement(
@@ -593,17 +852,30 @@ function addExplainingBotMessage(
         speakButton.type =
             "button";
 
-        speakButton.textContent =
-            "🔊 SPEAK";
+        speakButton.innerHTML =
+            "SPEAK";
+
+        speakButton.setAttribute(
+            "aria-label",
+            "Speak bot message"
+        );
 
         speakButton.addEventListener(
             "click",
-            () =>
+            () => {
+
                 speakBotText(
                     text,
                     speakButton
-                )
+                );
+
+            }
         );
+
+
+        /* ================================
+           ADD BUTTONS
+        ================================= */
 
         actions.append(
             copyButton,
@@ -615,16 +887,93 @@ function addExplainingBotMessage(
         );
     }
 
+
+    /* =====================================
+       ADD MESSAGE
+    ===================================== */
+
     explainingBotChat.appendChild(
         message
     );
 
+
     explainingBotChat.scrollTop =
         explainingBotChat.scrollHeight;
+
 
     return message;
 }
 
+
+/* =========================================
+   ADD BOT SUGGESTION
+========================================= */
+
+function addBotSuggestion(
+    label
+) {
+
+    const suggestion =
+        document.createElement(
+            "button"
+        );
+
+    suggestion.type =
+        "button";
+
+    suggestion.className =
+        "bot-suggestion";
+
+
+    /* =====================================
+       LABEL
+    ===================================== */
+
+    suggestion.textContent =
+        "→ " + label;
+
+
+    suggestion.setAttribute(
+        "aria-label",
+        "Suggested question: " + label
+    );
+
+
+    /* =====================================
+       CLICK
+    ===================================== */
+
+    suggestion.addEventListener(
+        "click",
+        () => {
+
+            const question =
+                suggestionToQuestion(
+                    label
+                );
+
+            suggestion.remove();
+
+            sendExplainingBotMessage(
+                question
+            );
+
+        }
+    );
+
+
+    /* =====================================
+       ADD TO CHAT
+    ===================================== */
+
+    explainingBotChat.appendChild(
+        suggestion
+    );
+
+
+    explainingBotChat.scrollTop =
+        explainingBotChat.scrollHeight;
+}
 /* =========================================
    HELP
 ========================================= */

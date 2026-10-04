@@ -1739,7 +1739,695 @@ body.theme-system.theme-colorful-text
 
     </section>
 
+<!-- =================================
+     PAGE 9 — EXPLAINING BOT
+================================= -->
 
+<section id="explainingBotPage" class="page explaining-bot-page">
+
+    <button id="explainingBotBackButton" class="back-button">
+        ← Back
+    </button>
+
+    <div class="explaining-bot-header">
+
+        <span class="section-label">
+            SDG-E • EXPLAINING SYSTEM
+        </span>
+
+        <h1>
+            Explaining Bot
+        </h1>
+
+        <p>
+            Ask the project AI about the SDG-E robot system.
+        </p>
+
+    </div>
+
+
+    <div class="explaining-bot-shell">
+
+        <!-- TOP SYSTEM BAR -->
+
+        <div class="explaining-bot-system-bar">
+
+            <div>
+                <span class="system-dot"></span>
+                <span>SDG-E CORE</span>
+            </div>
+
+            <span class="system-status">
+                SYSTEM READY
+            </span>
+
+        </div>
+
+
+        <!-- CHAT -->
+
+        <div
+            id="explainingBotChat"
+            class="explaining-bot-chat"
+        >
+
+            <div class="bot-message bot-message-bot">
+
+                <span class="bot-message-label">
+                    SDG-E AI
+                </span>
+
+                <div>
+                    Hey! Ask me about the SDG-E project.
+                    Type <strong>explain</strong> for a short
+                    project summary.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK COMMANDS -->
+
+        <div class="explaining-bot-commands">
+
+            <span class="commands-label">
+                QUICK COMMANDS
+            </span>
+
+            <div class="explaining-bot-quick-actions">
+
+                <button
+                    type="button"
+                    data-bot-question="What parts did you use?"
+                >
+                    <span>01</span>
+                    PARTS
+                    <b>↗</b>
+                </button>
+
+                <button
+                    type="button"
+                    data-bot-question="Who are the partners?"
+                >
+                    <span>02</span>
+                    TEAM
+                    <b>↗</b>
+                </button>
+
+                <button
+                    type="button"
+                    data-bot-question="Who is the mentor?"
+                >
+                    <span>03</span>
+                    MENTOR
+                    <b>↗</b>
+                </button>
+
+                <button
+                    type="button"
+                    data-bot-question="What coding do you use?"
+                >
+                    <span>04</span>
+                    CODING
+                    <b>↗</b>
+                </button>
+
+                <button
+                    type="button"
+                    data-bot-question="explain"
+                >
+                    <span>05</span>
+                    EXPLAIN
+                    <b>↗</b>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- INPUT -->
+
+        <div class="explaining-bot-input-area">
+
+            <span class="input-label">
+                ASK THE SYSTEM
+            </span>
+
+            <div class="explaining-bot-input-row">
+
+                <input
+                    type="text"
+                    id="explainingBotInput"
+                    placeholder="Enter your question..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="button"
+                    id="explainingBotSendButton"
+                >
+                    ASK
+                    <span>↗</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="explaining-bot-footer">
+
+            <span>
+                SDG-E • EXPLAINING SYSTEM
+            </span>
+
+            <span>
+                CORE ONLINE
+            </span>
+
+        </div>
+
+    </div>
+
+
+<style>
+
+/* =========================================================
+   EXPLAINING BOT — FUTURISTIC SYSTEM
+   ========================================================= */
+
+#explainingBotPage {
+    min-height: 100vh;
+    padding: 110px 20px 70px;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-header {
+    width: min(900px, 88%);
+    margin: 0 auto 28px;
+}
+
+#explainingBotPage .explaining-bot-header h1 {
+    margin: 7px 0 8px;
+
+    font-size: clamp(38px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -.035em;
+}
+
+#explainingBotPage .explaining-bot-header p {
+    margin: 0;
+
+    font-size: 14px;
+    opacity: .5;
+}
+
+
+/* =========================================================
+   MAIN SHELL
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-shell {
+    position: relative;
+
+    width: min(900px, 88%);
+    margin: 0 auto;
+
+    padding: 0;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.012)
+        ),
+        #0b0b0b;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 25px 70px rgba(0,0,0,.35);
+
+    overflow: hidden;
+}
+
+
+/* FUTURISTIC CORNERS */
+
+#explainingBotPage .explaining-bot-shell::before,
+#explainingBotPage .explaining-bot-shell::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 65px;
+    height: 65px;
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+#explainingBotPage .explaining-bot-shell::before {
+
+    top: 0;
+    left: 0;
+
+    border-top: 1px solid rgba(255,255,255,.45);
+    border-left: 1px solid rgba(255,255,255,.45);
+}
+
+#explainingBotPage .explaining-bot-shell::after {
+
+    right: 0;
+    bottom: 0;
+
+    border-right: 1px solid rgba(255,255,255,.45);
+    border-bottom: 1px solid rgba(255,255,255,.45);
+}
+
+
+/* =========================================================
+   SYSTEM BAR
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-system-bar {
+
+    height: 50px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    background: rgba(255,255,255,.018);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+}
+
+#explainingBotPage .explaining-bot-system-bar > div {
+
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+#explainingBotPage .system-dot {
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: currentColor;
+
+    box-shadow: 0 0 10px currentColor;
+}
+
+#explainingBotPage .system-status {
+    opacity: .4;
+}
+
+
+/* =========================================================
+   CHAT
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-chat {
+
+    height: 285px;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(255,255,255,.035),
+            transparent 35%
+        );
+}
+
+
+/* MESSAGE */
+
+#explainingBotPage .bot-message {
+
+    max-width: 72%;
+
+    padding: 13px 16px;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    background: rgba(255,255,255,.035);
+
+    font-size: 13px;
+    line-height: 1.55;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.15);
+}
+
+#explainingBotPage .bot-message-bot {
+
+    align-self: flex-start;
+
+    border-left: 2px solid rgba(255,255,255,.55);
+}
+
+#explainingBotPage .bot-message-user {
+
+    align-self: flex-end;
+
+    background: rgba(255,255,255,.07);
+
+    border-right: 2px solid rgba(255,255,255,.45);
+}
+
+#explainingBotPage .bot-message-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+
+    opacity: .35;
+}
+
+#explainingBotPage .bot-message strong {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   COMMANDS
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-commands {
+
+    padding: 16px 18px 18px;
+
+    border-top: 1px solid rgba(255,255,255,.07);
+}
+
+#explainingBotPage .commands-label,
+#explainingBotPage .input-label {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .18em;
+
+    opacity: .35;
+}
+
+#explainingBotPage .explaining-bot-quick-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+    gap: 8px;
+}
+
+#explainingBotPage .explaining-bot-quick-actions button {
+
+    position: relative;
+
+    height: 46px;
+
+    padding: 0 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: rgba(255,255,255,.025) !important;
+
+    border: 1px solid rgba(255,255,255,.10) !important;
+    border-radius: 0 !important;
+
+    color: inherit !important;
+
+    font: inherit;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+}
+
+#explainingBotPage .explaining-bot-quick-actions button span {
+
+    font-size: 8px;
+
+    opacity: .3;
+}
+
+#explainingBotPage .explaining-bot-quick-actions button b {
+
+    margin-left: auto;
+
+    font-size: 13px;
+    font-weight: 300;
+
+    opacity: .35;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+#explainingBotPage .explaining-bot-quick-actions button:hover {
+
+    transform: translateY(-2px);
+
+    background: rgba(255,255,255,.065) !important;
+
+    border-color: rgba(255,255,255,.3) !important;
+}
+
+#explainingBotPage .explaining-bot-quick-actions button:hover b {
+
+    opacity: 1;
+
+    transform: translate(2px,-2px);
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-input-area {
+
+    padding: 0 18px 18px;
+}
+
+#explainingBotPage .explaining-bot-input-row {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+#explainingBotPage #explainingBotInput {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 44px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,.025) !important;
+
+    border: 1px solid rgba(255,255,255,.12) !important;
+    border-radius: 0 !important;
+
+    color: inherit !important;
+
+    font: inherit;
+    font-size: 12px;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+#explainingBotPage #explainingBotInput::placeholder {
+    opacity: .3;
+}
+
+#explainingBotPage #explainingBotInput:focus {
+
+    background: rgba(255,255,255,.045) !important;
+
+    border-color: rgba(255,255,255,.35) !important;
+}
+
+#explainingBotPage #explainingBotSendButton {
+
+    width: 100px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    background: rgba(255,255,255,.08) !important;
+
+    border: 1px solid rgba(255,255,255,.18) !important;
+    border-radius: 0 !important;
+
+    color: inherit !important;
+
+    font: inherit;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: .15em;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+}
+
+#explainingBotPage #explainingBotSendButton span {
+
+    font-size: 15px;
+
+    opacity: .55;
+}
+
+#explainingBotPage #explainingBotSendButton:hover {
+
+    background: rgba(255,255,255,.14) !important;
+
+    border-color: rgba(255,255,255,.4) !important;
+
+    transform: translateX(2px);
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+#explainingBotPage .explaining-bot-footer {
+
+    height: 34px;
+
+    padding: 0 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+
+    border-top: 1px solid rgba(255,255,255,.07);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: .16em;
+
+    opacity: .28;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    #explainingBotPage {
+        padding-top: 90px;
+    }
+
+    #explainingBotPage .explaining-bot-header,
+    #explainingBotPage .explaining-bot-shell {
+        width: 92%;
+    }
+
+    #explainingBotPage .explaining-bot-chat {
+        height: 300px;
+    }
+
+    #explainingBotPage .explaining-bot-quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #explainingBotPage .explaining-bot-quick-actions button:last-child {
+        grid-column: 1 / -1;
+    }
+
+    #explainingBotPage .bot-message {
+        max-width: 88%;
+    }
+
+}
+
+</style>
+
+</section>
 <!-- SECRET PAGE -->
 
 <section id="secretPage" class="page secret-page">

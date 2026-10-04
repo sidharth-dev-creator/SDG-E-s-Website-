@@ -4348,3 +4348,165 @@ updateAutoThemeButton();
     });
 
 })();
+
+
+/* =====================================================
+   ROBOTS CODING — IMAGE VIEWER
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const cards = document.querySelectorAll(".coding-card");
+    const viewer = document.getElementById("codeImageViewer");
+    const image = document.getElementById("codeViewerImage");
+    const close = document.getElementById("codeViewerExit");
+
+    if (!viewer || !image || !close) return;
+
+    const images = ["1.jpg", "2.jpg", "3.jpg", "4.jpg"];
+
+    function closeViewer() {
+        viewer.classList.remove("active");
+        image.src = "";
+    }
+
+    cards.forEach((card, index) => {
+        card.addEventListener("click", (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            image.src = images[index];
+            viewer.classList.add("active");
+        });
+    });
+
+    close.onclick = function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeViewer();
+    };
+
+    viewer.onclick = function(event) {
+        if (event.target === viewer) {
+            closeViewer();
+        }
+    };
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeViewer();
+        }
+    });
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const viewer = document.getElementById("codeImageViewer");
+    const image = document.getElementById("codeViewerImage");
+    const exit = document.getElementById("codeViewerExit");
+
+    if (!viewer || !image || !exit) return;
+
+    function closeViewer() {
+        viewer.classList.remove("active");
+        image.src = "";
+        document.body.style.overflow = "";
+    }
+
+    exit.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeViewer();
+    };
+
+    exit.addEventListener("pointerdown", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }, true);
+
+    viewer.addEventListener("click", function (e) {
+        if (e.target === viewer) {
+            closeViewer();
+        }
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeViewer();
+        }
+    });
+
+});
+
+/* =====================================================
+   ROBOTS CODING — FINAL IMAGE VIEWER
+   ===================================================== */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const viewer = document.getElementById("codeImageViewer");
+    const viewerImage = document.getElementById("codeViewerImage");
+    const exitButton = document.getElementById("codeViewerExit");
+    const cards = document.querySelectorAll(".code-image-card");
+
+    if (!viewer || !viewerImage || !exitButton) {
+        console.error("Coding viewer elements not found.");
+        return;
+    }
+
+    function closeViewer() {
+        viewer.classList.remove("active");
+        viewerImage.src = "";
+        document.body.style.overflow = "";
+    }
+
+    cards.forEach(function (card) {
+
+        card.addEventListener("click", function (event) {
+
+            event.preventDefault();
+            event.stopPropagation();
+
+            const image = card.getAttribute("data-code-image");
+
+            if (!image) return;
+
+            viewerImage.src = image;
+            viewer.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+
+    });
+
+    /* X BUTTON */
+    exitButton.onclick = function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        closeViewer();
+    };
+
+    /* CLICK OUTSIDE */
+    viewer.onclick = function (event) {
+
+        if (event.target === viewer) {
+            closeViewer();
+        }
+
+    };
+
+    /* ESC */
+    document.addEventListener("keydown", function (event) {
+
+        if (
+            event.key === "Escape" &&
+            viewer.classList.contains("active")
+        ) {
+            closeViewer();
+        }
+
+    });
+
+});
